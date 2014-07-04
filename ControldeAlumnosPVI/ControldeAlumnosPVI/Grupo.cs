@@ -11,7 +11,12 @@ namespace grupo
         private string nombre;
         private string idGrupo;
 
-        public Grupo(string nombre, string idMateria):base(idMateria)
+        public Grupo()
+        {
+        }
+
+        public Grupo(string nombre, string idMateria)
+            : base(idMateria)
         {
             this.nombre = nombre;
         }
