@@ -46,7 +46,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -66,20 +66,20 @@
             this.panel1.Controls.Add(this.shapeContainer1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(219, 552);
+            this.panel1.Size = new System.Drawing.Size(219, 607);
             this.panel1.TabIndex = 2;
             // 
             // panel_materias
             // 
+            this.panel_materias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel_materias.AutoScroll = true;
             this.panel_materias.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel_materias.Location = new System.Drawing.Point(4, 47);
             this.panel_materias.Name = "panel_materias";
-            this.panel_materias.Size = new System.Drawing.Size(199, 500);
+            this.panel_materias.Size = new System.Drawing.Size(199, 555);
             this.panel_materias.TabIndex = 5;
             this.panel_materias.WrapContents = false;
-        
-            this.panel_materias.MouseEnter += new System.EventHandler(this.panel_materias_MouseEnter);
             // 
             // panel2
             // 
@@ -116,7 +116,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2});
-            this.shapeContainer1.Size = new System.Drawing.Size(219, 552);
+            this.shapeContainer1.Size = new System.Drawing.Size(219, 607);
             this.shapeContainer1.TabIndex = 4;
             this.shapeContainer1.TabStop = false;
             // 
@@ -140,15 +140,18 @@
             this.panel3.Controls.Add(this.shapeContainer2);
             this.panel3.Location = new System.Drawing.Point(237, 64);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 500);
+            this.panel3.Size = new System.Drawing.Size(221, 555);
             this.panel3.TabIndex = 3;
             // 
             // panel_grupos
             // 
+            this.panel_grupos.AutoScroll = true;
+            this.panel_grupos.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel_grupos.Location = new System.Drawing.Point(6, 47);
             this.panel_grupos.Name = "panel_grupos";
-            this.panel_grupos.Size = new System.Drawing.Size(180, 449);
+            this.panel_grupos.Size = new System.Drawing.Size(199, 449);
             this.panel_grupos.TabIndex = 6;
+            this.panel_grupos.WrapContents = false;
             // 
             // panel4
             // 
@@ -185,7 +188,7 @@
             this.shapeContainer2.Name = "shapeContainer2";
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer2.Size = new System.Drawing.Size(200, 500);
+            this.shapeContainer2.Size = new System.Drawing.Size(221, 555);
             this.shapeContainer2.TabIndex = 4;
             this.shapeContainer2.TabStop = false;
             // 
@@ -195,8 +198,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lineShape1.BorderColor = System.Drawing.SystemColors.AppWorkspace;
             this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 195;
-            this.lineShape1.X2 = 195;
+            this.lineShape1.X1 = 216;
+            this.lineShape1.X2 = 216;
             this.lineShape1.Y1 = -7;
             this.lineShape1.Y2 = 510;
             // 
@@ -205,9 +208,9 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.tabControl1);
-            this.panel5.Location = new System.Drawing.Point(440, 67);
+            this.panel5.Location = new System.Drawing.Point(464, 67);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(569, 500);
+            this.panel5.Size = new System.Drawing.Size(569, 555);
             this.panel5.TabIndex = 4;
             // 
             // tabControl1
@@ -219,7 +222,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(566, 493);
+            this.tabControl1.Size = new System.Drawing.Size(566, 548);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -227,7 +230,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(558, 467);
+            this.tabPage1.Size = new System.Drawing.Size(558, 522);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -242,26 +245,25 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel1
+            // panel
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(237, 12);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(763, 51);
-            this.flowLayoutPanel1.TabIndex = 5;
+            this.panel.Location = new System.Drawing.Point(261, 12);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(763, 51);
+            this.panel.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1038, 573);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1174, 628);
+            this.Controls.Add(this.panel);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
-  
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -290,7 +292,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel panel;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;

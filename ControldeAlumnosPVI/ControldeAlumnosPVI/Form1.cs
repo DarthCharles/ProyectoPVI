@@ -48,11 +48,7 @@ namespace ControldeAlumnosPVI
 
   
 
-        private void panel_materias_MouseEnter(object sender, EventArgs e)
-        {
-            panel_materias.Focus();
-        }
-
+        
       
 
    
