@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using materia;
 using database;
+using System.Drawing;
 namespace ControldeAlumnosPVI
 {
     class ItemMaterias : FlowLayoutPanel
@@ -51,12 +52,12 @@ namespace ControldeAlumnosPVI
 
             nombreMateria.Text = nombre;
         }
-
+        Color clr = Color.FromArgb(193, 224, 101);
         private void PanelMouseClick(object sender, MouseEventArgs e)
         {
             RefreshList();
             panel.PanelGrupos.Controls.Clear();
-            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
 
 
@@ -78,7 +79,7 @@ namespace ControldeAlumnosPVI
             // Set the font and forecolor when the cursor hovers over a label.
             //
 
-            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackColor = clr;
             this.nombreMateria.ForeColor = System.Drawing.Color.White;
 
         }

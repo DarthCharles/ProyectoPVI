@@ -93,7 +93,6 @@
             this.panel_materias.Size = new System.Drawing.Size(199, 555);
             this.panel_materias.TabIndex = 5;
             this.panel_materias.WrapContents = false;
-            this.panel_materias.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_materias_MouseClick);
             // 
             // panel2
             // 
@@ -122,6 +121,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(32, 30);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // shapeContainer1
             // 
@@ -287,14 +287,14 @@
             this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(4, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 29);
+            this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Professor:";
+            this.label2.Text = "Profesor:";
             // 
             // pictureBox7
             // 
             this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_configuracion;
+            this.pictureBox7.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_configuracion1;
             this.pictureBox7.Location = new System.Drawing.Point(1073, 549);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(68, 65);
@@ -304,7 +304,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_guardar;
+            this.pictureBox6.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_guardar1;
             this.pictureBox6.Location = new System.Drawing.Point(1073, 105);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(68, 68);
@@ -314,7 +314,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen;
+            this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen1;
             this.pictureBox5.Location = new System.Drawing.Point(1073, 344);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(68, 65);
@@ -324,7 +324,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox4.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo;
+            this.pictureBox4.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo1;
             this.pictureBox4.Location = new System.Drawing.Point(1073, 222);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(68, 68);
@@ -359,7 +359,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

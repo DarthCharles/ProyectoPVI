@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using materia;
+using System.Drawing;
 
 namespace ControldeAlumnosPVI
 {
@@ -13,13 +14,14 @@ namespace ControldeAlumnosPVI
         Label nombreMateria = new Label();
         PanelParameters panel;
         bool click;
+
         public bool Active
         {
             get { return click; }
             set { click = value; }
         }
 
-  
+       
 
 
         public ItemGrupo(PanelParameters caca, string nombre, Materia m)
@@ -52,11 +54,12 @@ namespace ControldeAlumnosPVI
 
             nombreMateria.Text = nombre;
         }
-
+        Color clr = Color.FromArgb(193, 224, 101);
+  
         private void PanelMouseClick(object sender, MouseEventArgs e)
         {
             RefreshList();
-            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
 
@@ -68,7 +71,7 @@ namespace ControldeAlumnosPVI
             // Set the font and forecolor when the cursor hovers over a label.
             //
 
-            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackColor = clr;
             this.nombreMateria.ForeColor = System.Drawing.Color.White;
 
         }
