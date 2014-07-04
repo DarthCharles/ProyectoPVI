@@ -7,6 +7,7 @@ using maestro;
 using System.Data.SqlClient;
 using System.Data;
 using materia;
+using grupo;
 
 namespace database
 {
@@ -56,7 +57,7 @@ namespace database
                     while (reader.Read())
                     {
                         maestro.IdMaestro = reader["idmaestros"].ToString();
-                        maestro.Nombre = reader["nombre"].ToString();
+                        maestro.NombreMaestro = reader["nombre"].ToString();
                         maestro.Apellido = reader["apellido"].ToString();
                         maestro.User = reader["user"].ToString();
                         maestro.Password = reader["password"].ToString();
@@ -89,7 +90,7 @@ namespace database
                     string query = "INSERT INTO maestros (nombre, apellido, user, password) " +
                         "VALUES (@nombre, @apellido, @user, @password)";
                     MySqlCommand comando = new MySqlCommand(query);
-                    comando.Parameters.AddWithValue("@nombre", maestro.Nombre);
+                    comando.Parameters.AddWithValue("@nombre", maestro.NombreMaestro);
                     comando.Parameters.AddWithValue("@apellido", maestro.Apellido);
                     comando.Parameters.AddWithValue("@user", maestro.User);
                     comando.Parameters.AddWithValue("@password", maestro.Password);
@@ -167,7 +168,7 @@ namespace database
                     while (reader.Read())
                     {
                         maestro.IdMaestro = idMaestro;
-                        maestro.Nombre = reader["nombre"].ToString();
+                        maestro.NombreMaestro = reader["nombre"].ToString();
                         maestro.Apellido = reader["apellido"].ToString();
                         maestro.User = reader["user"].ToString();
                         maestro.Password = reader["password"].ToString();
@@ -204,7 +205,7 @@ namespace database
                     {
                         Maestro maestro = new Maestro();
                         maestro.IdMaestro = reader["idmaestros"].ToString();
-                        maestro.Nombre = reader["nombre"].ToString();
+                        maestro.NombreMaestro = reader["nombre"].ToString();
                         maestro.Apellido = reader["apellido"].ToString();
                         maestro.User = reader["user"].ToString();
                         maestro.Password = reader["password"].ToString();
@@ -234,7 +235,7 @@ namespace database
                 string query = "UPDATE maestros SET nombre = @nombre, apellido = @apellido, " +
                     " user = @user, password = @password WHERE idmaestros = @idmaestros";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@nombre", maestro.Nombre);
+                comando.Parameters.AddWithValue("@nombre", maestro.NombreMaestro);
                 comando.Parameters.AddWithValue("@apellido", maestro.Apellido);
                 comando.Parameters.AddWithValue("@user", maestro.User);
                 comando.Parameters.AddWithValue("@password", maestro.Password);
@@ -305,7 +306,7 @@ namespace database
                     string query = "INSERT INTO materias (nombre, clave, idmaestros) " +
                         "VALUES (@nombre, @clave, @idmaestros)";
                     MySqlCommand comando = new MySqlCommand(query);
-                    comando.Parameters.AddWithValue("@nombre", materia.Nombre);
+                    comando.Parameters.AddWithValue("@nombre", materia.NombreMateria);
                     comando.Parameters.AddWithValue("@clave", materia.Clave);
                     comando.Parameters.AddWithValue("@idmaestros", materia.IdMaestro);
                     comando.Connection = conexion;
@@ -381,7 +382,7 @@ namespace database
                     {
                         Materia materia = new Materia();
                         materia.IdMateria = reader["idmaterias"].ToString();
-                        materia.Nombre = reader["nombre"].ToString();
+                        materia.NombreMateria = reader["nombre"].ToString();
                         materia.Clave = reader["clave"].ToString();
                         materia.IdMaestro = reader["idmaestros"].ToString();
 
@@ -420,7 +421,7 @@ namespace database
                     {
                         Materia materia = new Materia();
                         materia.IdMateria = reader["idmaterias"].ToString();
-                        materia.Nombre = reader["nombre"].ToString();
+                        materia.NombreMateria = reader["nombre"].ToString();
                         materia.Clave = reader["clave"].ToString();
                         materia.IdMaestro = reader["idmaestros"].ToString();
 
@@ -460,7 +461,7 @@ namespace database
                     while (reader.Read())
                     {
                         materia.IdMateria = idMateria;
-                        materia.Nombre = reader["nombre"].ToString();
+                        materia.NombreMateria = reader["nombre"].ToString();
                         materia.Clave = reader["clave"].ToString();
                         materia.IdMaestro = reader["idmaterias"].ToString();
                     }
@@ -498,7 +499,7 @@ namespace database
                     while (reader.Read())
                     {
                         materia.IdMateria = reader["idmaterias"].ToString();
-                        materia.Nombre = reader["nombre"].ToString();
+                        materia.NombreMateria = reader["nombre"].ToString();
                         materia.Clave = reader["clave"].ToString();
                         materia.IdMaestro = reader["idmaterias"].ToString();
                     }
@@ -526,7 +527,7 @@ namespace database
                 string query = "UPDATE materias SET nombre = @nombre, clave = @clave, " +
                     " idmaestros = @idmaestros WHERE idmaterias = @idmaterias";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@nombre", materia.Nombre);
+                comando.Parameters.AddWithValue("@nombre", materia.NombreMateria);
                 comando.Parameters.AddWithValue("@clave", materia.Clave);
                 comando.Parameters.AddWithValue("@idmaestros", materia.IdMaestro);
                
@@ -581,8 +582,35 @@ namespace database
         }
     
         //Grupos
+
+        public List<Grupo> readInfoGruposIdMateria(string idMateria)
+        {
+            List<Grupo> listaGrupos = new List<Grupo>();
+           
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT * FROM grupos WHERE idmaterias = @idmaterias";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idmaterias", idMateria);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Grupo grupo = new Grupo();
+                        grupo.IdMateria = reader["idmaterias"].ToString();
+                        grupo.NombreGrupo = reader["nombre"].ToString();
+                        grupo.IdGrupo = reader["idgrupos"].ToString();
+
+                        listaGrupos.Add(grupo);
+                    }
+                }
+            
+            return listaGrupos;
+        }
         
-
-
     }
 }

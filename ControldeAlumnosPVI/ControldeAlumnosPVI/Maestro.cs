@@ -57,7 +57,7 @@ namespace maestro
             set { password = value; }
         }
 
-        public string Nombre
+        public string NombreMaestro
         {
             get { return nombre; }
             set { nombre = value; }

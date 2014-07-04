@@ -26,7 +26,7 @@ namespace ControldeAlumnosPVI
             PanelParameters panel = new PanelParameters(this);
             foreach (Materia materia in listaMat)
             {
-                panel_materias.Controls.Add(new ItemMaterias(panel, materia.Nombre, materia));
+                panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
             }
           
            

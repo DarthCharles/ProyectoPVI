@@ -38,7 +38,7 @@ namespace materia
             set { idMateria = value; }
         }
 
-        public string Nombre
+        public string NombreMateria
         {
             get { return nombre; }
             set { nombre = value; }
