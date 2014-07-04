@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using materia;
 
 namespace ControldeAlumnosPVI
 {
@@ -19,12 +20,8 @@ namespace ControldeAlumnosPVI
 
         FlowLayoutPanel a;
 
-        public ListItem()
-        {
-        }
 
-
-        public ListItem(int size, string nombre, FlowLayoutPanel a)
+        public ListItem(int size, string nombre, FlowLayoutPanel a, Materia materia)
         {
             this.a = a;
             setLabel(nombre);
@@ -37,6 +34,7 @@ namespace ControldeAlumnosPVI
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(PanelMouseClick);
             this.TabIndex = 0;
         }
+
 
         private void setLabel(string nombre)
         {
@@ -85,12 +83,7 @@ namespace ControldeAlumnosPVI
                 this.BackColor = System.Drawing.Color.White;
 
                 this.nombreMateria.ForeColor = System.Drawing.Color.Black;
-
-
             }
-
-
-
         }
 
         public void RefreshList()
@@ -104,4 +97,5 @@ namespace ControldeAlumnosPVI
         }
 
     }
-}
+
+ }

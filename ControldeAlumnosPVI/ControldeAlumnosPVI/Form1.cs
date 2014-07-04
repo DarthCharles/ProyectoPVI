@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using database;
+using materia;
 
 namespace ControldeAlumnosPVI
 {
@@ -18,20 +20,16 @@ namespace ControldeAlumnosPVI
         {
             InitializeComponent();
 
+            Conexion con = new Conexion();
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
 
-            for (int i = 0; i < 10; i++)
+            foreach (Materia materia in listaMat)
             {
-                  panel_materias.Controls.Add(new ListItem(materItemSize, "Materia " + i, panel_materias));
+                panel_materias.Controls.Add(new ListItem(materItemSize, materia.Nombre, panel_materias, materia));
             }
-
-            for (int i = 0; i < 10; i++)
-            {
-                panel_grupos.Controls.Add(new ListItem(grupoItemSize, "Grupo " + i, panel_grupos));
-            }
-
-
-
+          
            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -7,3 +7,12 @@ C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPV
 C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
 C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.exe
 C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.pdb
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe.config
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.exe
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.pdb
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.pdb
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csprojResolveAssemblyReference.cache
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Form1.resources
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Properties.Resources.resources
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
