@@ -186,43 +186,43 @@ namespace database
             return maestro;
         }
 
-        public List<Maestro> readInfoMaestros()
-        {
-            List<Maestro> listaMaestros = new List<Maestro>();
-            try
-            {
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                string query = "SELECT idmaestros, nombre, apellido, user, pass from maestros";
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Connection = conexion;
-                MySqlDataReader reader = comando.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Maestro maestro = new Maestro();
-                        maestro.IdMaestro = reader["idmaestros"].ToString();
-                        maestro.NombreMaestro = reader["nombre"].ToString();
-                        maestro.Apellido = reader["apellido"].ToString();
-                        maestro.User = reader["user"].ToString();
-                        maestro.Password = reader["password"].ToString();
-                        listaMaestros.Add(maestro);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al leer la información del maestro: " + e.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return listaMaestros;
-        }
+        //public List<Maestro> readInfoMaestros()
+        //{
+        //    List<Maestro> listaMaestros = new List<Maestro>();
+        //    try
+        //    {
+        //        if (conexion.State == ConnectionState.Closed)
+        //        {
+        //            conexion.Open();
+        //        }
+        //        string query = "SELECT idmaestros, nombre, apellido, user, pass from maestros";
+        //        MySqlCommand comando = new MySqlCommand(query);
+        //        comando.Connection = conexion;
+        //        MySqlDataReader reader = comando.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                Maestro maestro = new Maestro();
+        //                maestro.IdMaestro = reader["idmaestros"].ToString();
+        //                maestro.NombreMaestro = reader["nombre"].ToString();
+        //                maestro.Apellido = reader["apellido"].ToString();
+        //                maestro.User = reader["user"].ToString();
+        //                maestro.Password = reader["password"].ToString();
+        //                listaMaestros.Add(maestro);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("Ha ocurrido un error al leer la información del maestro: " + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        conexion.Close();
+        //    }
+        //    return listaMaestros;
+        //}
 
         public bool update(Maestro maestro)
         {
@@ -363,43 +363,43 @@ namespace database
             return false;
         }
 
-        public List<Materia> readInfoMaterias()
-        {
-            List<Materia> listaMaterias = new List<Materia>();
-            try
-            {
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                string query = "SELECT * FROM materias";
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Connection = conexion;
-                MySqlDataReader reader = comando.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Materia materia = new Materia();
-                        materia.IdMateria = reader["idmaterias"].ToString();
-                        materia.NombreMateria = reader["nombre"].ToString();
-                        materia.Clave = reader["clave"].ToString();
-                        materia.IdMaestro = reader["idmaestros"].ToString();
+        //public List<Materia> readInfoMaterias()
+        //{
+        //    List<Materia> listaMaterias = new List<Materia>();
+        //    try
+        //    {
+        //        if (conexion.State == ConnectionState.Closed)
+        //        {
+        //            conexion.Open();
+        //        }
+        //        string query = "SELECT * FROM materias";
+        //        MySqlCommand comando = new MySqlCommand(query);
+        //        comando.Connection = conexion;
+        //        MySqlDataReader reader = comando.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                Materia materia = new Materia();
+        //                materia.IdMateria = reader["idmaterias"].ToString();
+        //                materia.NombreMateria = reader["nombre"].ToString();
+        //                materia.Clave = reader["clave"].ToString();
+        //                materia.IdMaestro = reader["idmaestros"].ToString();
 
-                        listaMaterias.Add(materia);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al leer la información del maestro: " + e.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return listaMaterias;
-        }
+        //                listaMaterias.Add(materia);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("Ha ocurrido un error al leer la información del maestro: " + e.Message);
+        //    }
+        //    finally
+        //    {
+        //        conexion.Close();
+        //    }
+        //    return listaMaterias;
+        //}
 
         public List<Materia> readInfoMateriasIdMaestro(string idMaestro)
         {
@@ -583,34 +583,204 @@ namespace database
     
         //Grupos
 
-        public List<Grupo> readInfoGruposIdMateria(string idMateria)
+        public bool create(Grupo grupo)
         {
-            List<Grupo> listaGrupos = new List<Grupo>();
-           
+            if (!isGrupoRepetido(grupo.NombreGrupo))
+            {
+                try
+                {
+                    if (conexion.State == ConnectionState.Closed)
+                    {
+                        conexion.Open();
+                    }
+                    string query = "INSERT INTO grupos (nombre, idmaterias) VALUES (@nombre, @idmaterias)";
+                    MySqlCommand comando = new MySqlCommand(query);
+                    comando.Parameters.AddWithValue("@nombre", grupo.NombreGrupo);
+                    comando.Parameters.AddWithValue("@idmaterias", grupo.IdMateria);
+                    comando.Connection = conexion;
+                    int a = comando.ExecuteNonQuery();
+                    if (a == 0)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Ha ocurrido un error al registrar un nuevo grupo: " + e.Message);
+                    return false;
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool isGrupoRepetido(string nombre)
+        {
+            try
+            {
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * FROM grupos WHERE idmaterias = @idmaterias";
+                string query = "SELECT * from grupos where nombre = @nombre";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idmaterias", idMateria);
+                comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al comprobar si existe el grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return false;
+        }
+
+        public List<Grupo> readInfoGruposIdMateria(string idMateria)
+        {
+            List<Grupo> listaGrupos = new List<Grupo>();
+
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "SELECT * FROM grupos WHERE idmaterias = @idmaterias";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@idmaterias", idMateria);
+            comando.Connection = conexion;
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Grupo grupo = new Grupo();
+                    grupo.IdMateria = reader["idmaterias"].ToString();
+                    grupo.NombreGrupo = reader["nombre"].ToString();
+                    grupo.IdGrupo = reader["idgrupos"].ToString();
+
+                    listaGrupos.Add(grupo);
+                }
+            }
+
+            return listaGrupos;
+        }
+
+        public Grupo readInfoGrupoIdGrupo(string idGrupo)
+        {
+            Grupo grupo = new Grupo();
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT idmaterias, nombre FROM grupos WHERE " +
+                    "idgrupos = @idgrupos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Connection = conexion;
+
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        Grupo grupo = new Grupo();
                         grupo.IdMateria = reader["idmaterias"].ToString();
                         grupo.NombreGrupo = reader["nombre"].ToString();
-                        grupo.IdGrupo = reader["idgrupos"].ToString();
-
-                        listaGrupos.Add(grupo);
                     }
                 }
-            
-            return listaGrupos;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al leer la información de la materia: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return grupo;
         }
+
+        public bool update(Grupo grupo)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "UPDATE grupos SET nombre = @nombre, idmaterias = @idmaterias, " +
+                    " WHERE idgrupos = @idgrupos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@nombre", grupo.NombreGrupo);
+                comando.Parameters.AddWithValue("@idmaterias", grupo.IdMateria);
+                comando.Parameters.AddWithValue("@idgrupos", grupo.IdGrupo);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al actualizar un grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool deleteGrupo(string idGrupo)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "DELETE FROM grupos " +
+                    "WHERE idgrupos = @idgrupos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al borrar un grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
         
     }
 }

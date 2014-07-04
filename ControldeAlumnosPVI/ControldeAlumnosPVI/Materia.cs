@@ -17,6 +17,11 @@ namespace materia
         {
         }
 
+        public Materia(string idMateria)
+        {
+            this.idMateria = idMateria;
+        }
+
         public Materia(string idMaestro, string nombre, string clave) 
             : base(idMaestro)
         {
