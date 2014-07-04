@@ -12,38 +12,36 @@ namespace ControldeAlumnosPVI
 {
     public partial class Form1 : Form
     {
-
+        int materItemSize = 176;
+        int grupoItemSize = 160;
         public Form1()
         {
             InitializeComponent();
-       
-
-            panel_materias.Controls.Add(new CustomLabel("Investigación de Operaciones"));
-            panel_materias.Controls.Add(new CustomLabel("Base de Datos"));
-            panel_materias.Controls.Add(new CustomLabel("Sistemas de Información"));
-            panel_materias.Controls.Add(new CustomLabel("Testing"));
-            panel_materias.Controls.Add(new CustomLabel("Cultura Emprendedora"));
-            panel_materias.Controls.Add(new CustomLabel("Investigación de Operaciones"));
-            panel_materias.Controls.Add(new CustomLabel("Base de Datos"));
-            panel_materias.Controls.Add(new CustomLabel("Sistemas de Información"));
-            panel_materias.Controls.Add(new CustomLabel("Testing"));
-            panel_materias.Controls.Add(new CustomLabel("Cultura Emprendedora"));
-            panel_materias.Controls.Add(new CustomLabel("Investigación de Operaciones"));
-            panel_materias.Controls.Add(new CustomLabel("Base de Datos"));
-            panel_materias.Controls.Add(new CustomLabel("Sistemas de Información"));
-            panel_materias.Controls.Add(new CustomLabel("Testing"));
-            panel_materias.Controls.Add(new CustomLabel("Cultura Emprendedora"));
-            panel_materias.Controls.Add(new CustomLabel("Investigación de Operaciones"));
-            panel_materias.Controls.Add(new CustomLabel("Base de Datos"));
-            panel_materias.Controls.Add(new CustomLabel("Sistemas de Información"));
-            panel_materias.Controls.Add(new CustomLabel("Testing"));
-            panel_materias.Controls.Add(new CustomLabel("Cultura Emprendedora"));
 
 
-            panel_grupos.Controls.Add(new CustomLabel("102-AS"));
-            panel_grupos.Controls.Add(new CustomLabel("1W02-AF"));
-            panel_grupos.Controls.Add(new CustomLabel("0A2-DG"));
-            panel_grupos.Controls.Add(new CustomLabel("602-PQ"));
+            for (int i = 0; i < 10; i++)
+            {
+                  panel_materias.Controls.Add(new ListItem(materItemSize, "Materia " + i, panel_materias));
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                panel_grupos.Controls.Add(new ListItem(grupoItemSize, "Grupo " + i, panel_grupos));
+            }
+
+
+
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_materias_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
 
   

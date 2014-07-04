@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomLabel.cs">
+    <Compile Include="ListItem.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Form1.cs">
@@ -91,6 +91,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_puntos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_ajustes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nueva.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_nueva.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_nuevo_trabajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_nuevo_examen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_configuracion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

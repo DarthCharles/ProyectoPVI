@@ -32,29 +32,42 @@
             this.panel_materias = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label_grupos = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel_grupos = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel5.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -80,6 +93,7 @@
             this.panel_materias.Size = new System.Drawing.Size(199, 555);
             this.panel_materias.TabIndex = 5;
             this.panel_materias.WrapContents = false;
+            this.panel_materias.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel_materias_MouseClick);
             // 
             // panel2
             // 
@@ -99,15 +113,6 @@
             this.label_grupos.Size = new System.Drawing.Size(82, 23);
             this.label_grupos.TabIndex = 4;
             this.label_grupos.Text = "Materias";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
-            this.pictureBox1.Location = new System.Drawing.Point(165, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 30);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // shapeContainer1
             // 
@@ -129,7 +134,7 @@
             this.lineShape2.X1 = 215;
             this.lineShape2.X2 = 215;
             this.lineShape2.Y1 = -3;
-            this.lineShape2.Y2 = 573;
+            this.lineShape2.Y2 = 623;
             // 
             // panel3
             // 
@@ -140,7 +145,7 @@
             this.panel3.Controls.Add(this.shapeContainer2);
             this.panel3.Location = new System.Drawing.Point(237, 64);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(221, 555);
+            this.panel3.Size = new System.Drawing.Size(196, 555);
             this.panel3.TabIndex = 3;
             // 
             // panel_grupos
@@ -149,7 +154,7 @@
             this.panel_grupos.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel_grupos.Location = new System.Drawing.Point(6, 47);
             this.panel_grupos.Name = "panel_grupos";
-            this.panel_grupos.Size = new System.Drawing.Size(199, 449);
+            this.panel_grupos.Size = new System.Drawing.Size(174, 503);
             this.panel_grupos.TabIndex = 6;
             this.panel_grupos.WrapContents = false;
             // 
@@ -159,7 +164,7 @@
             this.panel4.Controls.Add(this.pictureBox2);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(183, 38);
+            this.panel4.Size = new System.Drawing.Size(177, 38);
             this.panel4.TabIndex = 3;
             // 
             // label1
@@ -172,15 +177,6 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Grupos";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
-            this.pictureBox2.Location = new System.Drawing.Point(148, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(32, 30);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
             // shapeContainer2
             // 
             this.shapeContainer2.Location = new System.Drawing.Point(0, 0);
@@ -188,7 +184,7 @@
             this.shapeContainer2.Name = "shapeContainer2";
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer2.Size = new System.Drawing.Size(221, 555);
+            this.shapeContainer2.Size = new System.Drawing.Size(196, 555);
             this.shapeContainer2.TabIndex = 4;
             this.shapeContainer2.TabStop = false;
             // 
@@ -198,39 +194,42 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lineShape1.BorderColor = System.Drawing.SystemColors.AppWorkspace;
             this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 216;
-            this.lineShape1.X2 = 216;
+            this.lineShape1.X1 = 189;
+            this.lineShape1.X2 = 189;
             this.lineShape1.Y1 = -7;
-            this.lineShape1.Y2 = 510;
+            this.lineShape1.Y2 = 552;
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.Controls.Add(this.tabControl1);
-            this.panel5.Location = new System.Drawing.Point(464, 67);
+            this.panel5.Location = new System.Drawing.Point(436, 67);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(569, 555);
+            this.panel5.Size = new System.Drawing.Size(615, 555);
             this.panel5.TabIndex = 4;
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.ItemSize = new System.Drawing.Size(58, 30);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(566, 548);
+            this.tabControl1.Size = new System.Drawing.Size(609, 548);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(558, 522);
+            this.tabPage1.Size = new System.Drawing.Size(601, 510);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -240,17 +239,107 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(558, 467);
+            this.tabPage2.Size = new System.Drawing.Size(601, 522);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // panel
+            // panel6
             // 
-            this.panel.Location = new System.Drawing.Point(261, 12);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(763, 51);
-            this.panel.TabIndex = 5;
+            this.panel6.Controls.Add(this.label3);
+            this.panel6.Controls.Add(this.label2);
+            this.panel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel6.Location = new System.Drawing.Point(237, 12);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(814, 49);
+            this.panel6.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(4, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 29);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Professor:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(127, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(348, 25);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Guzmán Gerardo Sánchez Schmitz";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox7.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_configuracion;
+            this.pictureBox7.Location = new System.Drawing.Point(1073, 549);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox7.TabIndex = 12;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_guardar;
+            this.pictureBox6.Location = new System.Drawing.Point(1073, 105);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(68, 68);
+            this.pictureBox6.TabIndex = 11;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen;
+            this.pictureBox5.Location = new System.Drawing.Point(1073, 344);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox5.TabIndex = 10;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo;
+            this.pictureBox4.Location = new System.Drawing.Point(1073, 222);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(68, 68);
+            this.pictureBox4.TabIndex = 9;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_ajustes;
+            this.pictureBox3.Location = new System.Drawing.Point(1129, 12);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(34, 49);
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
+            this.pictureBox2.Location = new System.Drawing.Point(141, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 30);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
+            this.pictureBox1.Location = new System.Drawing.Point(165, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 30);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -258,22 +347,36 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1174, 628);
-            this.Controls.Add(this.panel);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel5.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -292,13 +395,20 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.FlowLayoutPanel panel;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private System.Windows.Forms.FlowLayoutPanel panel_grupos;
         private System.Windows.Forms.FlowLayoutPanel panel_materias;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox7;
 
     }
 }
