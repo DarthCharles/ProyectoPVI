@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using materia;
 using database;
+
 using System.Drawing;
+
+using grupo;
+
 namespace ControldeAlumnosPVI
 {
     class ItemMaterias : FlowLayoutPanel
@@ -14,6 +18,9 @@ namespace ControldeAlumnosPVI
         PanelParameters panel;
         Label nombreMateria = new Label();
         bool click;
+        Materia materia;
+        List<Grupo> listaGrupo;
+        
         public bool Active
         {
             get { return click; }
@@ -34,6 +41,10 @@ namespace ControldeAlumnosPVI
             this.MouseLeave += new System.EventHandler(this.PanelMouseLeave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(PanelMouseClick);
             this.TabIndex = 0;
+            this.materia = materia;
+            Conexion con = new Conexion();
+            listaGrupo = con.readInfoGruposIdMateria(materia.IdMateria);
+
         }
 
 
@@ -63,12 +74,11 @@ namespace ControldeAlumnosPVI
 
             click = true;
 
-            Conexion con = new Conexion();
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+          
 
-            foreach (Materia materia in listaMat)
+            foreach (Grupo grupo in listaGrupo)
             {
-                panel.PanelGrupos.Controls.Add(new ItemGrupo(panel, materia.Nombre, materia));
+                panel.PanelGrupos.Controls.Add(new ItemGrupo(panel, grupo.NombreGrupo, grupo));
             }
        
         }
