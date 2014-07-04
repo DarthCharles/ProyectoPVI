@@ -1,0 +1,9 @@
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe.config
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.pdb
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csprojResolveAssemblyReference.cache
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Form1.resources
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Properties.Resources.resources
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.exe
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.pdb
