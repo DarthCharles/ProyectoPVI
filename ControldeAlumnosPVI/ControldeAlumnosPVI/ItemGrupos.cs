@@ -8,9 +8,10 @@ using materia;
 
 namespace ControldeAlumnosPVI
 {
-    class ListItem : FlowLayoutPanel
+    class ItemGrupo : FlowLayoutPanel
     {
         Label nombreMateria = new Label();
+        PanelParameters panel;
         bool click;
         public bool Active
         {
@@ -18,17 +19,17 @@ namespace ControldeAlumnosPVI
             set { click = value; }
         }
 
-        FlowLayoutPanel a;
+  
 
 
-        public ListItem(int size, string nombre, FlowLayoutPanel a, Materia materia)
+        public ItemGrupo(PanelParameters caca, string nombre, Materia m)
         {
-            this.a = a;
+     panel = caca;
             setLabel(nombre);
             this.Controls.Add(nombreMateria);
             this.Location = new System.Drawing.Point(3, 3);
             this.AutoSize = true;
-            this.MinimumSize = new System.Drawing.Size(size, 0);
+            this.MinimumSize = new System.Drawing.Size(panel.Context.grupoItemSize, 0);
             this.MouseEnter += new System.EventHandler(this.PanelMouseEnter);
             this.MouseLeave += new System.EventHandler(this.PanelMouseLeave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(PanelMouseClick);
@@ -88,7 +89,7 @@ namespace ControldeAlumnosPVI
 
         public void RefreshList()
         {
-            foreach (ListItem x in a.Controls)
+            foreach (ItemGrupo x in panel.PanelGrupos.Controls)
             {
                 x.BackColor = System.Drawing.Color.White;
                 x.nombreMateria.ForeColor = System.Drawing.Color.Black;
@@ -98,4 +99,4 @@ namespace ControldeAlumnosPVI
 
     }
 
- }
+}

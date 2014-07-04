@@ -14,8 +14,8 @@ namespace ControldeAlumnosPVI
 {
     public partial class Form1 : Form
     {
-        int materItemSize = 176;
-        int grupoItemSize = 160;
+        public int materItemSize = 176;
+       public  int grupoItemSize = 160;
         public Form1()
         {
             InitializeComponent();
@@ -23,9 +23,10 @@ namespace ControldeAlumnosPVI
             Conexion con = new Conexion();
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
 
+            PanelParameters panel = new PanelParameters(this);
             foreach (Materia materia in listaMat)
             {
-                panel_materias.Controls.Add(new ListItem(materItemSize, materia.Nombre, panel_materias, materia));
+                panel_materias.Controls.Add(new ItemMaterias(panel, materia.Nombre, materia));
             }
           
            

@@ -50,7 +50,10 @@
     <Compile Include="database\Conexion.cs" />
     <Compile Include="database\DatabaseConstants.cs" />
     <Compile Include="Grupo.cs" />
-    <Compile Include="ListItem.cs">
+    <Compile Include="ItemGrupos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ItemMaterias.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Form1.cs">
@@ -61,6 +64,7 @@
     </Compile>
     <Compile Include="Maestro.cs" />
     <Compile Include="Materia.cs" />
+    <Compile Include="PanelParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
