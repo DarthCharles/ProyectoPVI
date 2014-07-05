@@ -35,48 +35,7 @@ namespace ControldeAlumnosPVI
 
 
 
-            foreach (TabPage tab in tabs_alumnos.TabPages)
-            {
-                switch (tab.Name)
-                {
-                    case "tabPage1":
-                        tab.Text = "Lista de Asistencia";
-                        tab.Controls.Add(new ListaAsistencia());
-                        break;
-
-                    case "tabPage2":
-                        tab.Text = "Tareas";
-                        tab.Controls.Add(new ListaTTE(8));
-                        break;
-
-                    case "tabPage3":
-                        tab.Text = "Trabajos";
-                        tab.Controls.Add(new ListaTTE(3));
-                        break;
-
-                    case "tabPage4":
-
-                        tab.Text = "Exámenes";
-                        tab.Controls.Add(new ListaTTE(3));
-                        break;
-
-                    case "tabPage5":
-
-                        tab.Text = "Participaciones";
-                        tab.Controls.Add(new ListaPart_Pextra());
-
-                        break;
-
-                    case "tabPage6":
-
-                        tab.Text = "Puntos Extra";
-                        tab.Controls.Add(new ListaPart_Pextra());
-                        break;
-                    default:
-                        break;
-                }
-            }
-
+          
 
         }
 

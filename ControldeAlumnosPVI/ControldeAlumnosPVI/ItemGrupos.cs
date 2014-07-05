@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using materias;
 using System.Drawing;
+using grupos;
+using database;
+using alumnos;
 
 namespace ControldeAlumnosPVI
 {
@@ -14,6 +17,8 @@ namespace ControldeAlumnosPVI
         Label nombreMateria = new Label();
         PanelParameters panel;
         bool click;
+        Grupo grupo;
+        List<Alumno> listaAlumnos;
 
         public bool Active
         {
@@ -24,9 +29,9 @@ namespace ControldeAlumnosPVI
        
 
 
-        public ItemGrupo(PanelParameters caca, string nombre, Materia m)
+        public ItemGrupo(PanelParameters caca, string nombre, Grupo m)
         {
-     panel = caca;
+            panel = caca;
             setLabel(nombre);
             this.Controls.Add(nombreMateria);
             this.Location = new System.Drawing.Point(3, 3);
@@ -36,6 +41,9 @@ namespace ControldeAlumnosPVI
             this.MouseLeave += new System.EventHandler(this.PanelMouseLeave);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(PanelMouseClick);
             this.TabIndex = 0;
+            this.grupo = m;
+            Conexion con = new Conexion();
+            listaAlumnos = con.readInfoAlumnosGrupo(m.IdGrupo);
         }
 
 
@@ -62,6 +70,65 @@ namespace ControldeAlumnosPVI
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
+           
+
+            foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
+            {
+                switch (tab.Name)
+                {
+                    case "tabPage1":
+                        tab.Controls.Clear();
+                        tab.Text = "Lista de Asistencia";
+                        ListaAsistencia lista = new ListaAsistencia();
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            lista.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                        }
+                        lista.Columns[0].Visible = false;
+                        tab.Controls.Add(lista);
+                        break;
+
+                    case "tabPage2":
+                                             tab.Controls.Clear();
+                        tab.Text = "Tareas";
+                        ListaTTE tareas = new ListaTTE(5);
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            tareas.Rows.Add("1", alumno.NombreAlumno);
+                        }
+                        //tareas.Columns[0].Visible = false;
+                        tab.Controls.Add(tareas);
+                        break;
+
+                    case "tabPage3":
+                        tab.Text = "Trabajos";
+                        tab.Controls.Add(new ListaTTE(3));
+                        break;
+
+                    case "tabPage4":
+
+                        tab.Text = "Exámenes";
+                        tab.Controls.Add(new ListaTTE(3));
+                        break;
+
+                    case "tabPage5":
+
+                        tab.Text = "Participaciones";
+                        tab.Controls.Add(new ListaPart_Pextra());
+
+                        break;
+
+                    case "tabPage6":
+
+                        tab.Text = "Puntos Extra";
+                        tab.Controls.Add(new ListaPart_Pextra());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+          
 
         }
 

@@ -12,15 +12,15 @@ namespace ControldeAlumnosPVI
         public ListaAsistencia() : base()
         {
             this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; //ajustamos el tamaño de las columnas
-            this.ColumnCount = 2;
-
+            this.ColumnCount = 3;
             this.Columns[0].HeaderText = "";
-            this.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            this.Columns[0].Width = 30;
+            this.Columns[1].HeaderText = "";
+            this.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.Columns[1].Width = 30;
             DataGridViewCheckBoxColumn a = new DataGridViewCheckBoxColumn();
             this.Columns.Add(a);
-            this.Columns[1].HeaderText = "Alumno";
-            this.Columns[2].HeaderText = "Asistencia";
+            this.Columns[2].HeaderText = "Alumno";
+            this.Columns[3].HeaderText = "Asistencia";
         }
     }
 }
