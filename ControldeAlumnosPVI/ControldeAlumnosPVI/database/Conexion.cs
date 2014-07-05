@@ -1175,7 +1175,7 @@ namespace database
             return listaTrabajos;
         }
 
-        public int countTrabajos(string idGrupo)
+        public int countTrabajos(string idGrupo, string tipo)
         {
             int numTrabajos= 0;
             try
@@ -1184,9 +1184,9 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT COUNT(*) FROM trabajos_dejados";
+                string query = "SELECT COUNT(*) FROM trabajos_dejados where tipo = @tipo";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Parameters.AddWithValue("@tipo", tipo);
                 comando.Connection = conexion;
 
                 numTrabajos = int.Parse(comando.ExecuteScalar().ToString());

@@ -76,6 +76,8 @@ namespace ControldeAlumnosPVI
 
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
+                Conexion con = new Conexion();
+
                 switch (tab.Name)
                 {
                     case "tabPage1":
@@ -95,9 +97,7 @@ namespace ControldeAlumnosPVI
                     case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
-                        Conexion con = new Conexion();
-
-                        int numtareas = con.countTrabajos(grupo.IdGrupo);
+                        int numtareas = con.countTrabajos(grupo.IdGrupo, "tarea");
                         ListaTTE tareas = new ListaTTE(numtareas);
                         foreach (Alumno alumno in listaAlumnos)
                         {
@@ -108,19 +108,24 @@ namespace ControldeAlumnosPVI
                             {
                                 tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
                             }
-
-
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
                         break;
 
                     case "tabPage3":
+                        int numtrabajos = con.countTrabajos(grupo.IdGrupo, "trabajo");
                         tab.Controls.Clear();
-                        ListaTTE trabajos = new ListaTTE(2);
+                        ListaTTE trabajos = new ListaTTE(numtrabajos);
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             trabajos.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "trabajo");
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
+                                trabajos.Rows[trabajos.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
                         }
                         tab.Controls.Add(trabajos);
                         break;
@@ -129,10 +134,18 @@ namespace ControldeAlumnosPVI
 
                         tab.Controls.Clear();
 
-                        ListaTTE examenes = new ListaTTE(3);
+                        int numexamenes = con.countTrabajos(grupo.IdGrupo, "examen");
+
+                        ListaTTE examenes = new ListaTTE(numexamenes);
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             examenes.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "examen");
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
+                                examenes.Rows[examenes.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
                         }
 
                         tab.Controls.Add(examenes);
