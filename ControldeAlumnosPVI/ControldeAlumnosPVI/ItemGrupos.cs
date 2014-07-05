@@ -76,16 +76,18 @@ namespace ControldeAlumnosPVI
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
                 Conexion con = new Conexion();
+                int a = 1;
 
                 switch (tab.Name)
                 {
                     case "tabPage1":
                         tab.Controls.Clear();
-
+                        a = 1;
                         ListaAsistencia lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            lista.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            
                         }
                         lista.CheckAll();
                         tab.Controls.Add(lista);
@@ -95,13 +97,14 @@ namespace ControldeAlumnosPVI
 
                     case "tabPage2":
                         tab.Controls.Clear();
+                        a = 1;
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(grupo.IdGrupo, "tarea");
                         ListaTTE tareas = new ListaTTE(numtareas);
 
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
                             int i = 3;
                             foreach (Trabajo trabajo in listaTrabajos)
@@ -114,12 +117,13 @@ namespace ControldeAlumnosPVI
                         break;
 
                     case "tabPage3":
+                        a = 1;
                         int numtrabajos = con.countTrabajos(grupo.IdGrupo, "trabajo");
                         tab.Controls.Clear();
                         ListaTTE trabajos = new ListaTTE(numtrabajos);
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            trabajos.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            trabajos.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "trabajo");
                             int i = 3;
                             foreach (Trabajo trabajo in listaTrabajos)
@@ -131,7 +135,7 @@ namespace ControldeAlumnosPVI
                         break;
 
                     case "tabPage4":
-
+                        a = 1;
                         tab.Controls.Clear();
 
                         int numexamenes = con.countTrabajos(grupo.IdGrupo, "examen");
@@ -139,7 +143,7 @@ namespace ControldeAlumnosPVI
                         ListaTTE examenes = new ListaTTE(numexamenes);
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            examenes.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                            examenes.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "examen");
                             int i = 3;
                             foreach (Trabajo trabajo in listaTrabajos)
