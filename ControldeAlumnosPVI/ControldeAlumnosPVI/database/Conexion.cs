@@ -1026,36 +1026,36 @@ namespace database
             return true;
         }
 
-        //public bool deleteAlumnoGrupo(string idAlumno)
-        //{
-        //    try
-        //    {
-        //        if (conexion.State == ConnectionState.Closed)
-        //        {
-        //            conexion.Open();
-        //        }
-        //        string query = "DELETE FROM alumnos_grupo " +
-        //            "WHERE idalumnos = @idalumnos";
-        //        MySqlCommand comando = new MySqlCommand(query);
-        //        comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-        //        comando.Connection = conexion;
-        //        int a = comando.ExecuteNonQuery();
-        //        if (a == 0)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
-        //        return false;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
-        //    return true;
-        //}
+        public bool deleteAlumnoGrupo(string idAlumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "DELETE FROM alumnos_grupo " +
+                    "WHERE idalumnos = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
 
         //Trabajos
 
