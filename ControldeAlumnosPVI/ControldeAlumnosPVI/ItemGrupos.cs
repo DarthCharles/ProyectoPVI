@@ -90,29 +90,24 @@ namespace ControldeAlumnosPVI
                         tab.Controls.Add(lista);
                         break;
 
-<<<<<<< HEAD
-                    case "tabPage2":
-                        tab.Controls.Clear();
-                 
-                        ListaTTE tareas = new ListaTTE(10);
-                        foreach (Alumno alumno in listaAlumnos)
-                        {
-                            tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
-=======
+
+
                      case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
                         ListaTTE tareas = new ListaTTE(2);
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            tareas.Rows.Add("1", alumno.NombreAlumno);
+                            tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
                             Conexion con = new Conexion();
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
-                            int i = 2;
-                            foreach(Trabajo trabajo in listaTrabajos){
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
                                 tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
                             }
->>>>>>> origin/master
+
+
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
