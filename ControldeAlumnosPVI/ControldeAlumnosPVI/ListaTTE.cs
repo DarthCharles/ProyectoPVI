@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ControldeAlumnosPVI
+{
+    class ListaTTE : ListaAlumnos
+    {
+        public ListaTTE(int num)
+            : base()
+        {
+
+            this.ColumnCount = 2 + num;
+            this.Columns[0].HeaderText = "";
+            this.Columns[0].Width = 30;
+            this.Columns[1].HeaderText = "Alumno";
+            this.Columns[1].Width = 330;
+            for (int i = 2; i < this.Columns.Count; i++)
+            {
+                this.Columns[i].Width = 40;
+            }
+
+
+            this.Columns.Add("Column", "Promedio");
+            this.Columns[ColumnCount - 1].Width = 100;
+            adjustColumns();
+
+    }
+
+        private void adjustColumns(){
+            int width = 0;
+
+            foreach (DataGridViewColumn col in this.Columns)
+            {
+                width += col.Width;
+            }
+            if (width < 685)
+            {
+                for (int i = 2; i < this.Columns.Count - 1; i++)
+                {
+                    this.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                }
+
+            }
+        }
+        }
+}

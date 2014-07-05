@@ -70,11 +70,8 @@ namespace ControldeAlumnosPVI
             panel.PanelGrupos.Controls.Clear();
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
-
-
             click = true;
-
-          
+        
 
             foreach (Grupo grupo in listaGrupo)
             {

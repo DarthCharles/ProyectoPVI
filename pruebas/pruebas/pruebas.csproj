@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F282FD94-A327-4B86-B101-F0D78C2DD86D}</ProjectGuid>
+    <ProjectGuid>{B47EF853-1029-437C-BC20-3320B9C717D0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ControldeAlumnosPVI</RootNamespace>
-    <AssemblyName>ControldeAlumnosPVI</AssemblyName>
+    <RootNamespace>pruebas</RootNamespace>
+    <AssemblyName>pruebas</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,37 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumno.cs" />
-    <Compile Include="database\Conexion.cs" />
-    <Compile Include="database\DatabaseConstants.cs" />
-    <Compile Include="Grupo.cs" />
-    <Compile Include="ItemGrupos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ItemMaterias.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaAlumnos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ListaAsistencia.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ListaPart_Pextra.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ListaTTE.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Maestro.cs" />
-    <Compile Include="Materia.cs" />
-    <Compile Include="PanelParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -85,18 +57,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -105,42 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\agregar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\agregar1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_ajustes.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\nueva.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_nueva.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_configuracion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_guardar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_nuevo_examen1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_nuevo_trabajo1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_configuracion1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ic_action_1404533629_98.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
