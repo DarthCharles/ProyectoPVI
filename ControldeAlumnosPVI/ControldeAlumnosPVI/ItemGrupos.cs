@@ -9,6 +9,7 @@ using System.Drawing;
 using grupos;
 using database;
 using alumnos;
+using trabajos;
 
 namespace ControldeAlumnosPVI
 {
@@ -88,13 +89,19 @@ namespace ControldeAlumnosPVI
                         tab.Controls.Add(lista);
                         break;
 
-                    case "tabPage2":
-                                             tab.Controls.Clear();
+                     case "tabPage2":
+                        tab.Controls.Clear();
                         tab.Text = "Tareas";
-                        ListaTTE tareas = new ListaTTE(5);
+                        ListaTTE tareas = new ListaTTE(2);
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add("1", alumno.NombreAlumno);
+                            Conexion con = new Conexion();
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
+                            int i = 2;
+                            foreach(Trabajo trabajo in listaTrabajos){
+                                tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
                         }
                         //tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
