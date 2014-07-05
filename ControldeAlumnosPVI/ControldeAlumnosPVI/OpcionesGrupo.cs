@@ -10,17 +10,13 @@ using System.Windows.Forms;
 
 namespace ControldeAlumnosPVI
 {
-    public partial class ConfGrupo : Form
+    public partial class OpcionesGrupo : Form
     {
-        public ConfGrupo(String str)
+        public OpcionesGrupo(String str)
         {
             InitializeComponent();
             this.Text = str;
         }
 
-        private void Conf_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

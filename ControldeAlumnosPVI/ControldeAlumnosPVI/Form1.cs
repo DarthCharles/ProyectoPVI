@@ -93,15 +93,17 @@ namespace ControldeAlumnosPVI
 
         private void grupos_agregar_Click(object sender, EventArgs e)
         {
-            if (panel_grupos.Controls.Count != 0)
+
+            if (ActiveMateria() != null)
             {
                 OpcionesMateria A = new OpcionesMateria("Agregar nuevo grupo");
                 A.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Por favor primero seleccione una materia", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         Materia ActiveMateria()
@@ -129,7 +131,7 @@ namespace ControldeAlumnosPVI
             }
             else
             {
-                MessageBox.Show("Por favor primero seleccione una materia", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
        
         
