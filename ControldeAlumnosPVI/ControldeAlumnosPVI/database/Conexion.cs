@@ -9,6 +9,8 @@ using System.Data;
 using materias;
 using grupos;
 using alumnos;
+using trabajos;
+using parciales;
 
 namespace database
 {
@@ -929,7 +931,7 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * FROM alumnos_grupo INNER JOIN alumnos ON grupos.idalumnos = " +
+                string query = "SELECT * FROM alumnos_grupo INNER JOIN alumnos ON alumnos_grupo.idalumnos = " +
                         "alumnos.idalumnos WHERE idgrupos = @idgrupos";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idgrupos", idGrupo);
@@ -940,7 +942,7 @@ namespace database
                     while (reader.Read())
                     {
                         Alumno alumno = new Alumno();
-                        alumno.IdAlumno = reader["grupos.idalumnos"].ToString();
+                        alumno.IdAlumno = reader["idalumnos"].ToString();
                         alumno.NombreAlumno = reader["nombre"].ToString();
                         alumno.Foto = reader["foto"].ToString();
                         alumno.Calificacion = reader["calificacion"].ToString();
@@ -1024,7 +1026,40 @@ namespace database
             return true;
         }
 
-        public bool deleteAlumnoGrupo(string idAlumno)
+        //public bool deleteAlumnoGrupo(string idAlumno)
+        //{
+        //    try
+        //    {
+        //        if (conexion.State == ConnectionState.Closed)
+        //        {
+        //            conexion.Open();
+        //        }
+        //        string query = "DELETE FROM alumnos_grupo " +
+        //            "WHERE idalumnos = @idalumnos";
+        //        MySqlCommand comando = new MySqlCommand(query);
+        //        comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+        //        comando.Connection = conexion;
+        //        int a = comando.ExecuteNonQuery();
+        //        if (a == 0)
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        conexion.Close();
+        //    }
+        //    return true;
+        //}
+
+        //Trabajos
+
+        public bool create(Trabajo trabajo)
         {
             try
             {
@@ -1032,12 +1067,57 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "DELETE FROM alumnos_grupo " +
-                    "WHERE idalumnos = @idalumnos";
+                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idparciales) VALUES (@nombre, @tipo, @idparciales)";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Parameters.AddWithValue("@nombre", trabajo.Nombre);
+                comando.Parameters.AddWithValue("@tipo", trabajo.Tipo);
+                comando.Parameters.AddWithValue("@idparciales", trabajo.IdParcial);
+
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
+                String lastId = comando.LastInsertedId.ToString();
+                trabajo.IdTrabajo = lastId;
+                if (a == 0)
+                {
+                    return false;
+                }
+                List<Alumno> listaAlumnos = readInfoAlumnosGrupo(trabajo.IdGrupo);
+                foreach (Alumno alumno in listaAlumnos)
+                {
+                    nuevoTrabajo(alumno, trabajo.IdTrabajo);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo trabajo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool nuevoTrabajo(Alumno alumno, string idTrabajo)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO trabajos (entregada, calificacion, idalumnos_grupo, " +
+                    "idtrabajos_dejados) " +
+                    "VALUES (@entregada, @calificacion, @id_alumnosgrupo, @idtrabajos_dejados)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@entregada", false);
+                comando.Parameters.AddWithValue("@calificacion", "0");
+                comando.Parameters.AddWithValue("@id_alumnosgrupo", alumno.IdAlumno);
+                comando.Parameters.AddWithValue("@idtrabajos_dejados", idTrabajo);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+
                 if (a == 0)
                 {
                     return false;
@@ -1045,7 +1125,7 @@ namespace database
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo trabajo para el alumno: " + e.Message);
                 return false;
             }
             finally
@@ -1057,3 +1137,4 @@ namespace database
 
     }
 }
+
