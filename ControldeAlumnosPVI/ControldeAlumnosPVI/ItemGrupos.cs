@@ -96,15 +96,7 @@ namespace ControldeAlumnosPVI
                     case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
-<<<<<<< HEAD
                         int numtareas = con.countTrabajos(grupo.IdGrupo, "tarea");
-=======
-
-                        
-                          Conexion con = new Conexion();
-
-                        int numtareas = con.countTrabajos(grupo.IdGrupo);
->>>>>>> origin/master
                         ListaTTE tareas = new ListaTTE(numtareas);
 
                         foreach (Alumno alumno in listaAlumnos)
