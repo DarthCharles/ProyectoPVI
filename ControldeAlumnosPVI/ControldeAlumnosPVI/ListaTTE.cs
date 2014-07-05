@@ -44,7 +44,7 @@ namespace ControldeAlumnosPVI
             }
             if (width < 685)
             {
-                for (int i = 3; i < this.Columns.Count - 1; i++)
+                for (int i = 3; i < this.Columns.Count ; i++)
                 {
                    
                     this.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
