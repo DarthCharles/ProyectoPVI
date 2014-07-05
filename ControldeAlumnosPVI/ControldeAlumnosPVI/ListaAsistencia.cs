@@ -17,12 +17,14 @@ namespace ControldeAlumnosPVI
 
             this.Columns[0].Visible = false;
             this.Columns[1].HeaderText = "";
+            this.Columns[1].ReadOnly = true;
             this.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             this.Columns[1].Width = 30;
             DataGridViewCheckBoxColumn a = new DataGridViewCheckBoxColumn();
 
             this.Columns.Add(a);
             this.Columns[2].HeaderText = "Alumno";
+            this.Columns[2].ReadOnly = true;
             this.Columns[3].HeaderText = "Asistencia";
 
 

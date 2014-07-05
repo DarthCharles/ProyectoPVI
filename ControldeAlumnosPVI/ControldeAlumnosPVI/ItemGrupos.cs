@@ -72,13 +72,7 @@ namespace ControldeAlumnosPVI
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
-<<<<<<< HEAD
-     
-        
-=======
 
-
->>>>>>> origin/master
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
                 switch (tab.Name)
@@ -100,15 +94,13 @@ namespace ControldeAlumnosPVI
                     case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
-<<<<<<< HEAD
+
                         
-                        ListaTTE tareas = new ListaTTE(2);
-=======
-                        Conexion con = new Conexion();
+                          Conexion con = new Conexion();
 
                         int numtareas = con.countTrabajos(grupo.IdGrupo);
                         ListaTTE tareas = new ListaTTE(numtareas);
->>>>>>> origin/master
+
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
