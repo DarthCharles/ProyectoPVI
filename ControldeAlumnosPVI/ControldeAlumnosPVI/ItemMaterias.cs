@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using materia;
+using materias;
 using database;
 
 using System.Drawing;
 
-using grupo;
+using grupos;
 
 namespace ControldeAlumnosPVI
 {

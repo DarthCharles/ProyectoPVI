@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alumno.cs" />
     <Compile Include="database\Conexion.cs" />
     <Compile Include="database\DatabaseConstants.cs" />
     <Compile Include="Grupo.cs" />

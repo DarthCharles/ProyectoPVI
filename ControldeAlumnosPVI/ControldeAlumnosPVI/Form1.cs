@@ -8,8 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using database;
+<<<<<<< HEAD
 using materia;
 using maestro;
+=======
+using materias;
+>>>>>>> origin/master
 
 namespace ControldeAlumnosPVI
 {

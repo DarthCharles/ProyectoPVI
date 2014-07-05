@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using materia;
+using materias;
 
-namespace grupo
+namespace grupos
 {
     class Grupo : Materia
     {
         private string nombre;
         private string idGrupo;
+
+        public Grupo(string idGrupo)
+        {
+            this.idGrupo = idGrupo;
+        }
 
         public Grupo()
         {

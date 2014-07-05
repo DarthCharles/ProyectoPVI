@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
-using maestro;
+using maestros;
 using System.Data.SqlClient;
 using System.Data;
-using materia;
-using grupo;
+using materias;
+using grupos;
+using alumnos;
 
 namespace database
 {
@@ -34,7 +35,7 @@ namespace database
         }
 
         //Maestros
-        
+
         public bool login(string user, string password, Maestro maestro)
         {
             try
@@ -118,35 +119,36 @@ namespace database
             }
         }
 
-        public bool isMaestroRepetido(string user){
-                try
+        public bool isMaestroRepetido(string user)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
                 {
-                    if (conexion.State == ConnectionState.Closed)
-                    {
-                        conexion.Open();
-                    }
-                    string query = "SELECT * from maestros where user = @user";
-                    MySqlCommand comando = new MySqlCommand(query);
-                    comando.Parameters.AddWithValue("@user", user);
-                    comando.Connection = conexion;
-                    MySqlDataReader reader = comando.ExecuteReader();
+                    conexion.Open();
+                }
+                string query = "SELECT * from maestros where user = @user";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@user", user);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
                 {
                     return true;
                 }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Ha ocurrido un error al registrar un nuevo maestro: " + e.Message);
-                    return false;
-                }
-                finally
-                {
-                    conexion.Close();
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo maestro: " + e.Message);
                 return false;
             }
-            
+            finally
+            {
+                conexion.Close();
+            }
+            return false;
+        }
+
         public Maestro readInfoMaestro(string idMaestro)
         {
             Maestro maestro = new Maestro();
@@ -269,7 +271,7 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "DELETE FROM maestros "+
+                string query = "DELETE FROM maestros " +
                     "WHERE idmaestros = @idmaestros";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idmaestros", idMaestro);
@@ -531,7 +533,8 @@ namespace database
                 comando.Parameters.AddWithValue("@nombre", materia.NombreMateria);
                 comando.Parameters.AddWithValue("@clave", materia.Clave);
                 comando.Parameters.AddWithValue("@idmaestros", materia.IdMaestro);
-               
+                comando.Parameters.AddWithValue("@idmaterias", materia.IdMateria);
+
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
                 if (a == 0)
@@ -581,7 +584,7 @@ namespace database
             }
             return true;
         }
-    
+
         //Grupos
 
         public bool create(Grupo grupo)
@@ -725,7 +728,7 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "UPDATE grupos SET nombre = @nombre, idmaterias = @idmaterias, " +
+                string query = "UPDATE grupos SET nombre = @nombre, idmaterias = @idmaterias " +
                     " WHERE idgrupos = @idgrupos";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", grupo.NombreGrupo);
@@ -781,6 +784,108 @@ namespace database
             }
             return true;
         }
+
+        //Alumnos
+
+        public bool create(Alumno alumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO alumnos (nombre, foto) VALUES (@nombre, @foto)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@nombre", alumno.NombreAlumno);
+                comando.Parameters.AddWithValue("@foto", alumno.Foto);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool addAlumnoGrupo(Alumno alumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO alumnos_grupo (idalumnos, idgrupos) VALUES (@idalumnos, @idgrupos)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", alumno.IdAlumno);
+                comando.Parameters.AddWithValue("@idgrupos", alumno.IdGrupo);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo alumno en un grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool createAlumnoIdGrupo(Alumno alumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO alumnos (nombre, foto) VALUES (@nombre, @foto)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@nombre", alumno.NombreAlumno);
+                comando.Parameters.AddWithValue("@foto", alumno.Foto);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                String lastId = comando.LastInsertedId.ToString();
+                alumno.IdAlumno = lastId;
+                addAlumnoGrupo(alumno);
+                if (a == 0)
+
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo alumno en un grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+
 
     }
 }
