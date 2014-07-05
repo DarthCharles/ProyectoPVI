@@ -73,7 +73,7 @@ namespace ControldeAlumnosPVI
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
      
-
+        
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
                 switch (tab.Name)
@@ -95,6 +95,7 @@ namespace ControldeAlumnosPVI
                      case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
+                        
                         ListaTTE tareas = new ListaTTE(2);
                         foreach (Alumno alumno in listaAlumnos)
                         {

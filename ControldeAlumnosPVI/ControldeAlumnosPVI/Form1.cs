@@ -22,7 +22,7 @@ namespace ControldeAlumnosPVI
         public Form1()
         {
             InitializeComponent();
-
+            label_fecha.Text = DateTime.Today.ToString("D").ToUpper();
             Conexion con = new Conexion();
 
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
@@ -45,6 +45,11 @@ namespace ControldeAlumnosPVI
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
