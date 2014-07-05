@@ -45,7 +45,7 @@ namespace ControldeAlumnosPVI
             this.grupo = m;
             Conexion con = new Conexion();
             listaAlumnos = con.readInfoAlumnosGrupo(m.IdGrupo);
-      
+
         }
 
 
@@ -72,15 +72,20 @@ namespace ControldeAlumnosPVI
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
+<<<<<<< HEAD
      
         
+=======
+
+
+>>>>>>> origin/master
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
                 switch (tab.Name)
                 {
                     case "tabPage1":
                         tab.Controls.Clear();
-                       
+
                         ListaAsistencia lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
@@ -92,15 +97,21 @@ namespace ControldeAlumnosPVI
 
 
 
-                     case "tabPage2":
+                    case "tabPage2":
                         tab.Controls.Clear();
                         tab.Text = "Tareas";
+<<<<<<< HEAD
                         
                         ListaTTE tareas = new ListaTTE(2);
+=======
+                        Conexion con = new Conexion();
+
+                        int numtareas = con.countTrabajos(grupo.IdGrupo);
+                        ListaTTE tareas = new ListaTTE(numtareas);
+>>>>>>> origin/master
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
-                            Conexion con = new Conexion();
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
                             int i = 3;
                             foreach (Trabajo trabajo in listaTrabajos)
@@ -121,7 +132,7 @@ namespace ControldeAlumnosPVI
                         {
                             trabajos.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
                         }
-                    tab.Controls.Add(trabajos);
+                        tab.Controls.Add(trabajos);
                         break;
 
                     case "tabPage4":
@@ -133,18 +144,18 @@ namespace ControldeAlumnosPVI
                         {
                             examenes.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
                         }
-                   
+
                         tab.Controls.Add(examenes);
                         break;
 
                     case "tabPage5":
-               
+
                         tab.Controls.Add(new ListaPart_Pextra());
 
                         break;
 
                     case "tabPage6":
-                          tab.Controls.Add(new ListaPart_Pextra());
+                        tab.Controls.Add(new ListaPart_Pextra());
                         break;
                     default:
                         break;

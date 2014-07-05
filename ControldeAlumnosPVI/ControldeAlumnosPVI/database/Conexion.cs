@@ -1175,6 +1175,35 @@ namespace database
             return listaTrabajos;
         }
 
+        public int countTrabajos(string idGrupo)
+        {
+            int numTrabajos= 0;
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT COUNT(*) FROM trabajos_dejados";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Connection = conexion;
+
+                numTrabajos = int.Parse(comando.ExecuteScalar().ToString());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al leer la información de la materia: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return numTrabajos;
+        }
+
+
     }
 }
 
