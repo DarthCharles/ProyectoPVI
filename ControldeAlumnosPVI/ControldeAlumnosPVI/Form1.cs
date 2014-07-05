@@ -12,6 +12,7 @@ using database;
 
 using materias;
 using System.Threading;
+using grupos;
 
 
 namespace ControldeAlumnosPVI
@@ -81,22 +82,12 @@ namespace ControldeAlumnosPVI
             A.ShowDialog();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void grupos_agregar_Click(object sender, EventArgs e)
         {
 
             if (ActiveMateria() != null)
             {
-                OpcionesMateria A = new OpcionesMateria("Agregar nuevo grupo");
+                OpcionesGrupo A = new OpcionesGrupo();
                 A.ShowDialog();
             }
             else
@@ -122,6 +113,21 @@ namespace ControldeAlumnosPVI
             return null;
         }
 
+        Grupo ActiveGrupo()
+        {
+
+            foreach (ItemGrupo x in panel_grupos.Controls)
+            {
+                if (x.Active == true)
+                {
+
+                    return x.Grupo;
+
+                }
+            }
+
+            return null;
+        }
         private void materias_conf_Click(object sender, EventArgs e)
         {
             if (ActiveMateria() != null)
@@ -137,6 +143,20 @@ namespace ControldeAlumnosPVI
         
 
 
+        }
+
+        private void grupos_conf_Click(object sender, EventArgs e)
+        {
+            if (ActiveGrupo() != null)
+            {
+                OpcionesGrupo A = new OpcionesGrupo(ActiveGrupo().NombreGrupo);
+                A.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+       
         }
 
 

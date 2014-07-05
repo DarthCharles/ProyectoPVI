@@ -16,5 +16,5 @@ C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnos
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Properties.Resources.resources
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csprojResolveAssemblyReference.cache
-C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.ConfGrupo.resources
 C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.OpcionesMateria.resources
+C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.OpcionesGrupo.resources

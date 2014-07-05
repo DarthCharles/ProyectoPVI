@@ -22,6 +22,11 @@ namespace ControldeAlumnosPVI
         Grupo grupo;
         List<Alumno> listaAlumnos;
 
+        public Grupo Grupo
+        {
+            get { return grupo; }
+            set { grupo = value; }
+        }
         public bool Active
         {
             get { return click; }
