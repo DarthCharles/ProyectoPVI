@@ -11,12 +11,13 @@ namespace ControldeAlumnosPVI
     {
         public ListaPart_Pextra()
         {
-            this.ColumnCount = 2 ;
-            this.Columns[0].HeaderText = "";
-            this.Columns[0].Width = 30;
+            this.ColumnCount = 3;
+            this.Columns[0].Visible = false;
+            this.Columns[1].HeaderText = "";
+            this.Columns[1].Width = 30;
   
-            this.Columns[1].HeaderText = "Alumno";
-            this.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.Columns[2].HeaderText = "Alumno";
+            this.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             // Initialize the button column.
             DataGridViewButtonColumn buttonColumn =
                 new DataGridViewButtonColumn();
@@ -28,10 +29,10 @@ namespace ControldeAlumnosPVI
             buttonColumn.UseColumnTextForButtonValue = true;
             buttonColumn.DefaultCellStyle.Padding = new Padding(2,0,2,0);
             this.Columns.Add(buttonColumn);
-            this.Columns[2].Width = 40;
+            this.Columns[3].Width = 40;
 
             this.Columns.Add("Column", "Total");
-            this.Columns[3].Width = 100;
+            this.Columns[4].Width = 100;
 
 
             buttonColumn.Text = "+";
@@ -46,7 +47,7 @@ namespace ControldeAlumnosPVI
             buttonColumn1.UseColumnTextForButtonValue = true;
             buttonColumn1.DefaultCellStyle.Padding = new Padding(2, 0, 2, 0);
             this.Columns.Add(buttonColumn1);
-            this.Columns[4].Width = 40;
+            this.Columns[5].Width = 40;
             
 
 
@@ -61,18 +62,18 @@ namespace ControldeAlumnosPVI
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                int a = Int32.Parse(this.Rows[e.RowIndex].Cells[3].Value.ToString());
+                int a = Int32.Parse(this.Rows[e.RowIndex].Cells[4].Value.ToString());
 
-                if (e.ColumnIndex == 2)
+                if (e.ColumnIndex == 3)
                 {                   
                     a++;
                     this.Rows[e.RowIndex].Cells[3].Value = a;
                 }
 
-                if (e.ColumnIndex == 4)
+                if (e.ColumnIndex == 5)
                 {
                      a--;
-                    this.Rows[e.RowIndex].Cells[3].Value = a;
+                    this.Rows[e.RowIndex].Cells[4].Value = a;
                 }
              
             }
