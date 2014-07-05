@@ -169,7 +169,7 @@ namespace database
                 {
                     while (reader.Read())
                     {
-       
+
                         maestro.IdMaestro = idMaestro;
                         maestro.NombreMaestro = reader["nombre"].ToString();
                         maestro.Apellido = reader["apellido"].ToString();
@@ -868,7 +868,6 @@ namespace database
                 alumno.IdAlumno = lastId;
                 addAlumnoGrupo(alumno);
                 if (a == 0)
-
                 {
                     return false;
                 }
@@ -885,7 +884,176 @@ namespace database
             return true;
         }
 
+        public List<Alumno> readInfoAlumnos()
+        {
+            List<Alumno> listaAlumnos = new List<Alumno>();
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT * FROM alumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Alumno alumno = new Alumno();
+                        alumno.IdAlumno = reader["idalumnos"].ToString();
+                        alumno.NombreAlumno = reader["nombre"].ToString();
+                        alumno.Foto = reader["foto"].ToString();
+                        listaAlumnos.Add(alumno);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al leer la información del alumno: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return listaAlumnos;
+        }
 
+        public List<Alumno> readInfoAlumnosGrupo(string idGrupo)
+        {
+            List<Alumno> listaAlumnos = new List<Alumno>();
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT * FROM alumnos_grupo INNER JOIN alumnos ON grupos.idalumnos = " +
+                        "alumnos.idalumnos WHERE idgrupos = @idgrupos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Alumno alumno = new Alumno();
+                        alumno.IdAlumno = reader["grupos.idalumnos"].ToString();
+                        alumno.NombreAlumno = reader["nombre"].ToString();
+                        alumno.Foto = reader["foto"].ToString();
+                        alumno.Calificacion = reader["calificacion"].ToString();
+                        listaAlumnos.Add(alumno);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al leer la información del alumno: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return listaAlumnos;
+        }
+
+        public bool update(Alumno alumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "UPDATE alumnos SET nombre = @nombre, foto = @foto " +
+                    " WHERE idalumnos = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@nombre", alumno.NombreAlumno);
+                comando.Parameters.AddWithValue("@foto", alumno.Foto);
+                comando.Parameters.AddWithValue("@idalumnos", alumno.IdAlumno);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al actualizar un alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool deleteAlumno(string idAlumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "DELETE FROM alumnos " +
+                    "WHERE idalumnos = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool deleteAlumnoGrupo(string idAlumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "DELETE FROM alumnos_grupo " +
+                    "WHERE idalumnos = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al borrar un alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
 
     }
 }

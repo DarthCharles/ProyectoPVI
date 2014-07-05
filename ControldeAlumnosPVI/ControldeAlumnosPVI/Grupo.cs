@@ -11,13 +11,18 @@ namespace grupos
         private string nombre;
         private string idGrupo;
 
+        public Grupo()
+        {
+        }
+
         public Grupo(string idGrupo)
         {
             this.idGrupo = idGrupo;
         }
 
-        public Grupo()
+        public Grupo(string nombre, string idGrupo, string idMaestro)
         {
+            this.idGrupo = idGrupo;
         }
 
         public Grupo(string nombre, string idMateria)
