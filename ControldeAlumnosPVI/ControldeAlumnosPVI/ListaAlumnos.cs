@@ -15,10 +15,10 @@ namespace ControldeAlumnosPVI
 
         public ListaAlumnos()
         {
-            this.ColumnCount = 2;
-            this.Columns[0].HeaderText = "Alumno";
+            this.ColumnCount = 3;
+            this.Columns[2].HeaderText = "Alumno";
             //this.Columns[0].ReadOnly = true;
-            this.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            this.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.Location = new System.Drawing.Point(0, 0);
             this.Size = new System.Drawing.Size(685, 510);
             this.BackgroundColor = Color.White; //cambiamos el color de fondo de la tabla

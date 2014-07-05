@@ -13,13 +13,15 @@ namespace ControldeAlumnosPVI
             : base()
         {
 
-            this.ColumnCount = 2 + num;
-            this.Columns[0].HeaderText = "";
-            this.Columns[0].Width = 30;
-            this.Columns[1].HeaderText = "Alumno";
-            this.Columns[1].Width = 330;
-            for (int i = 2; i < this.Columns.Count; i++)
+            this.ColumnCount = 3 + num;
+            this.Columns[0].Visible = false;
+            this.Columns[1].HeaderText = "";
+            this.Columns[1].Width = 30;
+            this.Columns[2].HeaderText = "Alumno";
+            this.Columns[2].Width = 330;
+            for (int i = 3; i < this.Columns.Count; i++)
             {
+                this.Columns[i].HeaderText = "T" + (i - 2);
                 this.Columns[i].Width = 40;
             }
 
@@ -39,8 +41,9 @@ namespace ControldeAlumnosPVI
             }
             if (width < 685)
             {
-                for (int i = 2; i < this.Columns.Count - 1; i++)
+                for (int i = 3; i < this.Columns.Count - 1; i++)
                 {
+                   
                     this.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 }

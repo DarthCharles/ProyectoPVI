@@ -26,7 +26,7 @@ namespace ControldeAlumnosPVI
             set { click = value; }
         }
 
-       
+
 
 
         public ItemGrupo(PanelParameters caca, string nombre, Grupo m)
@@ -44,6 +44,7 @@ namespace ControldeAlumnosPVI
             this.grupo = m;
             Conexion con = new Conexion();
             listaAlumnos = con.readInfoAlumnosGrupo(m.IdGrupo);
+      
         }
 
 
@@ -63,14 +64,14 @@ namespace ControldeAlumnosPVI
             nombreMateria.Text = nombre;
         }
         Color clr = Color.FromArgb(193, 224, 101);
-  
+
         private void PanelMouseClick(object sender, MouseEventArgs e)
         {
             RefreshList();
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
-           
+     
 
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
@@ -78,57 +79,66 @@ namespace ControldeAlumnosPVI
                 {
                     case "tabPage1":
                         tab.Controls.Clear();
-                        tab.Text = "Lista de Asistencia";
+                       
                         ListaAsistencia lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
                         }
-                        lista.Columns[0].Visible = false;
+                        lista.CheckAll();
                         tab.Controls.Add(lista);
                         break;
 
                     case "tabPage2":
-                                             tab.Controls.Clear();
-                        tab.Text = "Tareas";
-                        ListaTTE tareas = new ListaTTE(5);
+                        tab.Controls.Clear();
+                 
+                        ListaTTE tareas = new ListaTTE(10);
                         foreach (Alumno alumno in listaAlumnos)
                         {
-                            tareas.Rows.Add("1", alumno.NombreAlumno);
+                            tareas.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
                         }
-                        //tareas.Columns[0].Visible = false;
+                        tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
                         break;
 
                     case "tabPage3":
-                        tab.Text = "Trabajos";
-                        tab.Controls.Add(new ListaTTE(3));
+                        tab.Controls.Clear();
+                        ListaTTE trabajos = new ListaTTE(2);
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            trabajos.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                        }
+                    tab.Controls.Add(trabajos);
                         break;
 
                     case "tabPage4":
 
-                        tab.Text = "Exámenes";
-                        tab.Controls.Add(new ListaTTE(3));
+                        tab.Controls.Clear();
+
+                        ListaTTE examenes = new ListaTTE(3);
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            examenes.Rows.Add(alumno.IdAlumno, "1", alumno.NombreAlumno);
+                        }
+                   
+                        tab.Controls.Add(examenes);
                         break;
 
                     case "tabPage5":
-
-                        tab.Text = "Participaciones";
+               
                         tab.Controls.Add(new ListaPart_Pextra());
 
                         break;
 
                     case "tabPage6":
-
-                        tab.Text = "Puntos Extra";
-                        tab.Controls.Add(new ListaPart_Pextra());
+                          tab.Controls.Add(new ListaPart_Pextra());
                         break;
                     default:
                         break;
                 }
             }
 
-          
+
 
         }
 
