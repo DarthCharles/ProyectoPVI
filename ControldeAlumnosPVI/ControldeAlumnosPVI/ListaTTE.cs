@@ -17,8 +17,10 @@ namespace ControldeAlumnosPVI
             this.Columns[0].Visible = false;
             this.Columns[1].HeaderText = "";
             this.Columns[1].Width = 30;
+            this.Columns[1].ReadOnly = true;
             this.Columns[2].HeaderText = "Alumno";
             this.Columns[2].Width = 330;
+            this.Columns[2].ReadOnly = true;
             for (int i = 3; i < this.Columns.Count; i++)
             {
                 this.Columns[i].HeaderText = "T" + (i - 2);
@@ -28,6 +30,7 @@ namespace ControldeAlumnosPVI
 
             this.Columns.Add("Column", "Promedio");
             this.Columns[ColumnCount - 1].Width = 100;
+            this.Columns[ColumnCount - 1].ReadOnly = true;
             adjustColumns();
 
     }
