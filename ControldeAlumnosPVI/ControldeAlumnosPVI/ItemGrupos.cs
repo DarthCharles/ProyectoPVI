@@ -10,6 +10,7 @@ using grupos;
 using database;
 using alumnos;
 using trabajos;
+using System.Threading;
 
 namespace ControldeAlumnosPVI
 {
@@ -45,7 +46,7 @@ namespace ControldeAlumnosPVI
             this.grupo = m;
             Conexion con = new Conexion();
             listaAlumnos = con.readInfoAlumnosGrupo(m.IdGrupo);
-
+        
         }
 
 
@@ -69,12 +70,15 @@ namespace ControldeAlumnosPVI
         private void PanelMouseClick(object sender, MouseEventArgs e)
         {
             RefreshList();
+       
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
-
+     
+            this.panel.Context.ShowTabs();
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
+              
                 Conexion con = new Conexion();
                 int a = 1;
 
@@ -217,6 +221,8 @@ namespace ControldeAlumnosPVI
                 x.nombreMateria.ForeColor = System.Drawing.Color.Black;
                 x.Active = false;
             }
+     
+            this.panel.Context.HideTabs();
         }
 
     }

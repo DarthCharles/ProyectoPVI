@@ -11,6 +11,7 @@ using database;
 
 
 using materias;
+using System.Threading;
 
 
 namespace ControldeAlumnosPVI
@@ -22,6 +23,8 @@ namespace ControldeAlumnosPVI
         public Form1()
         {
             InitializeComponent();
+            HideTabs();
+        
             label_fecha.Text = DateTime.Today.ToString("D").ToUpper();
             Conexion con = new Conexion();
 
@@ -37,6 +40,38 @@ namespace ControldeAlumnosPVI
 
           
 
+        }
+        public void HideTabs()
+        {
+
+
+      
+      
+            tabs_alumnos.TabPages.Remove(tabPage6);
+            tabs_alumnos.TabPages.Remove(tabPage5);
+            tabs_alumnos.TabPages.Remove(tabPage4);
+            tabs_alumnos.TabPages.Remove(tabPage3);
+            tabs_alumnos.TabPages.Remove(tabPage2);
+            tabs_alumnos.TabPages.Remove(tabPage1);
+       
+      
+      
+          
+        }
+
+        public void ShowTabs()
+        {
+            tabs_alumnos.TabPages.Add(tabPage1);
+            tabs_alumnos.TabPages.Add(tabPage2);
+            tabs_alumnos.TabPages.Add(tabPage3);
+            tabs_alumnos.TabPages.Add(tabPage4);
+            tabs_alumnos.TabPages.Add(tabPage5);
+                 tabs_alumnos.TabPages.Add(tabPage6);
+
+      
+
+     
+                
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -113,6 +113,8 @@ namespace ControldeAlumnosPVI
                 x.nombreMateria.ForeColor = System.Drawing.Color.Black;
                 x.Active = false;
             }
+
+            this.panel.Context.HideTabs();
         }
 
    
