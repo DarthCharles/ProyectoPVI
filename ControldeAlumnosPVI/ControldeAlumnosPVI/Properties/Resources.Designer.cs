@@ -83,6 +83,16 @@ namespace ControldeAlumnosPVI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_action_1404533629_98 {
+            get {
+                object obj = ResourceManager.GetObject("ic_action_1404533629_98", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_ajustes {
             get {
                 object obj = ResourceManager.GetObject("ic_ajustes", resourceCulture);
@@ -103,9 +113,9 @@ namespace ControldeAlumnosPVI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_configuracion1 {
+        internal static System.Drawing.Bitmap ic_delete {
             get {
-                object obj = ResourceManager.GetObject("ic_configuracion1", resourceCulture);
+                object obj = ResourceManager.GetObject("ic_delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,16 +143,6 @@ namespace ControldeAlumnosPVI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_nueva {
-            get {
-                object obj = ResourceManager.GetObject("ic_nueva", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ic_nuevo_examen1 {
             get {
                 object obj = ResourceManager.GetObject("ic_nuevo_examen1", resourceCulture);
@@ -156,16 +156,6 @@ namespace ControldeAlumnosPVI.Properties {
         internal static System.Drawing.Bitmap ic_nuevo_trabajo1 {
             get {
                 object obj = ResourceManager.GetObject("ic_nuevo_trabajo1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap nueva {
-            get {
-                object obj = ResourceManager.GetObject("nueva", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

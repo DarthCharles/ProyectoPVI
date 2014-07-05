@@ -167,6 +167,7 @@ namespace database
                 {
                     while (reader.Read())
                     {
+       
                         maestro.IdMaestro = idMaestro;
                         maestro.NombreMaestro = reader["nombre"].ToString();
                         maestro.Apellido = reader["apellido"].ToString();

@@ -62,6 +62,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListaAlumnos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ListaAsistencia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ListaTareas.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Maestro.cs" />
     <Compile Include="Materia.cs" />
     <Compile Include="PanelParameters.cs" />
@@ -122,6 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_configuracion1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_action_1404533629_98.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
