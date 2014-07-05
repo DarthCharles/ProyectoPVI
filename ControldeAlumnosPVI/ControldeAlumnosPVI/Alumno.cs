@@ -14,6 +14,9 @@ namespace alumnos
         private string foto;
         private string calificacion;
 
+        public Alumno()
+        {
+        }
 
         public Alumno(string nombre, string foto, string idGrupo)
             : base(idGrupo)
