@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using database;
-using materia;
+using materias;
 
 namespace ControldeAlumnosPVI
 {

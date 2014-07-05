@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using maestro;
+using maestros;
 
-namespace materia
+namespace materias
 {
     class Materia : Maestro
     {
@@ -22,7 +22,7 @@ namespace materia
             this.idMateria = idMateria;
         }
 
-        public Materia(string idMaestro, string nombre, string clave) 
+        public Materia(string idMaestro, string nombre, string clave)
             : base(idMaestro)
         {
             this.nombre = nombre;
@@ -34,7 +34,7 @@ namespace materia
         {
             this.nombre = nombre;
             this.clave = clave;
-            this.IdMateria = IdMateria;
+            this.idMateria = idMateria;
         }
 
         public string IdMateria
@@ -54,8 +54,8 @@ namespace materia
             get { return clave; }
             set { clave = value; }
         }
-    
+
     }
 
-     
+
 }
