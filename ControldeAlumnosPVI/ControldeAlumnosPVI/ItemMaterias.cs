@@ -20,18 +20,23 @@ namespace ControldeAlumnosPVI
         bool click;
         Materia materia;
         List<Grupo> listaGrupo;
-        
+        public Materia Materia
+        {
+            get { return materia; }
+
+            set { materia = value; }
+        }
         public bool Active
         {
             get { return click; }
             set { click = value; }
         }
 
-  
+
 
         public ItemMaterias(PanelParameters caca, string nombre, Materia materia)
         {
-            this.panel = caca; 
+            this.panel = caca;
             setLabel(nombre);
             this.Controls.Add(nombreMateria);
             this.Location = new System.Drawing.Point(3, 3);
@@ -71,13 +76,13 @@ namespace ControldeAlumnosPVI
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
-        
+
 
             foreach (Grupo grupo in listaGrupo)
             {
                 panel.PanelGrupos.Controls.Add(new ItemGrupo(panel, grupo.NombreGrupo, grupo));
             }
-       
+
         }
 
         private void PanelMouseEnter(object sender, System.EventArgs e)
@@ -117,8 +122,8 @@ namespace ControldeAlumnosPVI
             this.panel.Context.HideTabs();
         }
 
-   
+
 
     }
 
- }
+}

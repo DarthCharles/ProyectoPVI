@@ -28,6 +28,7 @@ namespace ControldeAlumnosPVI
             // than using each cell's value as the text for its own button.
             buttonColumn.UseColumnTextForButtonValue = true;
             buttonColumn.DefaultCellStyle.Padding = new Padding(2,0,2,0);
+            buttonColumn.FlatStyle = FlatStyle.Flat;
             this.Columns.Add(buttonColumn);
             this.Columns[3].Width = 40;
 
@@ -35,12 +36,11 @@ namespace ControldeAlumnosPVI
             this.Columns[4].Width = 100;
 
 
-            buttonColumn.Text = "+";
-
+       
             DataGridViewButtonColumn buttonColumn1 =
           new DataGridViewButtonColumn();
 
-
+            buttonColumn1.FlatStyle = FlatStyle.Flat;
             buttonColumn1.Text = "-";
             // Use the Text property for the button text for all cells rather 
             // than using each cell's value as the text for its own button.
@@ -67,7 +67,7 @@ namespace ControldeAlumnosPVI
                 if (e.ColumnIndex == 3)
                 {                   
                     a++;
-                    this.Rows[e.RowIndex].Cells[3].Value = a;
+                    this.Rows[e.RowIndex].Cells[4].Value = a;
                 }
 
                 if (e.ColumnIndex == 5)

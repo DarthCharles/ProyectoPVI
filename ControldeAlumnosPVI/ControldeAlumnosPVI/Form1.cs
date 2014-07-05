@@ -24,8 +24,8 @@ namespace ControldeAlumnosPVI
         {
             InitializeComponent();
             HideTabs();
-        
-            label_fecha.Text = DateTime.Today.ToString("D").ToUpper();
+
+            label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
 
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
@@ -38,45 +38,47 @@ namespace ControldeAlumnosPVI
 
 
 
-          
+
 
         }
         public void HideTabs()
         {
 
 
-      
-      
+
+
             tabs_alumnos.TabPages.Remove(tabPage6);
             tabs_alumnos.TabPages.Remove(tabPage5);
             tabs_alumnos.TabPages.Remove(tabPage4);
             tabs_alumnos.TabPages.Remove(tabPage3);
             tabs_alumnos.TabPages.Remove(tabPage2);
             tabs_alumnos.TabPages.Remove(tabPage1);
-       
-      
-      
-          
+
+
+
+
         }
 
         public void ShowTabs()
         {
+
             tabs_alumnos.TabPages.Add(tabPage1);
             tabs_alumnos.TabPages.Add(tabPage2);
             tabs_alumnos.TabPages.Add(tabPage3);
             tabs_alumnos.TabPages.Add(tabPage4);
             tabs_alumnos.TabPages.Add(tabPage5);
-                 tabs_alumnos.TabPages.Add(tabPage6);
+            tabs_alumnos.TabPages.Add(tabPage6);
 
-      
 
-     
-                
+
+
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
+            A.ShowDialog();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -86,6 +88,52 @@ namespace ControldeAlumnosPVI
 
         private void label3_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void grupos_agregar_Click(object sender, EventArgs e)
+        {
+            if (panel_grupos.Controls.Count != 0)
+            {
+                OpcionesMateria A = new OpcionesMateria("Agregar nuevo grupo");
+                A.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione una materia", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        Materia ActiveMateria()
+        {
+    
+            foreach (ItemMaterias x in panel_materias.Controls)
+            {
+                if (x.Active == true)
+                {
+            
+                    return x.Materia;
+
+                }
+            }
+
+            return null;
+        }
+
+        private void materias_conf_Click(object sender, EventArgs e)
+        {
+            if (ActiveMateria() != null)
+            {
+                OpcionesMateria A = new OpcionesMateria("Configurar materia", ActiveMateria().NombreMateria);
+                A.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione una materia", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+       
+        
+
 
         }
 

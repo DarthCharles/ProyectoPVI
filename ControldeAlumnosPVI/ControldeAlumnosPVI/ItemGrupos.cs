@@ -160,22 +160,24 @@ namespace ControldeAlumnosPVI
                         break;
 
                     case "tabPage5":
+                        tab.Controls.Clear();
                         a = 1;
                         ListaPart_Pextra ass = new ListaPart_Pextra();
-                        for (int i = 0; i < 10; i++)
+                        foreach (Alumno alumno in listaAlumnos)
                         {
-                            ass.Rows.Add("qw", a++, "nombre");
+                            ass.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                         }
                         tab.Controls.Add(ass);
 
                         break;
 
                     case "tabPage6":
+                        tab.Controls.Clear();
                         a = 1;
                         ListaPart_Pextra assa = new ListaPart_Pextra();
-                        for (int i = 0; i < 10; i++)
+                        foreach (Alumno alumno in listaAlumnos)
                         {
-                            assa.Rows.Add("qw", a++, "nombre");
+                            assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                         }
                         tab.Controls.Add(assa);
                         break;
