@@ -1135,6 +1135,46 @@ namespace database
             return true;
         }
 
+        public List<Trabajo> readInfoTrabajosAlumno(string idAlumno, string tipo)
+        {
+            List<Trabajo> listaTrabajos = new List<Trabajo>();
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+
+                string query = "SELECT nombre, calificacion FROM trabajos INNER JOIN trabajos_dejados "+
+                    "ON trabajos.idtrabajos_dejados = idtareas_dejadas where idalumnos_grupo = @idgrupos and tipo = @tipo";
+
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idAlumno);
+                comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Trabajo trabajo = new Trabajo();
+                        trabajo.Nombre = reader["nombre"].ToString();
+                        trabajo.Calificacion = reader["calificacion"].ToString();
+                        listaTrabajos.Add(trabajo);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al leer la información del alumno: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return listaTrabajos;
+        }
+
     }
 }
 
