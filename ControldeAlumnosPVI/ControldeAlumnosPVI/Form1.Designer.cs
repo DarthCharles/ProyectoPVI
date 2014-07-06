@@ -229,7 +229,7 @@
             this.panel5.Controls.Add(this.tabs_alumnos);
             this.panel5.Location = new System.Drawing.Point(425, 64);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(652, 555);
+            this.panel5.Size = new System.Drawing.Size(680, 555);
             this.panel5.TabIndex = 4;
             // 
             // tabs_alumnos
@@ -247,7 +247,7 @@
             this.tabs_alumnos.Location = new System.Drawing.Point(3, 3);
             this.tabs_alumnos.Name = "tabs_alumnos";
             this.tabs_alumnos.SelectedIndex = 0;
-            this.tabs_alumnos.Size = new System.Drawing.Size(646, 548);
+            this.tabs_alumnos.Size = new System.Drawing.Size(674, 548);
             this.tabs_alumnos.TabIndex = 6;
             // 
             // tabPage1
@@ -255,7 +255,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(638, 510);
+            this.tabPage1.Size = new System.Drawing.Size(666, 510);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Lista de Asistencia";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -265,7 +265,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(638, 510);
+            this.tabPage2.Size = new System.Drawing.Size(628, 510);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tareas";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -275,7 +275,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(638, 510);
+            this.tabPage3.Size = new System.Drawing.Size(628, 510);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Trabajos";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 34);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(638, 510);
+            this.tabPage4.Size = new System.Drawing.Size(628, 510);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Exámenes";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -295,7 +295,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 34);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(638, 510);
+            this.tabPage5.Size = new System.Drawing.Size(628, 510);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Participaciones";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 34);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(638, 510);
+            this.tabPage6.Size = new System.Drawing.Size(628, 510);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Puntos Extra";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -364,9 +364,9 @@
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_alumno;
-            this.pictureBox2.Location = new System.Drawing.Point(1093, 292);
+            this.pictureBox2.Location = new System.Drawing.Point(1120, 244);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox2.Size = new System.Drawing.Size(50, 48);
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
@@ -374,9 +374,9 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_group;
-            this.pictureBox1.Location = new System.Drawing.Point(1167, 292);
+            this.pictureBox1.Location = new System.Drawing.Point(1176, 244);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox1.Size = new System.Drawing.Size(53, 48);
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
@@ -384,9 +384,9 @@
             // 
             this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox7.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen;
-            this.pictureBox7.Location = new System.Drawing.Point(1093, 185);
+            this.pictureBox7.Location = new System.Drawing.Point(1120, 170);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox7.Size = new System.Drawing.Size(50, 48);
             this.pictureBox7.TabIndex = 12;
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
@@ -395,9 +395,9 @@
             // 
             this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox6.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_guardar1;
-            this.pictureBox6.Location = new System.Drawing.Point(1152, 546);
+            this.pictureBox6.Location = new System.Drawing.Point(1155, 563);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(68, 68);
+            this.pictureBox6.Size = new System.Drawing.Size(52, 48);
             this.pictureBox6.TabIndex = 11;
             this.pictureBox6.TabStop = false;
             // 
@@ -405,9 +405,9 @@
             // 
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen1;
-            this.pictureBox5.Location = new System.Drawing.Point(1167, 111);
+            this.pictureBox5.Location = new System.Drawing.Point(1176, 105);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(68, 65);
+            this.pictureBox5.Size = new System.Drawing.Size(53, 50);
             this.pictureBox5.TabIndex = 10;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
@@ -416,9 +416,9 @@
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo1;
-            this.pictureBox4.Location = new System.Drawing.Point(1093, 111);
+            this.pictureBox4.Location = new System.Drawing.Point(1120, 105);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(68, 68);
+            this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 9;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
