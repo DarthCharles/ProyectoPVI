@@ -1311,6 +1311,37 @@ namespace database
             return numTrabajos;
         }
 
+        public List<Trabajo> readInfoTrabajosGrupo(string idGrupo, string tipo)
+        {
+            List<Trabajo> listaTrabajos = new List<Trabajo>();
+            
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+
+                string query = "SELECT * FROM trabajos_dejados  " +
+                    "WHERE idgrupos = @idgrupos and tipo = @tipo";
+
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Trabajo trabajo = new Trabajo();
+                        trabajo.Nombre = reader["nombre"].ToString();
+                        listaTrabajos.Add(trabajo);
+                    }
+                }
+                reader.Close();
+            
+            return listaTrabajos;
+        }
+
     }
 }
 

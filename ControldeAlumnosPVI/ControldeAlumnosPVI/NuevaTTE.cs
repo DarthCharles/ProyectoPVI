@@ -17,9 +17,11 @@ namespace ControldeAlumnosPVI
         string tipo;
         string idGrupo;
         string clave;
+        List<Trabajo> trabajos;
         public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
             InitializeComponent();
+            llenarTrabajos(idGrupo,tipo);
             label4.Text = str1;
        
             this.idGrupo = idGrupo;
@@ -76,8 +78,19 @@ namespace ControldeAlumnosPVI
             Conexion con = new Conexion();
             Trabajo trabajo = new Trabajo(textBox1.Text,tipo,"1",idGrupo);
             con.create(trabajo);
+            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
             dataGridView1.Rows.Add(textBox1.Text, clave+"" +(dataGridView1.Rows.Count+1));
             textBox1.Text = "";
+        }
+
+        private void llenarTrabajos(string idGrupo, string tipo)
+        {
+            Conexion con = new Conexion();
+            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
+            foreach (Trabajo trabajo in trabajos)
+            {
+                dataGridView1.Rows.Add(trabajo.Nombre, clave + "" + (dataGridView1.Rows.Count + 1));
+            }
         }
     }
 }
