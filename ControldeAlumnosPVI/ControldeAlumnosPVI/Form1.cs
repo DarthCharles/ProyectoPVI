@@ -182,5 +182,53 @@ namespace ControldeAlumnosPVI
             tabs_alumnos.TabPages.Add(tabPage5);
             tabs_alumnos.TabPages.Add(tabPage6);
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+            if (ActiveGrupo() != null)
+            {
+                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo);
+                tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+ 
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
+
+            if (ActiveGrupo() != null)
+            {
+                        NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
+            tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+ 
+    
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+            if (ActiveGrupo() != null)
+            {
+                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo);
+                tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+ 
+   
+        }
     }
 }
