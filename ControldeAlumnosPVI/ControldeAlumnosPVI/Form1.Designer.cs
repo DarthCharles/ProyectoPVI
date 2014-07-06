@@ -68,6 +68,7 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.exportar_excel = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.materias_conf)).BeginInit();
@@ -89,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -508,12 +510,24 @@
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
             // 
+            // exportar_excel
+            // 
+            this.exportar_excel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportar_excel.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen;
+            this.exportar_excel.Location = new System.Drawing.Point(1114, 346);
+            this.exportar_excel.Name = "exportar_excel";
+            this.exportar_excel.Size = new System.Drawing.Size(55, 56);
+            this.exportar_excel.TabIndex = 15;
+            this.exportar_excel.TabStop = false;
+            this.exportar_excel.Click += new System.EventHandler(this.exportar_excel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1247, 628);
+            this.Controls.Add(this.exportar_excel);
             this.Controls.Add(this.agregar_Alumno);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox7);
@@ -556,6 +570,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -601,6 +616,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox agregar_Alumno;
         private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.PictureBox exportar_excel;
 
     }
 }

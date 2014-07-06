@@ -16,6 +16,7 @@ using grupos;
 using alumnos;
 using trabajos;
 using maestros;
+using Microsoft.Office.Interop.Excel;
 
 
 namespace ControldeAlumnosPVI
@@ -448,6 +449,63 @@ namespace ControldeAlumnosPVI
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void exportar_excel_Click(object sender, EventArgs e)
+        {
+            DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
+
+            // creating Excel Application
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+
+
+            // creating new WorkBook within Excel application
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+
+
+            // creating new Excelsheet in workbook
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+
+            // see the excel sheet behind the program
+            app.Visible = true;
+
+            // get the reference of first sheet. By default its name is Sheet1.
+            // store its reference to worksheet
+            worksheet = workbook.Sheets["Hoja1"];
+            worksheet = workbook.ActiveSheet;
+
+            // changing the name of active sheet
+            worksheet.Name = tabs_alumnos.SelectedTab.Name;
+
+            ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
+            // storing header part in Excel
+
+
+
+            // storing header part in Excel
+            for (int i = 1; i < jo.Columns.Count; i++)
+            {
+                
+                    worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
+               
+          
+            }
+
+
+
+            // storing Each row and column value to excel sheet
+            for (int i = 0; i < jo.Rows.Count; i++)
+            {
+                for (int j = 1; j < jo.Columns.Count; j++)
+                {
+                    if (jo.Rows[i].Cells[j].Value != null)
+                    {
+                        worksheet.Cells[i + 2, j ] = jo.Rows[i].Cells[j].Value.ToString();
+                    }
+                    
+                }
+            }
+ 
         }
     }
 }
