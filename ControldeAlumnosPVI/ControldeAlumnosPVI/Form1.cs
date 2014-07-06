@@ -64,14 +64,16 @@ namespace ControldeAlumnosPVI
         //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
         {
+            int index = 0;
+
             foreach (ItemGrupo x in panel_grupos.Controls)
             {
                 if (x.Active == true)
                 {
-
+                    x.Grupo.Clave = index.ToString();
                     return x.Grupo;
-
                 }
+                index++;
             }
 
             return null;
@@ -95,10 +97,17 @@ namespace ControldeAlumnosPVI
 
         private void grupos_conf_Click(object sender, EventArgs e)
         {
+            Conexion con = new Conexion();
             if (ActiveGrupo() != null)
             {
-                OpcionesGrupo A = new OpcionesGrupo(ActiveGrupo().NombreGrupo);
+
+                OpcionesGrupo A = new OpcionesGrupo(ActiveGrupo().NombreGrupo, con.readPonderacion(ActiveGrupo().IdPonderacion),ActiveGrupo().IdGrupo,
+                                        ActiveGrupo().IdMateria);
                 A.ShowDialog();
+                ItemGrupo caca = panel_grupos.Controls[int.Parse(ActiveGrupo().Clave)] as ItemGrupo;
+                caca.modifyLabel(OpcionesGrupo.nombreGrupo);
+                panel_grupos.Refresh();
+
             }
             else
             {
@@ -243,6 +252,26 @@ namespace ControldeAlumnosPVI
             }
         }
 
+        private void grupos_eliminar_Click(object sender, EventArgs e)
+        {
+            if (ActiveMateria() != null)
+            {
+                DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar un grupo?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                if (dialogo == DialogResult.Yes)
+                {
+                    Conexion con = new Conexion();
+                    con.deleteGrupo(ActiveGrupo().IdGrupo);
+                    panel_grupos.Controls.RemoveAt(int.Parse(ActiveGrupo().Clave));
+                    panel_grupos.Refresh();
+                }
+
+            }
+            else
+            {
+
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
     }
 }

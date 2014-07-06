@@ -10,6 +10,7 @@ namespace grupos
     {
         private string nombre;
         private string idGrupo;
+        private string idPonderacion;
 
         public Grupo()
         {
@@ -41,6 +42,12 @@ namespace grupos
         {
             get { return idGrupo; }
             set { idGrupo = value; }
+        }
+
+        public string IdPonderacion
+        {
+            get { return idPonderacion; }
+            set { idPonderacion = value; }
         }
 
     }

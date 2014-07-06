@@ -16,19 +16,31 @@ namespace ControldeAlumnosPVI
     public partial class OpcionesGrupo : Form
     {
         string idMateria;
+        string idPonderacion;
+        string idGrupo;
+        public static string nombreGrupo;
 
         public OpcionesGrupo()
         {
             InitializeComponent();
         }
 
-        public OpcionesGrupo(string str)
+        public OpcionesGrupo(string str, string[]listaPonde, string idGrupo, string idMateria)
         {
             InitializeComponent();
             this.Text = "Configurar";
             this.label1.Text = "Configurar Grupo";
             this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
             this.textBox1.Text = str;
+            this.textBox2.Text = listaPonde[0];
+            this.textBox3.Text = listaPonde[1];
+            this.textBox4.Text = listaPonde[2];
+            this.textBox5.Text = listaPonde[3];
+            this.textBox6.Text = listaPonde[4];
+            this.idPonderacion = listaPonde[5];
+            this.idGrupo = idGrupo;
+            this.idMateria = idMateria;
+
         }
 
         public OpcionesGrupo(string idMateria, bool materia)
@@ -49,7 +61,7 @@ namespace ControldeAlumnosPVI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (idMateria != null)
+            if (idPonderacion == null)
             {
                 Conexion con = new Conexion();
                 Grupo grupo = new Grupo();
@@ -57,9 +69,37 @@ namespace ControldeAlumnosPVI
                 grupo.IdMateria = idMateria;
                 if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, grupo))
                 {
-                    MessageBox.Show("Ya existe un grupo con ese nombre");
+                    MessageBox.Show("Ya existe un grupo con ese nombre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                this.Close();
+                else
+                {
+                    this.Close();
+
+                }
+            }
+            else
+            {
+                Conexion con = new Conexion();
+                Grupo grupo = new Grupo();
+                grupo.NombreGrupo = textBox1.Text;
+                grupo.IdMateria = idMateria;
+                grupo.IdGrupo = idGrupo;
+                string[] listaPonde = new string[6];
+                listaPonde[0] = textBox2.Text;
+                listaPonde[1] = textBox3.Text;
+                listaPonde[2] = textBox4.Text;
+                listaPonde[3] = textBox5.Text;
+                listaPonde[4] = textBox6.Text;
+                listaPonde[5] = idPonderacion;
+                nombreGrupo = textBox1.Text;
+                if (!con.update(grupo, listaPonde))
+                {
+                    MessageBox.Show("No se pudo actualizar");
+                }
+                else
+                {
+                    this.Close();
+                }
             }
         }
 
