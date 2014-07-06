@@ -161,7 +161,7 @@ namespace ControldeAlumnosPVI
 
                 ItemMaterias caca = panel_materias.Controls[int.Parse(ActiveMateria().Clave)] as ItemMaterias;
                 caca.modifyLabel(con.readInfoMateriaIdMateria(ActiveMateria().IdMateria).NombreMateria);
-                panel_materias.Refresh(); 
+                panel_materias.Refresh();
             }
             else
             {
@@ -182,6 +182,27 @@ namespace ControldeAlumnosPVI
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
        
+        }
+
+        private void materias_eliminar_Click(object sender, EventArgs e)
+        {
+            if (ActiveMateria() != null)
+            {
+                
+            
+            DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Exclamation);         
+            if (dialogo==DialogResult.Yes)
+            {
+                Conexion con = new Conexion();
+                con.deleteMateria(ActiveMateria().IdMateria);
+                panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
+                panel_materias.Refresh();
+            }
+
+            } else {
+
+                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
         }
     }
 }

@@ -138,6 +138,7 @@
             this.materias_eliminar.Size = new System.Drawing.Size(32, 30);
             this.materias_eliminar.TabIndex = 5;
             this.materias_eliminar.TabStop = false;
+            this.materias_eliminar.Click += new System.EventHandler(this.materias_eliminar_Click);
             // 
             // label_grupos
             // 
