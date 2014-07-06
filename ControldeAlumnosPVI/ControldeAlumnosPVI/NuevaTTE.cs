@@ -20,6 +20,12 @@ namespace ControldeAlumnosPVI
         public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
             InitializeComponent();
+            dataGridView1.Columns.Add("c2","Nombre");
+            dataGridView1.Columns.Add("c2", "Clave");
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].Width = 50;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             label4.Text = str1;
        
             this.idGrupo = idGrupo;
@@ -78,6 +84,11 @@ namespace ControldeAlumnosPVI
             con.create(trabajo);
             dataGridView1.Rows.Add(textBox1.Text, clave+"" +(dataGridView1.Rows.Count+1));
             textBox1.Text = "";
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
