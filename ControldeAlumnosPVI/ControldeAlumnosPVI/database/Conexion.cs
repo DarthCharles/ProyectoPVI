@@ -179,6 +179,7 @@ namespace database
                         maestro.Password = reader["password"].ToString();
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -433,6 +434,7 @@ namespace database
                         listaMaterias.Add(materia);
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -471,6 +473,7 @@ namespace database
                         materia.IdMaestro = reader["idmaterias"].ToString();
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -509,6 +512,7 @@ namespace database
                         materia.IdMaestro = reader["idmaterias"].ToString();
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -591,7 +595,7 @@ namespace database
 
         public bool create(Grupo grupo, string idPonderacion)
         {
-            if (!isGrupoRepetido(grupo.NombreGrupo))
+            if (!isGrupoRepetido(grupo.NombreGrupo, grupo.IdMateria))
             {
                 try
                 {
@@ -653,7 +657,10 @@ namespace database
                     return false;
                 }
 
-                create(grupo, comando.LastInsertedId.ToString());
+                if (!create(grupo, comando.LastInsertedId.ToString()))
+                {
+                    return false;
+                }
             }
             catch (Exception e)
             {
@@ -667,7 +674,38 @@ namespace database
             return true;
         }
 
-        public bool isGrupoRepetido(string nombre)
+        public string[] readPonderacion(string idPonderacion)
+        {
+            string[] listaPonde = new string[6];
+           
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
+                    "idponderacion = @idponderacion";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
+                comando.Connection = conexion;
+
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        listaPonde[0] = reader["asistencia"].ToString();
+                        listaPonde[1] = reader["participacion"].ToString();
+                        listaPonde[2] = reader["trabajos"].ToString();
+                        listaPonde[3] = reader["tareas"].ToString();
+                        listaPonde[4] = reader["examenes"].ToString();
+                        listaPonde[5] = reader["idponderacion"].ToString();
+
+                    }
+                }
+            return listaPonde;
+        }
+
+        public bool isGrupoRepetido(string nombre, string idMateria)
         {
             try
             {
@@ -675,9 +713,10 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * from grupos where nombre = @nombre";
+                string query = "SELECT * from grupos where nombre = @nombre and idmaterias = @idmaterias";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@idmaterias", idMateria);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
@@ -718,11 +757,12 @@ namespace database
                     grupo.IdMateria = reader["idmaterias"].ToString();
                     grupo.NombreGrupo = reader["nombre"].ToString();
                     grupo.IdGrupo = reader["idgrupos"].ToString();
+                    grupo.IdPonderacion = reader["idponderacion"].ToString();
 
                     listaGrupos.Add(grupo);
                 }
             }
-
+            reader.Close();
             return listaGrupos;
         }
 
@@ -750,6 +790,7 @@ namespace database
                         grupo.NombreGrupo = reader["nombre"].ToString();
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -762,7 +803,7 @@ namespace database
             return grupo;
         }
 
-        public bool update(Grupo grupo)
+        public bool update(Grupo grupo, string[]listaPonde)
         {
             try
             {
@@ -776,6 +817,45 @@ namespace database
                 comando.Parameters.AddWithValue("@nombre", grupo.NombreGrupo);
                 comando.Parameters.AddWithValue("@idmaterias", grupo.IdMateria);
                 comando.Parameters.AddWithValue("@idgrupos", grupo.IdGrupo);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+                updatePonderacion(listaPonde);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al actualizar un grupo: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
+        }
+
+        public bool updatePonderacion(string[] listaPonde)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "UPDATE ponderacion SET asistencia = @asistencia, participacion = @participacion, trabajos = @trabajos, "+
+                    "tareas = @tareas, examenes = @examenes " +
+                    " WHERE idponderacion = @idponderacion";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@asistencia", listaPonde[0]);
+                comando.Parameters.AddWithValue("@participacion", listaPonde[1]);
+                comando.Parameters.AddWithValue("@trabajos", listaPonde[2]);
+                comando.Parameters.AddWithValue("@tareas", listaPonde[3]);
+                comando.Parameters.AddWithValue("@examenes", listaPonde[4]);
+                comando.Parameters.AddWithValue("@idponderacion", listaPonde[5]);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
@@ -950,6 +1030,7 @@ namespace database
                         listaAlumnos.Add(alumno);
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -989,6 +1070,7 @@ namespace database
                         listaAlumnos.Add(alumno);
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -1101,41 +1183,24 @@ namespace database
 
         public bool create(Trabajo trabajo)
         {
-            try
-            {
+           
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
-                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idparciales) VALUES (@nombre, @tipo, @idparciales)";
+                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idgrupos) VALUES (@nombre, @tipo, @idgrupos)";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", trabajo.Nombre);
                 comando.Parameters.AddWithValue("@tipo", trabajo.Tipo);
-                comando.Parameters.AddWithValue("@idparciales", trabajo.IdParcial);
+                comando.Parameters.AddWithValue("@idgrupos", trabajo.IdGrupo);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
-                String lastId = comando.LastInsertedId.ToString();
-                trabajo.IdTrabajo = lastId;
                 if (a == 0)
                 {
                     return false;
                 }
-                List<Alumno> listaAlumnos = readInfoAlumnosGrupo(trabajo.IdGrupo);
-                foreach (Alumno alumno in listaAlumnos)
-                {
-                    nuevoTrabajo(alumno, trabajo.IdTrabajo);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al registrar un nuevo trabajo: " + e.Message);
-                return false;
-            }
-            finally
-            {
-                conexion.Close();
-            }
+            
             return true;
         }
 
@@ -1185,7 +1250,7 @@ namespace database
                     conexion.Open();
                 }
 
-                string query = "SELECT nombre, calificacion FROM trabajos INNER JOIN trabajos_dejados "+
+                string query = "SELECT nombre, calificacion FROM trabajos INNER JOIN trabajos_dejados " +
                     "ON trabajos.idtrabajos_dejados = idtareas_dejadas where idalumnos_grupo = @idgrupos and tipo = @tipo";
 
                 MySqlCommand comando = new MySqlCommand(query);
@@ -1203,6 +1268,7 @@ namespace database
                         listaTrabajos.Add(trabajo);
                     }
                 }
+                reader.Close();
             }
             catch (Exception e)
             {
@@ -1217,16 +1283,18 @@ namespace database
 
         public int countTrabajos(string idGrupo, string tipo)
         {
-            int numTrabajos= 0;
+            int numTrabajos = 0;
             try
             {
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
-                string query = "SELECT COUNT(*) FROM trabajos_dejados where tipo = @tipo";
+                string query = "SELECT COUNT(*) FROM trabajos_dejados where tipo = @tipo and idgrupos = @idgrupos";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+
                 comando.Connection = conexion;
 
                 numTrabajos = int.Parse(comando.ExecuteScalar().ToString());
@@ -1242,7 +1310,6 @@ namespace database
             }
             return numTrabajos;
         }
-
 
     }
 }

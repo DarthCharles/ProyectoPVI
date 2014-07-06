@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using database;
+using trabajos;
 
 namespace ControldeAlumnosPVI
 {
     public partial class NuevaTTE : Form
     {
+        string tipo;
+        string idGrupo;
         string clave;
-        public NuevaTTE(string str, string str1)
+        public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
             InitializeComponent();
             label4.Text = str1;
+            this.idGrupo = idGrupo;
+            this.tipo = tipo;
    
             switch (str)
             {
@@ -66,10 +72,11 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            Conexion con = new Conexion();
+            Trabajo trabajo = new Trabajo(textBox1.Text,tipo,"1",idGrupo);
+            con.create(trabajo);
             dataGridView1.Rows.Add(textBox1.Text, clave+"" +(dataGridView1.Rows.Count+1));
             textBox1.Text = "";
         }
-
-
     }
 }
