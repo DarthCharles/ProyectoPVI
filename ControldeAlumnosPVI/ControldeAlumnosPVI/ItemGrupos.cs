@@ -33,6 +33,11 @@ namespace ControldeAlumnosPVI
             set { click = value; }
         }
 
+        public Label NombreMateria
+        {
+            get { return nombreMateria; }
+            set { nombreMateria = value; }
+        }
 
         public ItemGrupo(PanelParameters caca, string nombre, Grupo m)
         {
@@ -188,9 +193,12 @@ namespace ControldeAlumnosPVI
                         break;
                 }
             }
+        }
 
-
-
+        public void modifyLabel(string str)
+        {
+            this.setLabel(str);
+            this.NombreMateria.ForeColor = Color.White;
         }
 
         private void PanelMouseEnter(object sender, System.EventArgs e)

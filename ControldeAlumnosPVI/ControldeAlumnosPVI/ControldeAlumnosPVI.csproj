@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alumno.cs" />
+    <Compile Include="NuevaTTE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevaTTE.Designer.cs">
+      <DependentUpon>NuevaTTE.cs</DependentUpon>
+    </Compile>
     <Compile Include="OpcionesGrupo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trabajo.cs" />
+    <EmbeddedResource Include="NuevaTTE.resx">
+      <DependentUpon>NuevaTTE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OpcionesGrupo.resx">
       <DependentUpon>OpcionesGrupo.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +170,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_action_1404533629_98.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_action_content_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_examen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_group1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_alumno.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
