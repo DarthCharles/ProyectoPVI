@@ -13,6 +13,8 @@ using database;
 using materias;
 using System.Threading;
 using grupos;
+using alumnos;
+using trabajos;
 
 
 namespace ControldeAlumnosPVI
@@ -243,7 +245,154 @@ namespace ControldeAlumnosPVI
             }
         }
 
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            if (ActiveGrupo() != null)
+            {
+                string idGrupo = ActiveGrupo().IdGrupo;
+                NuevaListaAlumnos a = new NuevaListaAlumnos(idGrupo);
+                a.ShowDialog();
+                this.refreshTables(idGrupo);
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+  
+        }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+            if (ActiveGrupo() != null)
+            {
+                string idGrupo = ActiveGrupo().IdGrupo;
+                NuevoAlumno nuevo = new NuevoAlumno(idGrupo);
+                nuevo.ShowDialog();
+                refreshTables(idGrupo);
+
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+           
+        }
+
+        public void refreshTables(string idGrupo)
+        {
+            Conexion con = new Conexion();
+            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
+            {
+
+                int a = 1;
+
+                switch (tab.Name)
+                {
+                    case "tabPage1":
+                        tab.Controls.Clear();
+                        a = 1;
+                        ListaAsistencia lista = new ListaAsistencia();
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+
+                        }
+                        lista.CheckAll();
+                        tab.Controls.Add(lista);
+                        break;
+
+
+
+                    case "tabPage2":
+                        tab.Controls.Clear();
+                        a = 1;
+                        tab.Text = "Tareas";
+                        int numtareas = con.countTrabajos(idGrupo, "tarea");
+                        ListaTTE tareas = new ListaTTE(numtareas);
+
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
+                                tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
+                        }
+                        tareas.Columns[0].Visible = false;
+                        tab.Controls.Add(tareas);
+                        break;
+
+                    case "tabPage3":
+                        a = 1;
+                        int numtrabajos = con.countTrabajos(idGrupo, "trabajo");
+                        tab.Controls.Clear();
+                        ListaTTE trabajos = new ListaTTE(numtrabajos);
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            trabajos.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "trabajo");
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
+                                trabajos.Rows[trabajos.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
+                        }
+                        tab.Controls.Add(trabajos);
+                        break;
+
+                    case "tabPage4":
+                        a = 1;
+                        tab.Controls.Clear();
+
+                        int numexamenes = con.countTrabajos(idGrupo, "examen");
+
+                        ListaTTE examenes = new ListaTTE(numexamenes);
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            examenes.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "examen");
+                            int i = 3;
+                            foreach (Trabajo trabajo in listaTrabajos)
+                            {
+                                examenes.Rows[examenes.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            }
+                        }
+
+                        tab.Controls.Add(examenes);
+                        break;
+
+                    case "tabPage5":
+                        tab.Controls.Clear();
+                        a = 1;
+                        ListaPart_Pextra ass = new ListaPart_Pextra();
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            ass.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                        }
+                        tab.Controls.Add(ass);
+
+                        break;
+
+                    case "tabPage6":
+                        tab.Controls.Clear();
+                        a = 1;
+                        ListaPart_Pextra assa = new ListaPart_Pextra();
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                        }
+                        tab.Controls.Add(assa);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
 

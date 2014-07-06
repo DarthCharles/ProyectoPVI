@@ -20,14 +20,13 @@ namespace ControldeAlumnosPVI
             //this.Columns[0].ReadOnly = true;
             this.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.Location = new System.Drawing.Point(0, 0);
-            this.Size = new System.Drawing.Size(685, 510);
+            this.Size = new System.Drawing.Size(300, 510);
             this.BackgroundColor = Color.White; //cambiamos el color de fondo de la tabla
             this.ColumnHeadersHeight = 30;
             this.EditMode = DataGridViewEditMode.EditOnEnter;
             this.Dock = System.Windows.Forms.DockStyle.Fill; ;
-           // this.RowHeadersVisible = false;
-            this.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.RowHeadersVisible = false;
+      
             this.AllowUserToAddRows = false;
             DataGridViewCellStyle style = new DataGridViewCellStyle();
 

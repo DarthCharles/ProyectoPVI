@@ -265,7 +265,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(657, 510);
+            this.tabPage2.Size = new System.Drawing.Size(669, 510);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tareas";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -275,7 +275,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(657, 510);
+            this.tabPage3.Size = new System.Drawing.Size(669, 510);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Trabajos";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 34);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(657, 510);
+            this.tabPage4.Size = new System.Drawing.Size(669, 510);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Exámenes";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -295,7 +295,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 34);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(657, 510);
+            this.tabPage5.Size = new System.Drawing.Size(669, 510);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Participaciones";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 34);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(657, 510);
+            this.tabPage6.Size = new System.Drawing.Size(669, 510);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Puntos Extra";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -369,6 +369,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(55, 57);
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -379,6 +380,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(53, 57);
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // pictureBox7
             // 
