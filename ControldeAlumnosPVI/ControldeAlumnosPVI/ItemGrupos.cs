@@ -34,8 +34,6 @@ namespace ControldeAlumnosPVI
         }
 
 
-
-
         public ItemGrupo(PanelParameters caca, string nombre, Grupo m)
         {
             panel = caca;

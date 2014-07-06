@@ -81,7 +81,8 @@ namespace ControldeAlumnosPVI
             this.BackColor = clr;
             nombreMateria.ForeColor = System.Drawing.Color.White;
             click = true;
-
+            Conexion con = new Conexion();
+            listaGrupo = con.readInfoGruposIdMateria(materia.IdMateria);
 
             foreach (Grupo grupo in listaGrupo)
             {

@@ -589,7 +589,7 @@ namespace database
 
         //Grupos
 
-        public bool create(Grupo grupo)
+        public bool create(Grupo grupo, string idPonderacion)
         {
             if (!isGrupoRepetido(grupo.NombreGrupo))
             {
@@ -599,10 +599,12 @@ namespace database
                     {
                         conexion.Open();
                     }
-                    string query = "INSERT INTO grupos (nombre, idmaterias) VALUES (@nombre, @idmaterias)";
+                    string query = "INSERT INTO grupos (nombre, idmaterias, idponderacion) VALUES (@nombre, @idmaterias, @idponderacion)";
                     MySqlCommand comando = new MySqlCommand(query);
                     comando.Parameters.AddWithValue("@nombre", grupo.NombreGrupo);
                     comando.Parameters.AddWithValue("@idmaterias", grupo.IdMateria);
+                    comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
+
                     comando.Connection = conexion;
                     int a = comando.ExecuteNonQuery();
                     if (a == 0)
@@ -625,6 +627,44 @@ namespace database
             {
                 return false;
             }
+        }
+
+        public bool createPonderacion(string asistencia, string participacion,
+                string trabajos, string tareas, string examenes, Grupo grupo)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO ponderacion (asistencia, participacion, trabajos, tareas, examenes) VALUES (@asistencia, @participacion, @trabajos, @tareas, @examenes)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@asistencia", asistencia);
+                comando.Parameters.AddWithValue("@participacion", participacion);
+                comando.Parameters.AddWithValue("@trabajos", trabajos);
+                comando.Parameters.AddWithValue("@examenes", examenes);
+                comando.Parameters.AddWithValue("@tareas", tareas);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+                if (a == 0)
+                {
+                    return false;
+                }
+
+                create(grupo, comando.LastInsertedId.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar una nueva ponderacion: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return true;
         }
 
         public bool isGrupoRepetido(string nombre)
@@ -686,7 +726,7 @@ namespace database
             return listaGrupos;
         }
 
-        public Grupo readInfoGrupoIdGrupo(string idGrupo)
+        public Grupo readInfoGrupoIdMateria(string idMateria)
         {
             Grupo grupo = new Grupo();
             try
@@ -695,10 +735,10 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT idmaterias, nombre FROM grupos WHERE " +
-                    "idgrupos = @idgrupos";
+                string query = "SELECT idgrupos, nombre FROM grupos WHERE " +
+                    "idmaterias = @idmaterias";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Parameters.AddWithValue("@idmaterias", idMateria);
                 comando.Connection = conexion;
 
                 MySqlDataReader reader = comando.ExecuteReader();
@@ -706,14 +746,14 @@ namespace database
                 {
                     while (reader.Read())
                     {
-                        grupo.IdMateria = reader["idmaterias"].ToString();
+                        grupo.IdGrupo = reader["idgrupos"].ToString();
                         grupo.NombreGrupo = reader["nombre"].ToString();
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ha ocurrido un error al leer la información de la materia: " + e.Message);
+                Console.WriteLine("Ha ocurrido un error al leer la información del grupo: " + e.Message);
             }
             finally
             {
