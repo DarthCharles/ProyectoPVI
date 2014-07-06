@@ -1183,36 +1183,24 @@ namespace database
 
         public bool create(Trabajo trabajo)
         {
-            try
-            {
+           
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
-                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idparciales) VALUES (@nombre, @tipo, @idparciales)";
+                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idgrupos) VALUES (@nombre, @tipo, @idgrupos)";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", trabajo.Nombre);
                 comando.Parameters.AddWithValue("@tipo", trabajo.Tipo);
-                comando.Parameters.AddWithValue("@idparciales", trabajo.IdParcial);
+                comando.Parameters.AddWithValue("@idgrupos", trabajo.IdGrupo);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
-                String lastId = comando.LastInsertedId.ToString();
-                trabajo.IdTrabajo = lastId;
                 if (a == 0)
                 {
                     return false;
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al registrar un nuevo trabajo: " + e.Message);
-                return false;
-            }
-            finally
-            {
-                conexion.Close();
-            }
+            
             return true;
         }
 
@@ -1302,9 +1290,11 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT COUNT(*) FROM trabajos_dejados where tipo = @tipo";
+                string query = "SELECT COUNT(*) FROM trabajos_dejados where tipo = @tipo and idgrupos = @idgrupos";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+
                 comando.Connection = conexion;
 
                 numTrabajos = int.Parse(comando.ExecuteScalar().ToString());

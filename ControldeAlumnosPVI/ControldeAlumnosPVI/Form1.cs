@@ -214,7 +214,7 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo);
+                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo,"tarea");
                 tarea.ShowDialog();
             }
             else
@@ -230,7 +230,7 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
+                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo,ActiveGrupo().IdGrupo,"trabajo");
                 tarea.ShowDialog();
             }
             else
@@ -246,7 +246,7 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo);
+                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo,ActiveGrupo().IdGrupo,"examen");
                 tarea.ShowDialog();
             }
             else
