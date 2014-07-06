@@ -18,6 +18,12 @@ namespace ControldeAlumnosPVI
         string idGrupo;
         string clave;
         List<Trabajo> trabajos;
+        bool cambiado;
+
+        public bool Cambiado {
+            get { return cambiado; }
+            set { cambiado = value; }
+        }
         public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
             InitializeComponent();
@@ -38,18 +44,21 @@ namespace ControldeAlumnosPVI
                 case "tarea":
                     this.Text = "Nueva tarea";
                     label1.Text = "Asignar nueva tarea";
+                    this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo_small;
                     clave = "T";
                     break;
 
                 case "trabajo":
                     this.Text = "Nuevo trabajo";
                     label1.Text = "Asignar nuevo trabajo";
+                    this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen1;
                     clave = "TR";
                     break;
 
                 case "examen":
                     this.Text = "Nuevo examen";
                     label1.Text = "Asignar nuevo examen";
+                    this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen_small;
                     clave = "E";
                     break;
                 default:
@@ -60,36 +69,6 @@ namespace ControldeAlumnosPVI
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void NuevaTTE_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            Conexion con = new Conexion();
-            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
-            con.create(trabajo);
-            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
-            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
-            textBox1.Text = "";
-        
-        }
 
 
         private void llenarTrabajos(string idGrupo, string tipo)
@@ -102,9 +81,35 @@ namespace ControldeAlumnosPVI
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Conexion con = new Conexion();
+            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
+            con.create(trabajo);
+            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
+            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
+            textBox1.Text = "";
+            Cambiado = true;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.RemoveAt(dataGridView1.SelectedCells[0].RowIndex);
+    
+        }
+
+
+
+    
     }
 }

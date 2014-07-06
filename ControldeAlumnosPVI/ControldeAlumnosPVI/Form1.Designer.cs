@@ -481,7 +481,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen1;
+            this.pictureBox5.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo;
             this.pictureBox5.Location = new System.Drawing.Point(1175, 101);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(53, 56);

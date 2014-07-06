@@ -9,7 +9,7 @@ namespace ControldeAlumnosPVI
 {
     class ListaTTE : ListaAlumnos
     {
-        public ListaTTE(int num)
+        public ListaTTE(int num, string str)
             : base()
         {
 
@@ -21,12 +21,35 @@ namespace ControldeAlumnosPVI
             this.Columns[2].HeaderText = "Alumno";
             this.Columns[2].Width = 330;
             this.Columns[2].ReadOnly = true;
-            for (int i = 3; i < this.Columns.Count; i++)
-            {
-                this.Columns[i].HeaderText = "T" + (i - 2);
-                this.Columns[i].Width = 40;
-            }
+     
 
+
+            switch (str)
+            {
+                case "tarea":
+                    for (int i = 3; i < this.Columns.Count; i++)
+                    {
+                        this.Columns[i].HeaderText = "T" + (i - 2);
+                        this.Columns[i].Width = 40;
+                    }
+                    break;
+
+                case "trabajo":
+                    for (int i = 3; i < this.Columns.Count; i++)
+                    {
+                        this.Columns[i].HeaderText = "TR" + (i - 2);
+                        this.Columns[i].Width = 40;
+                    }
+                    break;
+
+                case "examen":
+                   for (int i = 3; i < this.Columns.Count; i++)
+                    {
+                        this.Columns[i].HeaderText = "E" + (i - 2);
+                        this.Columns[i].Width = 40;
+                    }
+                    break;
+            }
 
             this.Columns.Add("Column", "Promedio");
             this.Columns[ColumnCount - 1].Width = 100;
