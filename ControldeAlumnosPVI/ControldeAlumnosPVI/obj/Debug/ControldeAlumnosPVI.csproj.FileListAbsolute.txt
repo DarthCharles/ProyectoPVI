@@ -30,3 +30,4 @@ C:\Users\Contreiras\Documents\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPV
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.NuevaListaAlumnos.resources
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.NuevoAlumno.resources
 >>>>>>> origin/master
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Login.resources

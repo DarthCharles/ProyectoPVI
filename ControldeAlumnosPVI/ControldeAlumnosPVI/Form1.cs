@@ -234,11 +234,11 @@ namespace ControldeAlumnosPVI
                         {
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                             List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
-                            int i = 3;
-                            foreach (Trabajo trabajo in listaTrabajos)
-                            {
-                                tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
-                            }
+                            //int i = 3;
+                            //foreach (Trabajo trabajo in listaTrabajos)
+                            //{
+                            //    tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                            //}
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
