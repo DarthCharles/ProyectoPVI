@@ -232,11 +232,11 @@ namespace ControldeAlumnosPVI
                         {
                             List<Trabajo> listaTareas = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            int i = 3;
-                            for (int j = 0; j < numtareas; j++)
-                            {
-                                tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = listaTareas[j].Calificacion;
-                            }
+                            //int i = 3;
+                            //for (int j = 0; j < numtareas; j++)
+                            //{
+                            //    tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = listaTareas[j].Calificacion;
+                            //}
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
