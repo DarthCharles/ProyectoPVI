@@ -43,99 +43,8 @@ namespace ControldeAlumnosPVI
 
 
         }
-        public void HideTabs()
-        {
 
-
-
-
-            tabs_alumnos.TabPages.Remove(tabPage6);
-            tabs_alumnos.TabPages.Remove(tabPage5);
-            tabs_alumnos.TabPages.Remove(tabPage4);
-            tabs_alumnos.TabPages.Remove(tabPage3);
-            tabs_alumnos.TabPages.Remove(tabPage2);
-            tabs_alumnos.TabPages.Remove(tabPage1);
-
-
-
-
-        }
-
-        public void ShowTabs()
-        {
-
-            tabs_alumnos.TabPages.Add(tabPage1);
-            tabs_alumnos.TabPages.Add(tabPage2);
-            tabs_alumnos.TabPages.Add(tabPage3);
-            tabs_alumnos.TabPages.Add(tabPage4);
-            tabs_alumnos.TabPages.Add(tabPage5);
-            tabs_alumnos.TabPages.Add(tabPage6);
-
-
-
-
-
-        }
-
-        private void Refresh(){
-            Conexion con = new Conexion();
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-
-            panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
-            
-        }
-
-        private void RefreshModificar()
-        {
-            Conexion con = new Conexion();
-            Materia materia = con.readInfoMateriaIdMateria(ActiveMateria().IdMateria);
-            panel_materias.Controls.Clear();
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-
-            panel_materias.Refresh();         
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
-            A.ShowDialog();
-            Refresh();
-
-        }
-
-        private void grupos_agregar_Click(object sender, EventArgs e)
-        {
-
-            if (ActiveMateria() != null)
-            {
-                OpcionesGrupo A = new OpcionesGrupo();
-                A.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-        }
-
-        Materia ActiveMateria()
-        {
-            int index = 0;
-            foreach (ItemMaterias x in panel_materias.Controls)
-            {
-                
-                if (x.Active == true)
-                {
-                    x.Materia.Clave = index.ToString();
-                    return x.Materia;
-
-                }
-                index++;
-            }
-
-            return null;
-        }
-
+//METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
         {
 
@@ -151,17 +60,14 @@ namespace ControldeAlumnosPVI
 
             return null;
         }
-        private void materias_conf_Click(object sender, EventArgs e)
+
+        private void grupos_agregar_Click(object sender, EventArgs e)
         {
+
             if (ActiveMateria() != null)
             {
-                Conexion con = new Conexion();
-                OpcionesMateria A = new OpcionesMateria("Configurar materia", ActiveMateria().NombreMateria,false,ActiveMateria().IdMateria);
+                OpcionesGrupo A = new OpcionesGrupo();
                 A.ShowDialog();
-
-                ItemMaterias caca = panel_materias.Controls[int.Parse(ActiveMateria().Clave)] as ItemMaterias;
-                caca.modifyLabel(con.readInfoMateriaIdMateria(ActiveMateria().IdMateria).NombreMateria);
-                panel_materias.Refresh();
             }
             else
             {
@@ -181,28 +87,100 @@ namespace ControldeAlumnosPVI
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-       
+
+        }
+
+  //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
+        Materia ActiveMateria()
+        {
+            int index = 0;
+            foreach (ItemMaterias x in panel_materias.Controls)
+            {
+                
+                if (x.Active == true)
+                {
+                    x.Materia.Clave = index.ToString();
+                    return x.Materia;
+
+                }
+                index++;
+            }
+
+            return null;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
+            A.ShowDialog();
+            Conexion con = new Conexion();
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+            panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
+
+        }
+
+        private void materias_conf_Click(object sender, EventArgs e)
+        {
+            if (ActiveMateria() != null)
+            {
+                Conexion con = new Conexion();
+                OpcionesMateria A = new OpcionesMateria("Configurar materia", ActiveMateria().NombreMateria,false,ActiveMateria().IdMateria);
+                A.ShowDialog();
+
+                ItemMaterias caca = panel_materias.Controls[int.Parse(ActiveMateria().Clave)] as ItemMaterias;
+                caca.modifyLabel(con.readInfoMateriaIdMateria(ActiveMateria().IdMateria).NombreMateria);
+                panel_materias.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void materias_eliminar_Click(object sender, EventArgs e)
         {
             if (ActiveMateria() != null)
             {
-                
-            
-            DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Exclamation);         
-            if (dialogo==DialogResult.Yes)
-            {
-                Conexion con = new Conexion();
-                con.deleteMateria(ActiveMateria().IdMateria);
-                panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
-                panel_materias.Refresh();
-            }
 
-            } else {
+
+                DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                if (dialogo == DialogResult.Yes)
+                {
+                    Conexion con = new Conexion();
+                    con.deleteMateria(ActiveMateria().IdMateria);
+                    panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
+                    panel_materias.Refresh();
+                }
+
+            }
+            else
+            {
 
                 MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            }
+        }
+
+
+//METODO PARA REFRESCAR LAS TABS
+        public void HideTabs()
+        {
+            tabs_alumnos.TabPages.Remove(tabPage6);
+            tabs_alumnos.TabPages.Remove(tabPage5);
+            tabs_alumnos.TabPages.Remove(tabPage4);
+            tabs_alumnos.TabPages.Remove(tabPage3);
+            tabs_alumnos.TabPages.Remove(tabPage2);
+            tabs_alumnos.TabPages.Remove(tabPage1);
+        }
+
+        public void ShowTabs()
+        {
+            tabs_alumnos.TabPages.Add(tabPage1);
+            tabs_alumnos.TabPages.Add(tabPage2);
+            tabs_alumnos.TabPages.Add(tabPage3);
+            tabs_alumnos.TabPages.Add(tabPage4);
+            tabs_alumnos.TabPages.Add(tabPage5);
+            tabs_alumnos.TabPages.Add(tabPage6);
         }
     }
 }
