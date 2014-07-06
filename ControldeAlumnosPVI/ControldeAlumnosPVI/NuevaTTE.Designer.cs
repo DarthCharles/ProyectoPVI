@@ -166,8 +166,7 @@
             this.pictureBox1.TabIndex = 63;
             this.pictureBox1.TabStop = false;
             // 
-<<<<<<< HEAD
-=======
+
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
@@ -179,7 +178,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(264, 189);
             this.dataGridView1.TabIndex = 62;
             // 
->>>>>>> origin/master
+
             // NuevaTTE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
