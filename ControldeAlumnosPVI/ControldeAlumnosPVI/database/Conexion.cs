@@ -591,7 +591,7 @@ namespace database
 
         public bool create(Grupo grupo, string idPonderacion)
         {
-            if (!isGrupoRepetido(grupo.NombreGrupo))
+            if (!isGrupoRepetido(grupo.NombreGrupo, grupo.IdMateria))
             {
                 try
                 {
@@ -667,7 +667,7 @@ namespace database
             return true;
         }
 
-        public bool isGrupoRepetido(string nombre)
+        public bool isGrupoRepetido(string nombre, string idMateria)
         {
             try
             {
@@ -675,9 +675,10 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * from grupos where nombre = @nombre";
+                string query = "SELECT * from grupos where nombre = @nombre and idmaterias = @idmaterias";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@idmaterias", idMateria);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
@@ -1121,11 +1122,6 @@ namespace database
                 {
                     return false;
                 }
-                List<Alumno> listaAlumnos = readInfoAlumnosGrupo(trabajo.IdGrupo);
-                foreach (Alumno alumno in listaAlumnos)
-                {
-                    nuevoTrabajo(alumno, trabajo.IdTrabajo);
-                }
             }
             catch (Exception e)
             {
@@ -1242,7 +1238,6 @@ namespace database
             }
             return numTrabajos;
         }
-
 
     }
 }

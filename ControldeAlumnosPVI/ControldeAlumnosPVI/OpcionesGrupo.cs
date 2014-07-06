@@ -55,7 +55,10 @@ namespace ControldeAlumnosPVI
                 Grupo grupo = new Grupo();
                 grupo.NombreGrupo = textBox1.Text;
                 grupo.IdMateria = idMateria;
-                con.createPonderacion(textBox2.Text,textBox3.Text,textBox4.Text,textBox5.Text,textBox6.Text,grupo);
+                if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, grupo))
+                {
+                    MessageBox.Show("Ya existe un grupo con ese nombre");
+                }
                 this.Close();
             }
         }
