@@ -34,34 +34,13 @@ namespace ControldeAlumnosPVI
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-            
+
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
             }
         }
 
-        private void Refresh(bool materia)
-        {
-            if (materia)
-            {
-                Conexion con = new Conexion();
-                List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-                if (listaMat.Count != panel_materias.Controls.Count)
-                {
-                    panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
-                }
-            }
-            else
-            {
-                Conexion con = new Conexion();
-                List<Grupo> listaGrupo = con.readInfoGruposIdMateria(ActiveMateria().IdMateria);
-                if (listaGrupo.Count != panel_grupos.Controls.Count)
-                {
-                    panel_grupos.Controls.Add(new ItemGrupo(panel, listaGrupo[listaGrupo.Count - 1].NombreGrupo, listaGrupo[listaGrupo.Count - 1]));
-                }
-            }
-        }
 
         //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
@@ -88,7 +67,8 @@ namespace ControldeAlumnosPVI
             {
                 OpcionesGrupo A = new OpcionesGrupo(ActiveMateria().IdMateria, true);
                 A.ShowDialog();
-                Refresh(false);
+                refreshPaneles(false);
+
             }
             else
             {
@@ -103,11 +83,12 @@ namespace ControldeAlumnosPVI
             if (ActiveGrupo() != null)
             {
 
-                OpcionesGrupo A = new OpcionesGrupo(ActiveGrupo().NombreGrupo, con.readPonderacion(ActiveGrupo().IdPonderacion),ActiveGrupo().IdGrupo,
+                OpcionesGrupo A = new OpcionesGrupo(ActiveGrupo().NombreGrupo, con.readPonderacion(ActiveGrupo().IdPonderacion), ActiveGrupo().IdGrupo,
                                         ActiveGrupo().IdMateria);
                 A.ShowDialog();
                 ItemGrupo caca = panel_grupos.Controls[int.Parse(ActiveGrupo().Clave)] as ItemGrupo;
-                if(OpcionesGrupo.validado){
+                if (OpcionesGrupo.validado)
+                {
                     caca.modifyLabel(OpcionesGrupo.nombreGrupo);
                     OpcionesGrupo.validado = false;
                 }
@@ -144,10 +125,7 @@ namespace ControldeAlumnosPVI
         {
             OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
             A.ShowDialog();
-            Conexion con = new Conexion();
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-            panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
-
+            refreshPaneles(true);
         }
 
         private void materias_conf_Click(object sender, EventArgs e)
@@ -180,6 +158,8 @@ namespace ControldeAlumnosPVI
                     con.deleteMateria(ActiveMateria().IdMateria);
                     panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
                     panel_materias.Refresh();
+                    panel_grupos.Controls.Clear();
+                    HideTabs();
                 }
 
             }
@@ -211,110 +191,7 @@ namespace ControldeAlumnosPVI
             tabs_alumnos.TabPages.Add(tabPage6);
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-            if (ActiveGrupo() != null)
-            {
-                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo,"tarea");
-                tarea.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
-
-            if (ActiveGrupo() != null)
-            {
-                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo,ActiveGrupo().IdGrupo,"trabajo");
-                tarea.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-        }
-
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
-
-            if (ActiveGrupo() != null)
-            {
-                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo,ActiveGrupo().IdGrupo,"examen");
-                tarea.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-<<<<<<< HEAD
-        private void pictureBox1_Click_1(object sender, EventArgs e)
-        {
-            if (ActiveGrupo() != null)
-            {
-                string idGrupo = ActiveGrupo().IdGrupo;
-                NuevaListaAlumnos a = new NuevaListaAlumnos(idGrupo);
-                a.ShowDialog();
-                this.refreshTables(idGrupo);
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-  
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-            if (ActiveGrupo() != null)
-            {
-                string idGrupo = ActiveGrupo().IdGrupo;
-                NuevoAlumno nuevo = new NuevoAlumno(idGrupo);
-                nuevo.ShowDialog();
-                refreshTables(idGrupo);
-=======
-        private void grupos_eliminar_Click(object sender, EventArgs e)
-        {
-            if (ActiveMateria() != null)
-            {
-                DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar un grupo?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-                if (dialogo == DialogResult.Yes)
-                {
-                    Conexion con = new Conexion();
-                    con.deleteGrupo(ActiveGrupo().IdGrupo);
-                    panel_grupos.Controls.RemoveAt(int.Parse(ActiveGrupo().Clave));
-                    panel_grupos.Refresh();
-                }
-
-            }
-            else
-            {
-
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
->>>>>>> origin/master
-
-
-            }
-            else
-            {
-                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-           
-        }
+        //METODO PARA REFRESCAR Y CARGAR LAS GRIDS
 
         public void refreshTables(string idGrupo)
         {
@@ -427,6 +304,133 @@ namespace ControldeAlumnosPVI
                     default:
                         break;
                 }
+            }
+        }
+
+        //METODO PARA REFRESCAR LOS PANELES DE GRUPO Y MATERIA
+        private void refreshPaneles(bool materia)
+        {
+            if (materia)
+            {
+                Conexion con = new Conexion();
+                List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+                if (listaMat.Count != panel_materias.Controls.Count)
+                {
+                    panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
+                }
+            }
+            else
+            {
+                Conexion con = new Conexion();
+                List<Grupo> listaGrupo = con.readInfoGruposIdMateria(ActiveMateria().IdMateria);
+                if (listaGrupo.Count != panel_grupos.Controls.Count)
+                {
+                    panel_grupos.Controls.Add(new ItemGrupo(panel, listaGrupo[listaGrupo.Count - 1].NombreGrupo, listaGrupo[listaGrupo.Count - 1]));
+                }
+            }
+        }
+
+        //METODOS DE LOS BOTONES
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+            if (ActiveGrupo() != null)
+            {
+                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "tarea");
+                tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
+
+            if (ActiveGrupo() != null)
+            {
+                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "trabajo");
+                tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+            if (ActiveGrupo() != null)
+            {
+                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "examen");
+                tarea.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            if (ActiveGrupo() != null)
+            {
+                string idGrupo = ActiveGrupo().IdGrupo;
+                NuevaListaAlumnos a = new NuevaListaAlumnos(idGrupo);
+                a.ShowDialog();
+                this.refreshTables(idGrupo);
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void grupos_eliminar_Click(object sender, EventArgs e)
+        {
+            if (ActiveGrupo() != null)
+            {
+                DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar un grupo?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                if (dialogo == DialogResult.Yes)
+                {
+                    string idGrupo = ActiveGrupo().IdGrupo;
+                    Conexion con = new Conexion();
+                    con.deleteGrupo(idGrupo);
+                    panel_grupos.Controls.RemoveAt(int.Parse(ActiveGrupo().Clave));
+                    panel_grupos.Refresh();
+                    HideTabs();
+
+                }
+
+            }
+            else
+            {
+
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (ActiveGrupo() != null)
+            {
+                string idGrupo = ActiveGrupo().IdGrupo;
+                NuevoAlumno nuevo = new NuevoAlumno(idGrupo);
+                nuevo.ShowDialog();
+                refreshTables(idGrupo);
+
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

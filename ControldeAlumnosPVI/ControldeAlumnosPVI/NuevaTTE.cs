@@ -21,6 +21,7 @@ namespace ControldeAlumnosPVI
         {
             InitializeComponent();
             label4.Text = str1;
+       
             this.idGrupo = idGrupo;
             this.tipo = tipo;
    

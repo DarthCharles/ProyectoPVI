@@ -59,7 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label_fecha = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.agregar_Alumno = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -80,7 +80,7 @@
             this.tabs_alumnos.SuspendLayout();
             this.panel6.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -420,16 +420,16 @@
             this.label_fecha.TabIndex = 0;
             this.label_fecha.Text = "label_fecha";
             // 
-            // pictureBox2
+            // agregar_Alumno
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_alumno;
-            this.pictureBox2.Location = new System.Drawing.Point(1114, 264);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(55, 57);
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.agregar_Alumno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.agregar_Alumno.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_alumno;
+            this.agregar_Alumno.Location = new System.Drawing.Point(1114, 264);
+            this.agregar_Alumno.Name = "agregar_Alumno";
+            this.agregar_Alumno.Size = new System.Drawing.Size(55, 57);
+            this.agregar_Alumno.TabIndex = 14;
+            this.agregar_Alumno.TabStop = false;
+            this.agregar_Alumno.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -501,7 +501,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1247, 628);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.agregar_Alumno);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -535,7 +535,7 @@
             this.panel6.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -585,7 +585,7 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox agregar_Alumno;
 
     }
 }
