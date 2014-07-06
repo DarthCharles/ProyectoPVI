@@ -44,7 +44,7 @@ namespace ControldeAlumnosPVI
 
         }
 
-//METODO DE LOS BOTONES DEL PANEL DE GRUPOS
+//METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
         {
 
