@@ -37,39 +37,25 @@ namespace ControldeAlumnosPVI
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
             }
-
-
-
-
-
         }
-<<<<<<< HEAD
-
-        public void HideTabs()
-        {
-
-
-
-=======
->>>>>>> origin/master
 
 //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
         {
+             foreach (ItemGrupo x in panel_grupos.Controls)
+            {
+                if (x.Active == true)
+                {
 
-<<<<<<< HEAD
-            tabs_alumnos.TabPages.Add(tabPage1);
-            tabs_alumnos.TabPages.Add(tabPage2);
-            tabs_alumnos.TabPages.Add(tabPage3);
-            tabs_alumnos.TabPages.Add(tabPage4);
-            tabs_alumnos.TabPages.Add(tabPage5);
-            tabs_alumnos.TabPages.Add(tabPage6);
+                    return x.Grupo;
 
+                }
+            }
 
-
-
-
+            return null;
         }
+
+
 
         private void Refresh(bool materia)
         {
@@ -91,26 +77,6 @@ namespace ControldeAlumnosPVI
                     panel_grupos.Controls.Add(new ItemGrupo(panel, listaGrupo[listaGrupo.Count - 1].NombreGrupo, listaGrupo[listaGrupo.Count - 1]));
                 }
             }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
-            A.ShowDialog();
-            Refresh(true);
-=======
-            foreach (ItemGrupo x in panel_grupos.Controls)
-            {
-                if (x.Active == true)
-                {
-
-                    return x.Grupo;
-
-                }
-            }
->>>>>>> origin/master
-
-            return null;
         }
 
         private void grupos_agregar_Click(object sender, EventArgs e)
@@ -166,10 +132,7 @@ namespace ControldeAlumnosPVI
         {
             OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
             A.ShowDialog();
-            Conexion con = new Conexion();
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-            panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
-
+            Refresh(true);
         }
 
         private void materias_conf_Click(object sender, EventArgs e)
@@ -248,11 +211,6 @@ namespace ControldeAlumnosPVI
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> origin/master
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
@@ -261,9 +219,6 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-<<<<<<< HEAD
-
-
                 DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 if (dialogo == DialogResult.Yes)
                 {
@@ -271,24 +226,16 @@ namespace ControldeAlumnosPVI
                     con.deleteMateria(ActiveMateria().IdMateria);
                     panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
                     panel_materias.Refresh();
+                     NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
+            tarea.ShowDialog();
                 }
 
             }
             else
             {
 
-                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-=======
-                        NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
-            tarea.ShowDialog();
-            }
-            else
-            {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
- 
-    
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -304,8 +251,6 @@ namespace ControldeAlumnosPVI
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
  
-   
->>>>>>> origin/master
-        }
+          }
     }
 }
