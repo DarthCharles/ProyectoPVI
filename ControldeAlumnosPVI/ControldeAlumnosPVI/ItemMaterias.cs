@@ -31,6 +31,11 @@ namespace ControldeAlumnosPVI
             get { return click; }
             set { click = value; }
         }
+        public Label NombreMateria
+        {
+            get { return nombreMateria; }
+            set { nombreMateria = value; }
+        }
 
 
 
@@ -53,7 +58,7 @@ namespace ControldeAlumnosPVI
         }
 
 
-        private void setLabel(string nombre)
+        public void setLabel(string nombre)
         {
             //nombreMateria.Padding = new System.Windows.Forms.Padding(5);
 
@@ -122,7 +127,11 @@ namespace ControldeAlumnosPVI
             this.panel.Context.HideTabs();
         }
 
-
+        public void modifyLabel(string str)
+        {
+            this.setLabel(str);
+            this.NombreMateria.ForeColor = Color.White;
+        }
 
     }
 

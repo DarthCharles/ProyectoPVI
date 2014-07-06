@@ -300,7 +300,7 @@ namespace database
 
         public bool create(Materia materia)
         {
-            if (!isMateriaRepetida(materia.Clave))
+            if (!isMateriaRepetida(materia.NombreMateria))
             {
                 try
                 {
@@ -338,7 +338,7 @@ namespace database
             }
         }
 
-        public bool isMateriaRepetida(string clave)
+        public bool isMateriaRepetida(string nombre)
         {
             try
             {
@@ -346,9 +346,9 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * from materias where clave = @clave";
+                string query = "SELECT * from materias where nombre = @nombre";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@clave", clave);
+                comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)

@@ -21,6 +21,8 @@ namespace ControldeAlumnosPVI
     {
         public int materItemSize = 176;
         public int grupoItemSize = 160;
+        PanelParameters panel;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,10 +30,9 @@ namespace ControldeAlumnosPVI
 
             label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
-
+            panel = new PanelParameters(this);
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
 
-            PanelParameters panel = new PanelParameters(this);
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
@@ -76,10 +77,30 @@ namespace ControldeAlumnosPVI
 
         }
 
+        private void Refresh(){
+            Conexion con = new Conexion();
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+
+            panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
+            
+        }
+
+        private void RefreshModificar()
+        {
+            Conexion con = new Conexion();
+            Materia materia = con.readInfoMateriaIdMateria(ActiveMateria().IdMateria);
+            panel_materias.Controls.Clear();
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+
+            panel_materias.Refresh();         
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
             A.ShowDialog();
+            Refresh();
+
         }
 
         private void grupos_agregar_Click(object sender, EventArgs e)
@@ -99,15 +120,17 @@ namespace ControldeAlumnosPVI
 
         Materia ActiveMateria()
         {
-    
+            int index = 0;
             foreach (ItemMaterias x in panel_materias.Controls)
             {
+                
                 if (x.Active == true)
                 {
-            
+                    x.Materia.Clave = index.ToString();
                     return x.Materia;
 
                 }
+                index++;
             }
 
             return null;
@@ -132,16 +155,18 @@ namespace ControldeAlumnosPVI
         {
             if (ActiveMateria() != null)
             {
-                OpcionesMateria A = new OpcionesMateria("Configurar materia", ActiveMateria().NombreMateria);
+                Conexion con = new Conexion();
+                OpcionesMateria A = new OpcionesMateria("Configurar materia", ActiveMateria().NombreMateria,false,ActiveMateria().IdMateria);
                 A.ShowDialog();
+
+                ItemMaterias caca = panel_materias.Controls[int.Parse(ActiveMateria().Clave)] as ItemMaterias;
+                caca.modifyLabel(con.readInfoMateriaIdMateria(ActiveMateria().IdMateria).NombreMateria);
+                panel_materias.Refresh(); 
             }
             else
             {
                 MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-       
-        
-
 
         }
 
@@ -158,11 +183,5 @@ namespace ControldeAlumnosPVI
             }
        
         }
-
-
-
-
-
-
     }
 }
