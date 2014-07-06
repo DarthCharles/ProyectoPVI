@@ -32,7 +32,7 @@ namespace ControldeAlumnosPVI
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
             List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-
+            
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
@@ -105,7 +105,10 @@ namespace ControldeAlumnosPVI
                                         ActiveGrupo().IdMateria);
                 A.ShowDialog();
                 ItemGrupo caca = panel_grupos.Controls[int.Parse(ActiveGrupo().Clave)] as ItemGrupo;
-                caca.modifyLabel(OpcionesGrupo.nombreGrupo);
+                if(OpcionesGrupo.validado){
+                    caca.modifyLabel(OpcionesGrupo.nombreGrupo);
+                    OpcionesGrupo.validado = false;
+                }
                 panel_grupos.Refresh();
 
             }
@@ -272,6 +275,7 @@ namespace ControldeAlumnosPVI
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
     }
 }

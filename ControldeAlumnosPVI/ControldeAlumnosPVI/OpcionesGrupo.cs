@@ -19,6 +19,7 @@ namespace ControldeAlumnosPVI
         string idPonderacion;
         string idGrupo;
         public static string nombreGrupo;
+        public static bool validado;
 
         public OpcionesGrupo()
         {
@@ -92,6 +93,7 @@ namespace ControldeAlumnosPVI
                 listaPonde[4] = textBox6.Text;
                 listaPonde[5] = idPonderacion;
                 nombreGrupo = textBox1.Text;
+                validado = true;
                 if (!con.update(grupo, listaPonde))
                 {
                     MessageBox.Show("No se pudo actualizar");
@@ -102,6 +104,17 @@ namespace ControldeAlumnosPVI
                 }
             }
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                )
+            {
+                e.Handled = true;
+            }
+        }
+
 
     }
 }
