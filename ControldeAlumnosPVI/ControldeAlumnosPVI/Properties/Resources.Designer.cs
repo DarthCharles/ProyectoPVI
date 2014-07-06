@@ -213,6 +213,26 @@ namespace ControldeAlumnosPVI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_logo {
+            get {
+                object obj = ResourceManager.GetObject("ic_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_logo1 {
+            get {
+                object obj = ResourceManager.GetObject("ic_logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_nuevo_examen1 {
             get {
                 object obj = ResourceManager.GetObject("ic_nuevo_examen1", resourceCulture);
@@ -236,6 +256,16 @@ namespace ControldeAlumnosPVI.Properties {
         internal static System.Drawing.Bitmap ic_nuevo_trabajo1 {
             get {
                 object obj = ResourceManager.GetObject("ic_nuevo_trabajo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LOGO {
+            get {
+                object obj = ResourceManager.GetObject("LOGO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

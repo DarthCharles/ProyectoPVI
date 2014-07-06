@@ -15,6 +15,7 @@ using System.Threading;
 using grupos;
 using alumnos;
 using trabajos;
+using maestros;
 
 
 namespace ControldeAlumnosPVI
@@ -25,11 +26,11 @@ namespace ControldeAlumnosPVI
         public int grupoItemSize = 160;
         PanelParameters panel;
 
-        public Form1()
+        public Form1(string str1, string str2)
         {
             InitializeComponent();
             HideTabs();
-
+            nombre_profesor.Text = str1 + " " + str2;
             label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
@@ -92,6 +93,7 @@ namespace ControldeAlumnosPVI
                     caca.modifyLabel(OpcionesGrupo.nombreGrupo);
                     OpcionesGrupo.validado = false;
                 }
+                ActiveGrupo().NombreGrupo = OpcionesGrupo.nombreGrupo;
                 panel_grupos.Refresh();
 
             }
@@ -173,6 +175,7 @@ namespace ControldeAlumnosPVI
         //METODO PARA REFRESCAR LAS TABS
         public void HideTabs()
         {
+            tabs_alumnos.TabPages.Remove(tabPage7);
             tabs_alumnos.TabPages.Remove(tabPage6);
             tabs_alumnos.TabPages.Remove(tabPage5);
             tabs_alumnos.TabPages.Remove(tabPage4);
@@ -189,6 +192,7 @@ namespace ControldeAlumnosPVI
             tabs_alumnos.TabPages.Add(tabPage4);
             tabs_alumnos.TabPages.Add(tabPage5);
             tabs_alumnos.TabPages.Add(tabPage6);
+            tabs_alumnos.TabPages.Add(tabPage7);
         }
 
         //METODO PARA REFRESCAR Y CARGAR LAS GRIDS
@@ -300,6 +304,18 @@ namespace ControldeAlumnosPVI
                             assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                         }
                         tab.Controls.Add(assa);
+                        break;
+
+
+                    case "tabPage7":
+                        tab.Controls.Clear();
+                        a = 1;
+                        ListaTotal total = new ListaTotal();
+                        foreach (Alumno alumno in listaAlumnos)
+                        {
+                            total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                        }
+                        tab.Controls.Add(total);
                         break;
                     default:
                         break;
