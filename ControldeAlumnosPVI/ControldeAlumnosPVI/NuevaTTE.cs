@@ -21,21 +21,18 @@ namespace ControldeAlumnosPVI
         public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
             InitializeComponent();
-<<<<<<< HEAD
-            llenarTrabajos(idGrupo,tipo);
-=======
-            dataGridView1.Columns.Add("c2","Nombre");
+            dataGridView1.Columns.Add("c2", "Nombre");
             dataGridView1.Columns.Add("c2", "Clave");
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].Width = 50;
             dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
->>>>>>> origin/master
+            dataGridView1.AllowUserToAddRows = false;
             label4.Text = str1;
-       
+
             this.idGrupo = idGrupo;
             this.tipo = tipo;
-   
+
             switch (str)
             {
                 case "tarea":
@@ -58,6 +55,7 @@ namespace ControldeAlumnosPVI
                 default:
                     break;
             }
+            llenarTrabajos(idGrupo, tipo);
 
 
         }
@@ -79,20 +77,19 @@ namespace ControldeAlumnosPVI
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Conexion con = new Conexion();
-            Trabajo trabajo = new Trabajo(textBox1.Text,tipo,"1",idGrupo);
+            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
             con.create(trabajo);
             trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
-            dataGridView1.Rows.Add(textBox1.Text, clave+"" +(dataGridView1.Rows.Count+1));
+            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
             textBox1.Text = "";
         }
 
-<<<<<<< HEAD
         private void llenarTrabajos(string idGrupo, string tipo)
         {
             Conexion con = new Conexion();
@@ -101,11 +98,6 @@ namespace ControldeAlumnosPVI
             {
                 dataGridView1.Rows.Add(trabajo.Nombre, clave + "" + (dataGridView1.Rows.Count + 1));
             }
-=======
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
->>>>>>> origin/master
         }
     }
 }
