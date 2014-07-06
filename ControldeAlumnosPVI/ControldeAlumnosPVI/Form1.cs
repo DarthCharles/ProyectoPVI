@@ -25,6 +25,8 @@ namespace ControldeAlumnosPVI
         public int materItemSize = 176;
         public int grupoItemSize = 160;
         PanelParameters panel;
+        ListaAsistencia lista;
+        ListaTTE tareas;
 
         public Form1(string str1, string str2)
         {
@@ -211,7 +213,7 @@ namespace ControldeAlumnosPVI
                     case "tabPage1":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaAsistencia lista = new ListaAsistencia();
+                        lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
@@ -228,17 +230,17 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(idGrupo, "tarea");
-                        ListaTTE tareas = new ListaTTE(numtareas);
+                        tareas = new ListaTTE(numtareas);
 
                         foreach (Alumno alumno in listaAlumnos)
                         {
+                            List<Trabajo> listaTareas = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
-                            int i = 3;
-                            foreach (Trabajo trabajo in listaTrabajos)
-                            {
-                                tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
-                            }
+                            //int i = 3;
+                            //for (int j = 0; j < numtareas; j++)
+                            //{
+                            //    tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = listaTareas[j].Calificacion;
+                            //}
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
@@ -354,6 +356,7 @@ namespace ControldeAlumnosPVI
             {
                 NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "tarea");
                 tarea.ShowDialog();
+                refreshTables(ActiveGrupo().IdGrupo);
             }
             else
             {
@@ -370,6 +373,8 @@ namespace ControldeAlumnosPVI
             {
                 NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "trabajo");
                 tarea.ShowDialog();
+                refreshTables(ActiveGrupo().IdGrupo);
+
             }
             else
             {
@@ -386,6 +391,8 @@ namespace ControldeAlumnosPVI
             {
                 NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "examen");
                 tarea.ShowDialog();
+                refreshTables(ActiveGrupo().IdGrupo);
+
             }
             else
             {
@@ -447,6 +454,19 @@ namespace ControldeAlumnosPVI
             else
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                for (int i = 0; i < tareas.RowCount; i++)
+                {
+                    Conexion con = new Conexion();
+                    con.nuevoTrabajo(tareas.Rows[i].Cells[0].Value.ToString(), tareas.Columns[j + 2].HeaderText,
+                        tareas.Rows[i].Cells[3].Value.ToString(), "tarea");
+                }
             }
         }
     }

@@ -1204,7 +1204,7 @@ namespace database
             return true;
         }
 
-        public bool nuevoTrabajo(Alumno alumno, string idTrabajo)
+        public bool nuevoTrabajo(string idAlumno, string clave, string calificacion, string tipo)
         {
             try
             {
@@ -1212,14 +1212,15 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "INSERT INTO trabajos (entregada, calificacion, idalumnos_grupo, " +
-                    "idtrabajos_dejados) " +
-                    "VALUES (@entregada, @calificacion, @id_alumnosgrupo, @idtrabajos_dejados)";
+                string query = "INSERT INTO trabajos (calificacion, idalumnos_grupo, " +
+                    "clave, tipo) " +
+                    "VALUES (@calificacion, @id_alumnosgrupo, @clave, @tipo)";
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@entregada", false);
-                comando.Parameters.AddWithValue("@calificacion", "0");
-                comando.Parameters.AddWithValue("@id_alumnosgrupo", alumno.IdAlumno);
-                comando.Parameters.AddWithValue("@idtrabajos_dejados", idTrabajo);
+                comando.Parameters.AddWithValue("@calificacion", calificacion);
+                comando.Parameters.AddWithValue("@id_alumnosgrupo", idAlumno);
+                comando.Parameters.AddWithValue("@clave", clave);
+                comando.Parameters.AddWithValue("@tipo", tipo);
+
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
 
@@ -1250,11 +1251,11 @@ namespace database
                     conexion.Open();
                 }
 
-                string query = "SELECT nombre, calificacion FROM trabajos INNER JOIN trabajos_dejados " +
-                    "ON trabajos.idtrabajos_dejados = idtareas_dejadas where idalumnos_grupo = @idgrupos and tipo = @tipo";
+                string query = "select * from trabajos " +
+                    " where idalumnos_grupo = @idalumno and tipo = @tipo";
 
                 MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idgrupos", idAlumno);
+                comando.Parameters.AddWithValue("@idalumno", idAlumno);
                 comando.Parameters.AddWithValue("@tipo", tipo);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
@@ -1263,7 +1264,6 @@ namespace database
                     while (reader.Read())
                     {
                         Trabajo trabajo = new Trabajo();
-                        trabajo.Nombre = reader["nombre"].ToString();
                         trabajo.Calificacion = reader["calificacion"].ToString();
                         listaTrabajos.Add(trabajo);
                     }
@@ -1310,6 +1310,38 @@ namespace database
             }
             return numTrabajos;
         }
+
+        public List<Trabajo> readInfoTrabajosGrupo(string idGrupo, string tipo)
+        {
+            List<Trabajo> listaTrabajos = new List<Trabajo>();
+            
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+
+                string query = "SELECT * FROM trabajos_dejados  " +
+                    "WHERE idgrupos = @idgrupos and tipo = @tipo";
+
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+                comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Trabajo trabajo = new Trabajo();
+                        trabajo.Nombre = reader["nombre"].ToString();
+                        listaTrabajos.Add(trabajo);
+                    }
+                }
+                reader.Close();
+            
+            return listaTrabajos;
+        }
+
 
     }
 }
