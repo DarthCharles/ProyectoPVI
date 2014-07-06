@@ -37,38 +37,6 @@ namespace ControldeAlumnosPVI
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
             }
-
-
-
-
-
-        }
-<<<<<<< HEAD
-
-        public void HideTabs()
-        {
-
-
-
-=======
->>>>>>> origin/master
-
-//METODO DE LOS BOTONES DEL PANEL DE MATERIAS
-        Grupo ActiveGrupo()
-        {
-
-<<<<<<< HEAD
-            tabs_alumnos.TabPages.Add(tabPage1);
-            tabs_alumnos.TabPages.Add(tabPage2);
-            tabs_alumnos.TabPages.Add(tabPage3);
-            tabs_alumnos.TabPages.Add(tabPage4);
-            tabs_alumnos.TabPages.Add(tabPage5);
-            tabs_alumnos.TabPages.Add(tabPage6);
-
-
-
-
-
         }
 
         private void Refresh(bool materia)
@@ -93,12 +61,9 @@ namespace ControldeAlumnosPVI
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
+        Grupo ActiveGrupo()
         {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
-            A.ShowDialog();
-            Refresh(true);
-=======
             foreach (ItemGrupo x in panel_grupos.Controls)
             {
                 if (x.Active == true)
@@ -108,7 +73,6 @@ namespace ControldeAlumnosPVI
 
                 }
             }
->>>>>>> origin/master
 
             return null;
         }
@@ -143,7 +107,7 @@ namespace ControldeAlumnosPVI
 
         }
 
-  //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
+        //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Materia ActiveMateria()
         {
             int index = 0;
@@ -195,8 +159,6 @@ namespace ControldeAlumnosPVI
         {
             if (ActiveMateria() != null)
             {
-
-
                 DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 if (dialogo == DialogResult.Yes)
                 {
@@ -214,8 +176,7 @@ namespace ControldeAlumnosPVI
             }
         }
 
-
-//METODO PARA REFRESCAR LAS TABS
+        //METODO PARA REFRESCAR LAS TABS
         public void HideTabs()
         {
             tabs_alumnos.TabPages.Remove(tabPage6);
@@ -248,11 +209,7 @@ namespace ControldeAlumnosPVI
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> origin/master
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
@@ -261,34 +218,15 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-<<<<<<< HEAD
-
-
-                DialogResult dialogo = MessageBox.Show("¿Está seguro de querer borrar una materia?", "Advertencia", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-                if (dialogo == DialogResult.Yes)
-                {
-                    Conexion con = new Conexion();
-                    con.deleteMateria(ActiveMateria().IdMateria);
-                    panel_materias.Controls.RemoveAt(int.Parse(ActiveMateria().Clave));
-                    panel_materias.Refresh();
-                }
-
-            }
-            else
-            {
-
-                MessageBox.Show("Por favor primero seleccione una materia.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-=======
-                        NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
-            tarea.ShowDialog();
+                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo);
+                tarea.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
- 
-    
+
+
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -303,9 +241,9 @@ namespace ControldeAlumnosPVI
             {
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
- 
-   
->>>>>>> origin/master
         }
+
+
     }
 }
+
