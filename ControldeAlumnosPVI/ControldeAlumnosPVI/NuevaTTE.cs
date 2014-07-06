@@ -88,7 +88,9 @@ namespace ControldeAlumnosPVI
             trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
             dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
             textBox1.Text = "";
+        
         }
+
 
         private void llenarTrabajos(string idGrupo, string tipo)
         {
