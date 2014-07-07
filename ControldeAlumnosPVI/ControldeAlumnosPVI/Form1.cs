@@ -217,7 +217,7 @@ namespace ControldeAlumnosPVI
                 switch (tab.Name)
                 {
                     case "tabPage1":
-                          tab.Controls.Clear();
+                        tab.Controls.Clear();
                         a = 1;
                         lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
@@ -227,6 +227,7 @@ namespace ControldeAlumnosPVI
                                 DateTime.Today.ToString("yyyy-MM-dd")).ToString();
                         }
                         tab.Controls.Add(lista);
+                   
                         break;
 
 
@@ -252,6 +253,8 @@ namespace ControldeAlumnosPVI
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
+                        promediar(tareas, numtareas);
+
                         break;
 
                     case "tabPage3":
@@ -273,6 +276,7 @@ namespace ControldeAlumnosPVI
                             }
                         }
                         tab.Controls.Add(trabajos);
+                        promediar(trabajos, numtrabajos);
                         break;
 
                     case "tabPage4":
@@ -297,6 +301,7 @@ namespace ControldeAlumnosPVI
                         }
 
                         tab.Controls.Add(examenes);
+                        promediar(examenes, numexamenes);
                         break;
 
                     case "tabPage5":
@@ -339,6 +344,42 @@ namespace ControldeAlumnosPVI
                     default:
                         break;
                 }
+            }
+        }
+
+        public void promediar(DataGridView tareas, int numtareas)
+        {
+            try
+            {
+
+      
+            int promedio = 0;
+
+            if (numtareas > 0)
+            {
+                for (int i = 0; i < tareas.Rows.Count; i++)
+                {
+                    for (int j = 3; j < tareas.Columns.Count - 1; j++)
+                    {
+                        promedio += int.Parse(tareas.Rows[i].Cells[j].Value.ToString());
+                    }
+                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = (promedio / numtareas);
+                    promedio = 0;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < tareas.Rows.Count; i++)
+                {
+                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = 0;
+                }
+            }
+
+            }
+            catch (Exception)
+            {
+
+  
             }
         }
 
@@ -493,7 +534,7 @@ namespace ControldeAlumnosPVI
             {
                 case "tabPage1":
                     guardarLista();
-                        break;
+                    break;
                 case "tabPage2":
                     guardarTareas();
                     break;
@@ -589,10 +630,13 @@ namespace ControldeAlumnosPVI
         public void guardarLista()
         {
             Conexion con = new Conexion();
+
             for (int i = 0; i < lista.RowCount; i++)
             {
                 con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
             }
+
+            MessageBox.Show("Asistencias guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void exportar_excel_Click(object sender, EventArgs e)
         {
