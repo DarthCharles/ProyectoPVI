@@ -1601,7 +1601,244 @@ namespace database
 
             return asistencias;
         }
-    
+        
+        //participaciones
+
+        public string numeroParticipaciones(string idAlumno)
+        {
+            string numeroPart = "0";
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+
+            string query = "SELECT * FROM participaciones  " +
+                "WHERE idalumnos_grupo = @idalumnos";
+
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+            comando.Connection = conexion;
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    numeroPart = reader["numero"].ToString();
+                }
+            }
+            reader.Close();
+
+            return numeroPart;
+        }
+
+        public bool tomarPart(string idAlumno, string part)
+        {
+            if (!isPartRepetida(idAlumno))
+            {
+                nuevaPart(idAlumno, part);
+            }
+            else
+            {
+                updatePart(idAlumno, part);
+            }
+            return true;
+        }
+
+        public bool isPartRepetida(string idAlumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT * from participaciones where idalumnos_grupo = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al comprobar si existe el alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return false;
+        }
+
+        public bool nuevaPart(string idAlumno, string part)
+        {
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "INSERT INTO participaciones (numero, idalumnos_grupo) " +
+                "VALUES (@numero, @idalumnos_grupo)";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@numero", part);
+            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+
+            if (a == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool updatePart(string idAlumno, string part)
+        {
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "UPDATE participaciones SET numero = @numero " +
+                " WHERE idalumnos_grupo = @idalumnos_grupo";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@numero", part);
+            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+
+            if (a == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        //puntos extra
+
+        public string numPuntosExtra(string idAlumno)
+        {
+            string numeroPart = "0";
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+
+            string query = "SELECT * FROM puntos_extra  " +
+                "WHERE idalumnos_grupo = @idalumnos";
+
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+            comando.Connection = conexion;
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    numeroPart = reader["num_puntos"].ToString();
+                }
+            }
+            reader.Close();
+
+            return numeroPart;
+        }
+
+        public bool tomarPuntos(string idAlumno, string part)
+        {
+            if (!isPuntosRepetidos(idAlumno))
+            {
+                nuevoPuntos(idAlumno, part);
+            }
+            else
+            {
+                updatePuntos(idAlumno, part);
+            }
+            return true;
+        }
+
+        public bool isPuntosRepetidos(string idAlumno)
+        {
+            try
+            {
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "SELECT * from puntos_extra where idalumnos_grupo = @idalumnos";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                comando.Connection = conexion;
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al comprobar si existe el alumno: " + e.Message);
+                return false;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return false;
+        }
+
+        public bool nuevoPuntos(string idAlumno, string part)
+        {
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "INSERT INTO puntos_extra (num_puntos, idalumnos_grupo) " +
+                "VALUES (@numero, @idalumnos_grupo)";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@numero", part);
+            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+
+            if (a == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool updatePuntos(string idAlumno, string part)
+        {
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "UPDATE puntos_extra SET num_puntos = @numero " +
+                " WHERE idalumnos_grupo = @idalumnos_grupo";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@numero", part);
+            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+
+            if (a == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
     }
 }
 

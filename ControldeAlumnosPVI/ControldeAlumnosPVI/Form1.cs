@@ -32,6 +32,8 @@ namespace ControldeAlumnosPVI
         ListaAsistencia lista;
         List<Alumno> listaAlumnos;
         ListaTotal total;
+        ListaPart_Pextra ass;
+        ListaPart_Pextra assa;
 
         public Form1(string str1, string str2)
         {
@@ -302,10 +304,11 @@ namespace ControldeAlumnosPVI
                     case "tabPage5":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaPart_Pextra ass = new ListaPart_Pextra();
+                        ass = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             ass.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            ass.Rows[ass.RowCount - 1].Cells[4].Value = (con.numeroParticipaciones(alumno.IdAlumno));
                         }
                         tab.Controls.Add(ass);
 
@@ -314,10 +317,12 @@ namespace ControldeAlumnosPVI
                     case "tabPage6":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaPart_Pextra assa = new ListaPart_Pextra();
+                        assa = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            assa.Rows[assa.RowCount - 1].Cells[4].Value = (con.numPuntosExtra(alumno.IdAlumno));
+
                         }
                         tab.Controls.Add(assa);
                         break;
@@ -503,6 +508,12 @@ namespace ControldeAlumnosPVI
                 case "tabPage4":
                     guardarExamenes();
                     break;
+                case "tabPage5":
+                    guardarParticipaciones();
+                    break;
+                case "tabPage6":
+                    guardarPuntos();
+                    break;
                 default:
                     break;
             }
@@ -533,7 +544,6 @@ namespace ControldeAlumnosPVI
 
             MessageBox.Show("Tareas guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
         public void guardarTrabajos()
         {
@@ -594,6 +604,25 @@ namespace ControldeAlumnosPVI
                 con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
             }
         }
+
+        public void guardarParticipaciones()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarPart(listaAlumnos[i].IdAlumno, ass.Rows[i].Cells[4].Value.ToString());
+            }
+        }
+
+        public void guardarPuntos()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarPuntos(listaAlumnos[i].IdAlumno, assa.Rows[i].Cells[4].Value.ToString());
+            }
+        }
+
         private void exportar_excel_Click(object sender, EventArgs e)
         {
             if (ActiveGrupo() != null)
