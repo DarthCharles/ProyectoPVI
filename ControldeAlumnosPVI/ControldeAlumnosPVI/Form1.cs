@@ -563,7 +563,7 @@ namespace ControldeAlumnosPVI
         }
 
         private void exportar_excel_Click(object sender, EventArgs e)
-        {
+            {
                       DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
  
             // creating Excel Application
@@ -618,7 +618,6 @@ namespace ControldeAlumnosPVI
 
         }
 
-<<<<<<< HEAD
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -628,12 +627,7 @@ namespace ControldeAlumnosPVI
         {
             System.Windows.Forms.Application.Exit();
         }
-        
-=======
->>>>>>> origin/master
-   
-    
-    
+
     }
 }
 
