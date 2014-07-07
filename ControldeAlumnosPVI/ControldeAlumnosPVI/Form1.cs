@@ -553,6 +553,8 @@ namespace ControldeAlumnosPVI
     
                     guardarPuntos();
 
+                    MessageBox.Show("Datos guardados con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     refreshTables(ActiveGrupo().IdGrupo);
 
             }
@@ -581,7 +583,6 @@ namespace ControldeAlumnosPVI
                 }
             }
 
-            MessageBox.Show("Tareas guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarTrabajos()
@@ -607,7 +608,6 @@ namespace ControldeAlumnosPVI
                 }
             }
 
-            MessageBox.Show("Trabajos guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarExamenes()
@@ -632,7 +632,6 @@ namespace ControldeAlumnosPVI
                         "examen");
                 }
             }
-            MessageBox.Show("Examen guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarLista()
@@ -644,7 +643,6 @@ namespace ControldeAlumnosPVI
                 con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
             }
 
-            MessageBox.Show("Asistencias guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarParticipaciones()
