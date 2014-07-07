@@ -61,15 +61,16 @@
             // contraseña
             // 
             this.contraseña.Location = new System.Drawing.Point(17, 253);
-            this.contraseña.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.contraseña.Margin = new System.Windows.Forms.Padding(4);
             this.contraseña.Name = "contraseña";
+            this.contraseña.PasswordChar = '*';
             this.contraseña.Size = new System.Drawing.Size(189, 27);
             this.contraseña.TabIndex = 2;
             // 
             // usuario
             // 
             this.usuario.Location = new System.Drawing.Point(13, 180);
-            this.usuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.usuario.Margin = new System.Windows.Forms.Padding(4);
             this.usuario.Name = "usuario";
             this.usuario.Size = new System.Drawing.Size(189, 27);
             this.usuario.TabIndex = 1;
@@ -111,7 +112,7 @@
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso al Sistema";

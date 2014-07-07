@@ -16,6 +16,11 @@ namespace ControldeAlumnosPVI
     public partial class NuevaListaAlumnos : Form
     {
         string idGrupo;
+        bool cambiado;
+            public bool Cambiado { 
+                get{ return cambiado;}
+                set { cambiado = value; }
+            }
         public NuevaListaAlumnos(string str)
         {
             this.idGrupo = str;
@@ -103,7 +108,7 @@ namespace ControldeAlumnosPVI
 
                 }
             }
-
+            Cambiado = true;
             this.Close();
         }
 

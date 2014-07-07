@@ -418,7 +418,10 @@ namespace ControldeAlumnosPVI
                 string idGrupo = ActiveGrupo().IdGrupo;
                 NuevaListaAlumnos a = new NuevaListaAlumnos(idGrupo);
                 a.ShowDialog();
-                this.refreshTables(idGrupo);
+                if (a.Cambiado)
+                {
+                    refreshTables(idGrupo);
+                }
             }
             else
             {
@@ -457,7 +460,10 @@ namespace ControldeAlumnosPVI
                 string idGrupo = ActiveGrupo().IdGrupo;
                 NuevoAlumno nuevo = new NuevoAlumno(idGrupo);
                 nuevo.ShowDialog();
-                refreshTables(idGrupo);
+                if (nuevo.Cambiado)
+                {
+                    refreshTables(idGrupo);
+                }
 
 
             }
@@ -546,6 +552,16 @@ namespace ControldeAlumnosPVI
                  }
              }
 
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
         
    

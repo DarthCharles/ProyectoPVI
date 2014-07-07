@@ -16,7 +16,12 @@ namespace ControldeAlumnosPVI
     {
         string nombreAlumno;
             string idGrupo;
-
+            bool cambiado;
+            public bool Cambiado
+            {
+                get { return cambiado; }
+                set { cambiado = value; }
+            }
         public NuevoAlumno(string idGrupo)
         {
 
@@ -34,6 +39,7 @@ namespace ControldeAlumnosPVI
             a.Foto = "1";
             a.IdGrupo = idGrupo;
             con.createAlumnoIdGrupo(a);
+            Cambiado = true;
             this.Close();
         }
 

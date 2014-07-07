@@ -17,7 +17,9 @@ namespace ControldeAlumnosPVI
         {
             this.ColumnCount = 3;
             this.Columns[2].HeaderText = "Alumno";
-            //this.Columns[0].ReadOnly = true;
+            this.Columns[0].ReadOnly = true;
+            this.Columns[1].ReadOnly = true;
+            this.Columns[2].ReadOnly = true;
             this.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.Location = new System.Drawing.Point(0, 0);
             this.Size = new System.Drawing.Size(300, 510);
@@ -25,7 +27,7 @@ namespace ControldeAlumnosPVI
             this.ColumnHeadersHeight = 30;
             this.EditMode = DataGridViewEditMode.EditOnEnter;
             this.Dock = System.Windows.Forms.DockStyle.Fill; ;
-            this.RowHeadersVisible = false;
+            this.RowHeadersVisible = true;
       
             this.AllowUserToAddRows = false;
             DataGridViewCellStyle style = new DataGridViewCellStyle();

@@ -103,6 +103,16 @@ namespace ControldeAlumnosPVI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_action_ic_cerrar {
+            get {
+                object obj = ResourceManager.GetObject("ic_action_ic_cerrar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_ajustes {
             get {
                 object obj = ResourceManager.GetObject("ic_ajustes", resourceCulture);
@@ -126,6 +136,26 @@ namespace ControldeAlumnosPVI.Properties {
         internal static System.Drawing.Bitmap ic_alumno_small {
             get {
                 object obj = ResourceManager.GetObject("ic_alumno_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_cerrar {
+            get {
+                object obj = ResourceManager.GetObject("ic_cerrar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_cerrar1 {
+            get {
+                object obj = ResourceManager.GetObject("ic_cerrar1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
