@@ -23,20 +23,14 @@ namespace ControldeAlumnosPVI
 {
     public partial class Form1 : Form
     {
-        public string idMaestro;
         public int materItemSize = 176;
         public int grupoItemSize = 160;
         PanelParameters panel;
         ListaTTE tareas;
         ListaTTE trabajos;
         ListaTTE examenes;
-        ListaAsistencia lista;
-        List<Alumno> listaAlumnos;
-        ListaTotal total;
-        ListaPart_Pextra ass;
-        ListaPart_Pextra assa;
 
-        public Form1(string str1, string str2, string idMaestro)
+        public Form1(string str1, string str2)
         {
             InitializeComponent();
             HideTabs();
@@ -44,8 +38,8 @@ namespace ControldeAlumnosPVI
             label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
-            this.idMaestro = idMaestro;
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
@@ -136,7 +130,7 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia", this.idMaestro);
+            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
             A.ShowDialog();
             refreshPaneles(true);
         }
@@ -211,7 +205,7 @@ namespace ControldeAlumnosPVI
         public void refreshTables(string idGrupo)
         {
             Conexion con = new Conexion();
-            listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
 
@@ -222,15 +216,14 @@ namespace ControldeAlumnosPVI
                     case "tabPage1":
                         tab.Controls.Clear();
                         a = 1;
-                        lista = new ListaAsistencia();
+                        ListaAsistencia lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            (lista.Rows[lista.RowCount - 1].Cells[3] as DataGridViewCheckBoxCell).Value = con.loadLista(alumno.IdAlumno,
-                                DateTime.Today.ToString("yyyy-MM-dd")).ToString();
+
                         }
+                        lista.CheckAll();
                         tab.Controls.Add(lista);
-                   
                         break;
 
 
@@ -256,8 +249,6 @@ namespace ControldeAlumnosPVI
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
-                        promediar(tareas, numtareas);
-
                         break;
 
                     case "tabPage3":
@@ -279,7 +270,6 @@ namespace ControldeAlumnosPVI
                             }
                         }
                         tab.Controls.Add(trabajos);
-                        promediar(trabajos, numtrabajos);
                         break;
 
                     case "tabPage4":
@@ -304,17 +294,15 @@ namespace ControldeAlumnosPVI
                         }
 
                         tab.Controls.Add(examenes);
-                        promediar(examenes, numexamenes);
                         break;
 
                     case "tabPage5":
                         tab.Controls.Clear();
                         a = 1;
-                        ass = new ListaPart_Pextra();
+                        ListaPart_Pextra ass = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             ass.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            ass.Rows[ass.RowCount - 1].Cells[4].Value = (con.numeroParticipaciones(alumno.IdAlumno));
                         }
                         tab.Controls.Add(ass);
 
@@ -323,12 +311,10 @@ namespace ControldeAlumnosPVI
                     case "tabPage6":
                         tab.Controls.Clear();
                         a = 1;
-                        assa = new ListaPart_Pextra();
+                        ListaPart_Pextra assa = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            assa.Rows[assa.RowCount - 1].Cells[4].Value = (con.numPuntosExtra(alumno.IdAlumno));
-
                         }
                         tab.Controls.Add(assa);
                         break;
@@ -337,13 +323,10 @@ namespace ControldeAlumnosPVI
                     case "tabPage7":
                         tab.Controls.Clear();
                         a = 1;
-                        total = new ListaTotal();
+                        ListaTotal total = new ListaTotal();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
-                                (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
-                                int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
                         }
                         tab.Controls.Add(total);
                         break;
@@ -353,48 +336,13 @@ namespace ControldeAlumnosPVI
             }
         }
 
-        public void promediar(DataGridView tareas, int numtareas)
-        {
-            try
-            {
-
-      
-            int promedio = 0;
-
-            if (numtareas > 0)
-            {
-                for (int i = 0; i < tareas.Rows.Count; i++)
-                {
-                    for (int j = 3; j < tareas.Columns.Count - 1; j++)
-                    {
-                        promedio += int.Parse(tareas.Rows[i].Cells[j].Value.ToString());
-                    }
-                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = (promedio / numtareas);
-                    promedio = 0;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < tareas.Rows.Count; i++)
-                {
-                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = 0;
-                }
-            }
-            }
-            catch (Exception)
-            {
-
-  
-            }
-        }
-
         //METODO PARA REFRESCAR LOS PANELES DE GRUPO Y MATERIA
         private void refreshPaneles(bool materia)
         {
             if (materia)
             {
                 Conexion con = new Conexion();
-                List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
+                List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
                 if (listaMat.Count != panel_materias.Controls.Count)
                 {
                     panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
@@ -533,30 +481,21 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
-            if (ActiveGrupo() != null)
-            {
-                
-            
             label_fecha.Focus();
 
-         
-
-                    guardarLista();
-
+            switch (tabs_alumnos.SelectedTab.Name)
+            {
+                case "tabPage2":
                     guardarTareas();
-        
+                    break;
+                case "tabPage3":
                     guardarTrabajos();
-         
+                    break;
+                case "tabPage4":
                     guardarExamenes();
- 
-                    guardarParticipaciones();
-    
-                    guardarPuntos();
-
-                    MessageBox.Show("Datos guardados con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    refreshTables(ActiveGrupo().IdGrupo);
-
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -583,7 +522,9 @@ namespace ControldeAlumnosPVI
                 }
             }
 
+            MessageBox.Show("Tareas guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         public void guardarTrabajos()
         {
@@ -608,6 +549,7 @@ namespace ControldeAlumnosPVI
                 }
             }
 
+            MessageBox.Show("Trabajos guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarExamenes()
@@ -632,35 +574,7 @@ namespace ControldeAlumnosPVI
                         "examen");
                 }
             }
-        }
-
-        public void guardarLista()
-        {
-            Conexion con = new Conexion();
-
-            for (int i = 0; i < lista.RowCount; i++)
-            {
-                con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
-            }
-
-        }
-
-        public void guardarParticipaciones()
-        {
-            Conexion con = new Conexion();
-            for (int i = 0; i < lista.RowCount; i++)
-            {
-                con.tomarPart(listaAlumnos[i].IdAlumno, ass.Rows[i].Cells[4].Value.ToString());
-            }
-        }
-
-        public void guardarPuntos()
-        {
-            Conexion con = new Conexion();
-            for (int i = 0; i < lista.RowCount; i++)
-            {
-                con.tomarPuntos(listaAlumnos[i].IdAlumno, assa.Rows[i].Cells[4].Value.ToString());
-            }
+            MessageBox.Show("Examen guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void exportar_excel_Click(object sender, EventArgs e)

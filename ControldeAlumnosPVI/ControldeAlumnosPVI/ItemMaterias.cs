@@ -20,7 +20,6 @@ namespace ControldeAlumnosPVI
         bool click;
         Materia materia;
         List<Grupo> listaGrupo;
-        public string idMaestro;
         public Materia Materia
         {
             get { return materia; }
