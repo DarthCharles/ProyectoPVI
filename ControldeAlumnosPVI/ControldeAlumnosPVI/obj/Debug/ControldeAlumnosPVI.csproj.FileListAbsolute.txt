@@ -13,3 +13,22 @@ C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnos
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.exe
 C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.pdb
+<<<<<<< HEAD
+C:\Users\Erick\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csprojResolveAssemblyReference.cache
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe.config
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.exe
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\bin\Debug\ControldeAlumnosPVI.pdb
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.ResolveComReference.cache
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Login.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.NuevaListaAlumnos.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.NuevaTTE.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.NuevoAlumno.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.OpcionesGrupo.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Form1.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.OpcionesMateria.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.Properties.Resources.resources
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.csproj.GenerateResource.Cache
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.exe
+C:\Users\Contreiras\Documents\GitHub\ProyectoPVI\ControldeAlumnosPVI\ControldeAlumnosPVI\obj\Debug\ControldeAlumnosPVI.pdb
+=======
+>>>>>>> origin/master

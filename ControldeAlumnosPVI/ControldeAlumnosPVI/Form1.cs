@@ -533,30 +533,28 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
+            if (ActiveGrupo() != null)
+            {
+                
+            
             label_fecha.Focus();
 
-            switch (tabs_alumnos.SelectedTab.Name)
-            {
-                case "tabPage1":
+         
+
                     guardarLista();
-                    break;
-                case "tabPage2":
+
                     guardarTareas();
-                    break;
-                case "tabPage3":
+        
                     guardarTrabajos();
-                    break;
-                case "tabPage4":
+         
                     guardarExamenes();
-                    break;
-                case "tabPage5":
+ 
                     guardarParticipaciones();
-                    break;
-                case "tabPage6":
+    
                     guardarPuntos();
-                    break;
-                default:
-                    break;
+
+                    refreshTables(ActiveGrupo().IdGrupo);
+
             }
         }
 
