@@ -29,6 +29,9 @@ namespace ControldeAlumnosPVI
         ListaTTE tareas;
         ListaTTE trabajos;
         ListaTTE examenes;
+        ListaAsistencia lista;
+        List<Alumno> listaAlumnos;
+        ListaTotal total;
 
         public Form1(string str1, string str2)
         {
@@ -205,7 +208,7 @@ namespace ControldeAlumnosPVI
         public void refreshTables(string idGrupo)
         {
             Conexion con = new Conexion();
-            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
 
@@ -214,15 +217,15 @@ namespace ControldeAlumnosPVI
                 switch (tab.Name)
                 {
                     case "tabPage1":
-                        tab.Controls.Clear();
+                          tab.Controls.Clear();
                         a = 1;
-                        ListaAsistencia lista = new ListaAsistencia();
+                        lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-
+                            (lista.Rows[lista.RowCount - 1].Cells[3] as DataGridViewCheckBoxCell).Value = con.loadLista(alumno.IdAlumno,
+                                DateTime.Today.ToString("yyyy-MM-dd")).ToString();
                         }
-                        lista.CheckAll();
                         tab.Controls.Add(lista);
                         break;
 
@@ -323,10 +326,13 @@ namespace ControldeAlumnosPVI
                     case "tabPage7":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaTotal total = new ListaTotal();
+                        total = new ListaTotal();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
+                                (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
+                                int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
                         }
                         tab.Controls.Add(total);
                         break;
@@ -485,6 +491,9 @@ namespace ControldeAlumnosPVI
 
             switch (tabs_alumnos.SelectedTab.Name)
             {
+                case "tabPage1":
+                    guardarLista();
+                        break;
                 case "tabPage2":
                     guardarTareas();
                     break;
@@ -577,6 +586,14 @@ namespace ControldeAlumnosPVI
             MessageBox.Show("Examen guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public void guardarLista()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
+            }
+        }
         private void exportar_excel_Click(object sender, EventArgs e)
         {
             if (ActiveGrupo() != null)
