@@ -27,6 +27,8 @@ namespace ControldeAlumnosPVI
         public int grupoItemSize = 160;
         PanelParameters panel;
         ListaTTE tareas;
+        ListaTTE trabajos;
+        ListaTTE examenes;
 
         public Form1(string str1, string str2)
         {
@@ -231,16 +233,17 @@ namespace ControldeAlumnosPVI
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(idGrupo, "tarea");
                         tareas = new ListaTTE(numtareas, "tarea");
+                        List<Trabajo> tareasGrupo = con.readInfoTrabajosGrupo(idGrupo, "tarea");
 
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            for (int i = 0; i <= numtareas; i++)
+                            for (int i = 0; i < numtareas; i++)
                             {
-                                List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "T" + i.ToString());
+                                List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, tareasGrupo[i].IdTrabajo);
 
                                 if (listaTrabajos.Count != 0)
-                                    tareas.Rows[tareas.RowCount - 1].Cells[i + 2].Value = listaTrabajos[0].Calificacion;
+                                    tareas.Rows[tareas.RowCount - 1].Cells[i + 3].Value = listaTrabajos[0].Calificacion;
                             }
                         }
                         tareas.Columns[0].Visible = false;
@@ -251,15 +254,18 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         int numtrabajos = con.countTrabajos(idGrupo, "trabajo");
                         tab.Controls.Clear();
-                        ListaTTE trabajos = new ListaTTE(numtrabajos, "trabajo");
+                        trabajos = new ListaTTE(numtrabajos, "trabajo");
+                        List<Trabajo> trabajosGrupo = con.readInfoTrabajosGrupo(idGrupo, "trabajo");
+
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             trabajos.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "trabajo");
-                            int i = 3;
-                            foreach (Trabajo trabajo in listaTrabajos)
+                            for (int i = 0; i < numtrabajos; i++)
                             {
-                                trabajos.Rows[trabajos.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                                List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, trabajosGrupo[i].IdTrabajo);
+
+                                if (listaTrabajos.Count != 0)
+                                    trabajos.Rows[trabajos.RowCount - 1].Cells[i + 3].Value = listaTrabajos[0].Calificacion;
                             }
                         }
                         tab.Controls.Add(trabajos);
@@ -271,15 +277,18 @@ namespace ControldeAlumnosPVI
 
                         int numexamenes = con.countTrabajos(idGrupo, "examen");
 
-                        ListaTTE examenes = new ListaTTE(numexamenes, "examen");
+                        examenes = new ListaTTE(numexamenes, "examen");
+                        List<Trabajo> examenesGrupo = con.readInfoTrabajosGrupo(idGrupo, "examen");
+
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             examenes.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "examen");
-                            int i = 3;
-                            foreach (Trabajo trabajo in listaTrabajos)
+                            for (int i = 0; i < numexamenes; i++)
                             {
-                                examenes.Rows[examenes.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
+                                List<Trabajo> listaExamenes = con.readInfoTrabajosAlumno(alumno.IdAlumno, examenesGrupo[i].IdTrabajo);
+
+                                if (listaExamenes.Count != 0)
+                                    examenes.Rows[examenes.RowCount - 1].Cells[i + 3].Value = listaExamenes[0].Calificacion;
                             }
                         }
 
@@ -475,25 +484,80 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
+            guardarTareas();
+            guardarTrabajos();
+            guardarExamenes();
+        }
+
+        public void guardarTareas()
+        {
             Conexion con = new Conexion();
             string idGrupo = ActiveGrupo().IdGrupo;
             int numtareas = con.countTrabajos(idGrupo, "tarea");
-
+            List<Trabajo> trabajos = con.readInfoTrabajosGrupo(idGrupo, "tarea");
             for (int j = 0; j < tareas.RowCount; j++)
             {
                 for (int i = 0; i <= numtareas - 1; i++)
                 {
-
                     string calificacion = "0";
                     try
                     {
                         calificacion = tareas.Rows[j].Cells[i + 3].Value.ToString();
                     }
-                    catch (Exception ) { }
-                    
+                    catch (Exception) { }
+
                     con.registroTarea(tareas.Rows[j].Cells[0].Value.ToString(),
-                        tareas.Columns[i + 3].HeaderCell.Value.ToString(), calificacion,
+                        trabajos[i].IdTrabajo, calificacion,
                         "tarea");
+                }
+            }
+        }
+
+
+        public void guardarTrabajos()
+        {
+            Conexion con = new Conexion();
+            string idGrupo = ActiveGrupo().IdGrupo;
+            int numtrabajos = con.countTrabajos(idGrupo, "trabajo");
+            List<Trabajo> trabajoslist = con.readInfoTrabajosGrupo(idGrupo, "trabajo");
+            for (int j = 0; j < trabajos.RowCount; j++)
+            {
+                for (int i = 0; i <= numtrabajos - 1; i++)
+                {
+                    string calificacion = "0";
+                    try
+                    {
+                        calificacion = trabajos.Rows[j].Cells[i + 3].Value.ToString();
+                    }
+                    catch (Exception) { }
+
+                    con.registroTarea(tareas.Rows[j].Cells[0].Value.ToString(),
+                        trabajoslist[i].IdTrabajo, calificacion,
+                        "trabajo");
+                }
+            }
+        }
+
+        public void guardarExamenes()
+        {
+            Conexion con = new Conexion();
+            string idGrupo = ActiveGrupo().IdGrupo;
+            int numexamenes = con.countTrabajos(idGrupo, "examen");
+            List<Trabajo> exameneslist = con.readInfoTrabajosGrupo(idGrupo, "examen");
+            for (int j = 0; j < examenes.RowCount; j++)
+            {
+                for (int i = 0; i <= numexamenes - 1; i++)
+                {
+                    string calificacion = "0";
+                    try
+                    {
+                        calificacion = examenes.Rows[j].Cells[i + 3].Value.ToString();
+                    }
+                    catch (Exception) { }
+
+                    con.registroTarea(tareas.Rows[j].Cells[0].Value.ToString(),
+                        exameneslist[i].IdTrabajo, calificacion,
+                        "examen");
                 }
             }
         }
@@ -554,6 +618,7 @@ namespace ControldeAlumnosPVI
 
         }
 
+<<<<<<< HEAD
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -564,6 +629,8 @@ namespace ControldeAlumnosPVI
             System.Windows.Forms.Application.Exit();
         }
         
+=======
+>>>>>>> origin/master
    
     
     

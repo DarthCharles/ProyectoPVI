@@ -1225,21 +1225,20 @@ namespace database
             return true;
         }
 
-        public bool nuevoTrabajo(string idAlumno, string clave, string calificacion, string tipo)
+        public bool nuevoTrabajo(string idAlumno, string idtareas, string calificacion, string tipo)
         {
-            try
-            {
+            
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
                 string query = "INSERT INTO trabajos (calificacion, idalumnos_grupo, " +
-                    "clave, tipo) " +
+                    "idtareas_dejadas, tipo) " +
                     "VALUES (@calificacion, @id_alumnosgrupo, @clave, @tipo)";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@calificacion", calificacion);
                 comando.Parameters.AddWithValue("@id_alumnosgrupo", idAlumno);
-                comando.Parameters.AddWithValue("@clave", clave);
+                comando.Parameters.AddWithValue("@clave", idtareas);
                 comando.Parameters.AddWithValue("@tipo", tipo);
 
                 comando.Connection = conexion;
@@ -1249,20 +1248,11 @@ namespace database
                 {
                     return false;
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al registrar un nuevo trabajo para el alumno: " + e.Message);
-                return false;
-            }
-            finally
-            {
-                conexion.Close();
-            }
+
             return true;
         }
 
-        public bool updateTrabajo(string idAlumno, string clave, string calificacion)
+        public bool updateTrabajo(string idAlumno, string idtareas, string calificacion)
         {
             
                 if (conexion.State == ConnectionState.Closed)
@@ -1270,11 +1260,11 @@ namespace database
                     conexion.Open();
                 }
                 string query = "UPDATE trabajos SET calificacion = @calificacion " +
-                    " WHERE clave = @clave and idalumnos_grupo = @idalumnos_grupo";
+                    " WHERE idtareas_dejadas = @clave and idalumnos_grupo = @idalumnos_grupo";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@calificacion", calificacion);
                 comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
-                comando.Parameters.AddWithValue("@clave", clave);
+                comando.Parameters.AddWithValue("@clave", idtareas);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
@@ -1286,20 +1276,20 @@ namespace database
             return true;
         }
 
-        public bool registroTarea(string idAlumno, string clave, string calificacion, string tipo)
+        public bool registroTarea(string idAlumno, string idTrabajo, string calificacion, string tipo)
         {
-            if (existeTarea(idAlumno, clave))
+            if (existeTarea(idAlumno, idTrabajo))
             {
-                updateTrabajo(idAlumno, clave, calificacion);
+                updateTrabajo(idAlumno, idTrabajo, calificacion);
             }
             else
             {
-                nuevoTrabajo(idAlumno, clave, calificacion, tipo);
+                nuevoTrabajo(idAlumno, idTrabajo, calificacion, tipo);
             }
             return true;
         }
 
-        public bool existeTarea(string idAlumno, string clave)
+        public bool existeTarea(string idAlumno, string idtareas)
         {
             {
                 try
@@ -1308,10 +1298,10 @@ namespace database
                     {
                         conexion.Open();
                     }
-                    string query = "SELECT * from trabajos where idalumnos_grupo = @idalumnos and clave = @clave";
+                    string query = "SELECT * from trabajos where idalumnos_grupo = @idalumnos and idtareas_dejadas = @clave";
                     MySqlCommand comando = new MySqlCommand(query);
                     comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-                    comando.Parameters.AddWithValue("@clave", clave);
+                    comando.Parameters.AddWithValue("@clave", idtareas);
                     comando.Connection = conexion;
                     MySqlDataReader reader = comando.ExecuteReader();
                     if (reader.HasRows)
@@ -1332,7 +1322,7 @@ namespace database
             }
         }
 
-        public List<Trabajo> readInfoTrabajosAlumno(string idAlumno, string clave)
+        public List<Trabajo> readInfoTrabajosAlumno(string idAlumno, string idtrabajos)
         {
             List<Trabajo> listaTrabajos = new List<Trabajo>();
             try
@@ -1343,11 +1333,11 @@ namespace database
                 }
 
                 string query = "select * from trabajos " +
-                    " where idalumnos_grupo = @idalumno and clave = @clave";
+                    " where idalumnos_grupo = @idalumno and idtareas_dejadas = @clave";
 
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idalumno", idAlumno);
-                comando.Parameters.AddWithValue("@clave", clave);
+                comando.Parameters.AddWithValue("@clave", idtrabajos);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
