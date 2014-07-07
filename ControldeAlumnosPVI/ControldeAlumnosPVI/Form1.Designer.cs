@@ -477,6 +477,7 @@
             this.pictureBox6.Size = new System.Drawing.Size(67, 65);
             this.pictureBox6.TabIndex = 11;
             this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
             // 
             // pictureBox5
             // 
@@ -519,7 +520,6 @@
             this.exportar_excel.Size = new System.Drawing.Size(55, 56);
             this.exportar_excel.TabIndex = 15;
             this.exportar_excel.TabStop = false;
-            this.exportar_excel.Click += new System.EventHandler(this.exportar_excel_Click);
             // 
             // Form1
             // 

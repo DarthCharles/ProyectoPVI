@@ -16,7 +16,6 @@ using grupos;
 using alumnos;
 using trabajos;
 using maestros;
-using Microsoft.Office.Interop.Excel;
 
 
 namespace ControldeAlumnosPVI
@@ -26,6 +25,7 @@ namespace ControldeAlumnosPVI
         public int materItemSize = 176;
         public int grupoItemSize = 160;
         PanelParameters panel;
+        ListaTTE tareas;
 
         public Form1(string str1, string str2)
         {
@@ -229,17 +229,17 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(idGrupo, "tarea");
-                        ListaTTE tareas = new ListaTTE(numtareas);
-
+                        tareas = new ListaTTE(numtareas);
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "tarea");
-                            //int i = 3;
-                            //foreach (Trabajo trabajo in listaTrabajos)
-                            //{
-                            //    tareas.Rows[tareas.RowCount - 1].Cells[i++].Value = trabajo.Calificacion;
-                            //}
+                            for (int i = 0; i <= numtareas; i++)
+                            {
+                                List<Trabajo> listaTrabajos = con.readInfoTrabajosAlumno(alumno.IdAlumno, "T" + i.ToString());
+
+                                if (listaTrabajos.Count != 0)
+                                    tareas.Rows[tareas.RowCount - 1].Cells[i + 2].Value = listaTrabajos[0].Calificacion;
+                            }
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
@@ -423,7 +423,6 @@ namespace ControldeAlumnosPVI
                     panel_grupos.Controls.RemoveAt(int.Parse(ActiveGrupo().Clave));
                     panel_grupos.Refresh();
                     HideTabs();
-
                 }
 
             }
@@ -451,62 +450,33 @@ namespace ControldeAlumnosPVI
             }
         }
 
-        private void exportar_excel_Click(object sender, EventArgs e)
+        private void pictureBox6_Click(object sender, EventArgs e)
         {
-            DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
+            Conexion con = new Conexion();
+            string idGrupo = ActiveGrupo().IdGrupo;
+            int numtareas = con.countTrabajos(idGrupo, "tarea");
 
-            // creating Excel Application
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-
-
-            // creating new WorkBook within Excel application
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-
-
-            // creating new Excelsheet in workbook
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-
-            // see the excel sheet behind the program
-            app.Visible = true;
-
-            // get the reference of first sheet. By default its name is Sheet1.
-            // store its reference to worksheet
-            worksheet = workbook.Sheets["Hoja1"];
-            worksheet = workbook.ActiveSheet;
-
-            // changing the name of active sheet
-            worksheet.Name = tabs_alumnos.SelectedTab.Name;
-
-            ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
-            // storing header part in Excel
-
-
-
-            // storing header part in Excel
-            for (int i = 1; i < jo.Columns.Count; i++)
+            for (int j = 0; j < tareas.RowCount; j++)
             {
-                
-                    worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
-               
-          
-            }
-
-
-
-            // storing Each row and column value to excel sheet
-            for (int i = 0; i < jo.Rows.Count; i++)
-            {
-                for (int j = 1; j < jo.Columns.Count; j++)
+                for (int i = 0; i <= numtareas - 1; i++)
                 {
-                    if (jo.Rows[i].Cells[j].Value != null)
+
+                    string calificacion = "0";
+                    try
                     {
-                        worksheet.Cells[i + 2, j ] = jo.Rows[i].Cells[j].Value.ToString();
+                        calificacion = tareas.Rows[j].Cells[i + 3].Value.ToString();
                     }
+                    catch (Exception ) { }
                     
+                    con.registroTarea(tareas.Rows[j].Cells[0].Value.ToString(),
+                        tareas.Columns[i + 3].HeaderCell.Value.ToString(), calificacion,
+                        "tarea");
                 }
             }
- 
         }
+   
+    
+    
     }
 }
 

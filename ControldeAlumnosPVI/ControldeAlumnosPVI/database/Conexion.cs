@@ -677,31 +677,31 @@ namespace database
         public string[] readPonderacion(string idPonderacion)
         {
             string[] listaPonde = new string[6];
-           
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
-                    "idponderacion = @idponderacion";
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
-                comando.Connection = conexion;
 
-                MySqlDataReader reader = comando.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        listaPonde[0] = reader["asistencia"].ToString();
-                        listaPonde[1] = reader["participacion"].ToString();
-                        listaPonde[2] = reader["trabajos"].ToString();
-                        listaPonde[3] = reader["tareas"].ToString();
-                        listaPonde[4] = reader["examenes"].ToString();
-                        listaPonde[5] = reader["idponderacion"].ToString();
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
+                "idponderacion = @idponderacion";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
+            comando.Connection = conexion;
 
-                    }
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    listaPonde[0] = reader["asistencia"].ToString();
+                    listaPonde[1] = reader["participacion"].ToString();
+                    listaPonde[2] = reader["trabajos"].ToString();
+                    listaPonde[3] = reader["tareas"].ToString();
+                    listaPonde[4] = reader["examenes"].ToString();
+                    listaPonde[5] = reader["idponderacion"].ToString();
+
                 }
+            }
             return listaPonde;
         }
 
@@ -803,7 +803,7 @@ namespace database
             return grupo;
         }
 
-        public bool update(Grupo grupo, string[]listaPonde)
+        public bool update(Grupo grupo, string[] listaPonde)
         {
             try
             {
@@ -846,7 +846,7 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "UPDATE ponderacion SET asistencia = @asistencia, participacion = @participacion, trabajos = @trabajos, "+
+                string query = "UPDATE ponderacion SET asistencia = @asistencia, participacion = @participacion, trabajos = @trabajos, " +
                     "tareas = @tareas, examenes = @examenes " +
                     " WHERE idponderacion = @idponderacion";
                 MySqlCommand comando = new MySqlCommand(query);
@@ -1053,7 +1053,7 @@ namespace database
                     conexion.Open();
                 }
                 string query = "SELECT * FROM alumnos_grupo INNER JOIN alumnos ON alumnos_grupo.idalumnos = " +
-                        "alumnos.idalumnos WHERE idgrupos = @idgrupos";
+                        "alumnos.idalumnos WHERE idgrupos = @idgrupos ORDER by nombre";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idgrupos", idGrupo);
                 comando.Connection = conexion;
@@ -1183,24 +1183,24 @@ namespace database
 
         public bool create(Trabajo trabajo)
         {
-           
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                string query = "INSERT INTO trabajos_dejados (nombre, tipo, idgrupos) VALUES (@nombre, @tipo, @idgrupos)";
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@nombre", trabajo.Nombre);
-                comando.Parameters.AddWithValue("@tipo", trabajo.Tipo);
-                comando.Parameters.AddWithValue("@idgrupos", trabajo.IdGrupo);
 
-                comando.Connection = conexion;
-                int a = comando.ExecuteNonQuery();
-                if (a == 0)
-                {
-                    return false;
-                }
-            
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "INSERT INTO trabajos_dejados (nombre, tipo, idgrupos) VALUES (@nombre, @tipo, @idgrupos)";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@nombre", trabajo.Nombre);
+            comando.Parameters.AddWithValue("@tipo", trabajo.Tipo);
+            comando.Parameters.AddWithValue("@idgrupos", trabajo.IdGrupo);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+            if (a == 0)
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -1241,7 +1241,77 @@ namespace database
             return true;
         }
 
-        public List<Trabajo> readInfoTrabajosAlumno(string idAlumno, string tipo)
+        public bool updateTrabajo(string idAlumno, string clave, string calificacion)
+        {
+            
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "UPDATE trabajos SET calificacion = @calificacion " +
+                    " WHERE clave = @clave and idalumnos_grupo = @idalumnos_grupo";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@calificacion", calificacion);
+                comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+                comando.Parameters.AddWithValue("@clave", clave);
+
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
+
+                if (a == 0)
+                {
+                    return false;
+                }
+            return true;
+        }
+
+        public bool registroTarea(string idAlumno, string clave, string calificacion, string tipo)
+        {
+            if (existeTarea(idAlumno, clave))
+            {
+                updateTrabajo(idAlumno, clave, calificacion);
+            }
+            else
+            {
+                nuevoTrabajo(idAlumno, clave, calificacion, tipo);
+            }
+            return true;
+        }
+
+        public bool existeTarea(string idAlumno, string clave)
+        {
+            {
+                try
+                {
+                    if (conexion.State == ConnectionState.Closed)
+                    {
+                        conexion.Open();
+                    }
+                    string query = "SELECT * from trabajos where idalumnos_grupo = @idalumnos and clave = @clave";
+                    MySqlCommand comando = new MySqlCommand(query);
+                    comando.Parameters.AddWithValue("@idalumnos", idAlumno);
+                    comando.Parameters.AddWithValue("@clave", clave);
+                    comando.Connection = conexion;
+                    MySqlDataReader reader = comando.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Ha ocurrido un error al comprobar si existe el alumno: " + e.Message);
+                    return false;
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+                return false;
+            }
+        }
+
+        public List<Trabajo> readInfoTrabajosAlumno(string idAlumno, string clave)
         {
             List<Trabajo> listaTrabajos = new List<Trabajo>();
             try
@@ -1252,11 +1322,11 @@ namespace database
                 }
 
                 string query = "select * from trabajos " +
-                    " where idalumnos_grupo = @idalumno and tipo = @tipo";
+                    " where idalumnos_grupo = @idalumno and clave = @clave";
 
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idalumno", idAlumno);
-                comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Parameters.AddWithValue("@clave", clave);
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
@@ -1314,34 +1384,34 @@ namespace database
         public List<Trabajo> readInfoTrabajosGrupo(string idGrupo, string tipo)
         {
             List<Trabajo> listaTrabajos = new List<Trabajo>();
-            
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
 
-                string query = "SELECT * FROM trabajos_dejados  " +
-                    "WHERE idgrupos = @idgrupos and tipo = @tipo";
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
 
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idgrupos", idGrupo);
-                comando.Parameters.AddWithValue("@tipo", tipo);
-                comando.Connection = conexion;
-                MySqlDataReader reader = comando.ExecuteReader();
-                if (reader.HasRows)
+            string query = "SELECT * FROM trabajos_dejados  " +
+                "WHERE idgrupos = @idgrupos and tipo = @tipo";
+
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@idgrupos", idGrupo);
+            comando.Parameters.AddWithValue("@tipo", tipo);
+            comando.Connection = conexion;
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Trabajo trabajo = new Trabajo();
-                        trabajo.Nombre = reader["nombre"].ToString();
-                        listaTrabajos.Add(trabajo);
-                    }
+                    Trabajo trabajo = new Trabajo();
+                    trabajo.Nombre = reader["nombre"].ToString();
+                    trabajo.IdTrabajo = reader["idtareas_dejadas"].ToString();
+                    listaTrabajos.Add(trabajo);
                 }
-                reader.Close();
-            
+            }
+            reader.Close();
+
             return listaTrabajos;
         }
-
 
     }
 }
