@@ -52,6 +52,7 @@ namespace ControldeAlumnosPVI
                 case "tarea":
                     this.Text = "Nueva tarea";
                     label1.Text = "Asignar nueva tarea";
+                    this.detalles.Text = "Detalles de tareas";
                     this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_trabajo_small;
                     clave = "T";
                     break;
@@ -59,6 +60,7 @@ namespace ControldeAlumnosPVI
                 case "trabajo":
                     this.Text = "Nuevo trabajo";
                     label1.Text = "Asignar nuevo trabajo";
+                            this.detalles.Text = "Detalles de trabajos";
                     this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_nuevo_examen1;
                     clave = "TR";
                     break;
@@ -66,6 +68,7 @@ namespace ControldeAlumnosPVI
                 case "examen":
                     this.Text = "Nuevo examen";
                     label1.Text = "Asignar nuevo examen";
+                    this.detalles.Text = "Detalles de exámenes";
                     this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen_small;
                     clave = "E";
                     break;
@@ -169,6 +172,8 @@ namespace ControldeAlumnosPVI
                     }
                 }
             }
+
+            this.Focus();
         }
 
 
