@@ -20,21 +20,36 @@ namespace ControldeAlumnosPVI
 
                this.Columns[2].Width = 350;
 
+               this.Columns[2].ReadOnly = true;
+
             this.Columns.Add("Column", "Asist.");
             this.Columns[3].Width = 70;
+            this.Columns[3].ReadOnly = true;
+
             this.Columns.Add("Column1", "Tareas");
             this.Columns[4].Width = 70;
+            this.Columns[4].ReadOnly = true;
+
             this.Columns.Add("Column2", "Trabajos");
             this.Columns[5].Width = 70;
+            this.Columns[5].ReadOnly = true;
+
             this.Columns.Add("Column3", "Examenes");
             this.Columns[6].Width = 70;
+            this.Columns[6].ReadOnly = true;
+
             this.Columns.Add("Column4", "Part.");
             this.Columns[7].Width = 70;
+            this.Columns[7].ReadOnly = true;
+
             this.Columns.Add("Column5", "P. Extras");
             this.Columns[8].Width = 70;
+            this.Columns[8].ReadOnly = true;
+
             this.Columns.Add("Column6", "Promedio");
             this.Columns[ColumnCount - 1].Width = 100;
             this.Columns[ColumnCount - 1].ReadOnly = true;
+
         }
     }
 }

@@ -20,11 +20,15 @@ namespace ControldeAlumnosPVI
         {
             InitializeComponent();
             this.Text = str;
+            this.AcceptButton = button1;
+
         }
 
         public OpcionesMateria(String str, string nombre, bool nuevo, string idMateria)
         {
             InitializeComponent();
+            this.AcceptButton = button1;
+
             this.Text = "Configurar Materia";
             this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
             textBox1.Text = nombre;

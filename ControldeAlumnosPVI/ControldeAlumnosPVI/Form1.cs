@@ -385,7 +385,7 @@ namespace ControldeAlumnosPVI
             float relacion = asis / total;
             float puntosAsistencia = relacion * (float.Parse(ponderacion[0]));
             //participacion
-            float partiPuntos = float.Parse(participacion);
+            float partiPuntos = (float.Parse(participacion)/(float.Parse(ponderacion[5])))*(float.Parse(ponderacion[1]));
             //trabajos
             float trabajosPuntos = float.Parse(trabajos) * (float.Parse(ponderacion[2]) / 100);
             //tareas
@@ -403,8 +403,6 @@ namespace ControldeAlumnosPVI
         {
             try
             {
-
-
                 int promedio = 0;
 
                 if (numtareas > 0)
@@ -583,10 +581,7 @@ namespace ControldeAlumnosPVI
             if (ActiveGrupo() != null)
             {
 
-
                 label_fecha.Focus();
-
-
 
                 guardarLista();
 
@@ -802,6 +797,16 @@ namespace ControldeAlumnosPVI
         private void panel_materias_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+               && !char.IsDigit(e.KeyChar)
+               )
+            {
+                e.Handled = true;
+            }
         }
     }
 }

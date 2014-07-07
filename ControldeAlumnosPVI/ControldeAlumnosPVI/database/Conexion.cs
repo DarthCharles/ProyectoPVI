@@ -636,7 +636,7 @@ namespace database
         }
 
         public bool createPonderacion(string asistencia, string participacion,
-                string trabajos, string tareas, string examenes, Grupo grupo)
+                string trabajos, string tareas, string examenes, string numeroPart, Grupo grupo)
         {
             try
             {
@@ -644,13 +644,14 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "INSERT INTO ponderacion (asistencia, participacion, trabajos, tareas, examenes) VALUES (@asistencia, @participacion, @trabajos, @tareas, @examenes)";
+                string query = "INSERT INTO ponderacion (asistencia, participacion, trabajos, tareas, examenes, numero_part) VALUES (@asistencia, @participacion, @trabajos, @tareas, @examenes, @numeropart)";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@asistencia", asistencia);
                 comando.Parameters.AddWithValue("@participacion", participacion);
                 comando.Parameters.AddWithValue("@trabajos", trabajos);
                 comando.Parameters.AddWithValue("@examenes", examenes);
                 comando.Parameters.AddWithValue("@tareas", tareas);
+                comando.Parameters.AddWithValue("@numeropart", numeroPart);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();
@@ -679,14 +680,14 @@ namespace database
         public string[] readPonderacion(string idPonderacion)
         {
 
-            string[] listaPonde = new string[6];
+            string[] listaPonde = new string[7];
             try
             {
                 if (conexion.State == ConnectionState.Closed)
                 {
                     conexion.Open();
                 }
-                string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
+                string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes, numero_part FROM ponderacion WHERE " +
                     "idponderacion = @idponderacion";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
@@ -702,7 +703,9 @@ namespace database
                         listaPonde[2] = reader["trabajos"].ToString();
                         listaPonde[3] = reader["tareas"].ToString();
                         listaPonde[4] = reader["examenes"].ToString();
-                        listaPonde[5] = reader["idponderacion"].ToString();
+                        listaPonde[5] = reader["numero_part"].ToString();
+                        listaPonde[6] = reader["idponderacion"].ToString();
+
 
                     }
                 }
@@ -717,7 +720,6 @@ namespace database
             }
             return listaPonde;
         }
-
 
         public bool isGrupoRepetido(string nombre, string idMateria)
         {
@@ -861,7 +863,7 @@ namespace database
                     conexion.Open();
                 }
                 string query = "UPDATE ponderacion SET asistencia = @asistencia, participacion = @participacion, trabajos = @trabajos, " +
-                    "tareas = @tareas, examenes = @examenes " +
+                    "tareas = @tareas, examenes = @examenes, numero_part = @numeropart " +
                     " WHERE idponderacion = @idponderacion";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@asistencia", listaPonde[0]);
@@ -869,7 +871,8 @@ namespace database
                 comando.Parameters.AddWithValue("@trabajos", listaPonde[2]);
                 comando.Parameters.AddWithValue("@tareas", listaPonde[3]);
                 comando.Parameters.AddWithValue("@examenes", listaPonde[4]);
-                comando.Parameters.AddWithValue("@idponderacion", listaPonde[5]);
+                comando.Parameters.AddWithValue("@idponderacion", listaPonde[6]);
+                comando.Parameters.AddWithValue("@numeropart", listaPonde[5]);
 
                 comando.Connection = conexion;
                 int a = comando.ExecuteNonQuery();

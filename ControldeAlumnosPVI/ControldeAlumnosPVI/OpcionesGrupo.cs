@@ -24,6 +24,8 @@ namespace ControldeAlumnosPVI
         public OpcionesGrupo()
         {
             InitializeComponent();
+            this.AcceptButton = button1;
+
         }
         private bool validar()
         {
@@ -40,6 +42,8 @@ namespace ControldeAlumnosPVI
         public OpcionesGrupo(string str, string[] listaPonde, string idGrupo, string idMateria)
         {
             InitializeComponent();
+            this.AcceptButton = button1;
+
             this.Text = "Configurar";
             this.label1.Text = "Configurar Grupo";
             this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
@@ -49,7 +53,8 @@ namespace ControldeAlumnosPVI
             this.textBox4.Text = listaPonde[2];
             this.textBox5.Text = listaPonde[3];
             this.textBox6.Text = listaPonde[4];
-            this.idPonderacion = listaPonde[5];
+            this.textBox7.Text = listaPonde[5];
+            this.idPonderacion = listaPonde[6];
             this.idGrupo = idGrupo;
             this.idMateria = idMateria;
 
@@ -83,7 +88,7 @@ namespace ControldeAlumnosPVI
                     Grupo grupo = new Grupo();
                     grupo.NombreGrupo = textBox1.Text;
                     grupo.IdMateria = idMateria;
-                    if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, grupo))
+                    if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, grupo))
                     {
                         MessageBox.Show("Ya existe un grupo con ese nombre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
@@ -100,13 +105,14 @@ namespace ControldeAlumnosPVI
                     grupo.NombreGrupo = textBox1.Text;
                     grupo.IdMateria = idMateria;
                     grupo.IdGrupo = idGrupo;
-                    string[] listaPonde = new string[6];
+                    string[] listaPonde = new string[7];
                     listaPonde[0] = textBox2.Text;
                     listaPonde[1] = textBox3.Text;
                     listaPonde[2] = textBox4.Text;
                     listaPonde[3] = textBox5.Text;
                     listaPonde[4] = textBox6.Text;
-                    listaPonde[5] = idPonderacion;
+                    listaPonde[5] = textBox7.Text;
+                    listaPonde[6] = idPonderacion;
                     nombreGrupo = textBox1.Text;
                     validado = true;
                     if (!con.update(grupo, listaPonde))

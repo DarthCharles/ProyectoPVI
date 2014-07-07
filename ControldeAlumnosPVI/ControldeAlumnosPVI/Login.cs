@@ -18,7 +18,8 @@ namespace ControldeAlumnosPVI
         public Login()
         {
             InitializeComponent();
-   
+            this.AcceptButton = button2;
+
         }
 
         private void Login_Load(object sender, EventArgs e)
