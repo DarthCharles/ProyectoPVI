@@ -42,7 +42,7 @@ namespace ControldeAlumnosPVI
                 if (con.login(usuario.Text.Trim(), contraseña.Text.Trim(), maes))
                 {
 
-                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido);
+                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido, maes.IdMaestro);
                     principal.Show();
                     this.Visible = false;
 
@@ -61,7 +61,7 @@ namespace ControldeAlumnosPVI
                 if (con.login(usuario.Text.Trim(), contraseña.Text.Trim(), maes))
                 {
 
-                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido);
+                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido, maes.IdMaestro);
                     principal.Show();
                     this.Visible = false;
 

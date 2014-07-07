@@ -23,6 +23,7 @@ namespace ControldeAlumnosPVI
 {
     public partial class Form1 : Form
     {
+        public string idMaestro;
         public int materItemSize = 176;
         public int grupoItemSize = 160;
         PanelParameters panel;
@@ -35,7 +36,7 @@ namespace ControldeAlumnosPVI
         ListaPart_Pextra ass;
         ListaPart_Pextra assa;
 
-        public Form1(string str1, string str2)
+        public Form1(string str1, string str2, string idMaestro)
         {
             InitializeComponent();
             HideTabs();
@@ -43,8 +44,8 @@ namespace ControldeAlumnosPVI
             label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
+            this.idMaestro = idMaestro;
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
@@ -135,7 +136,7 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
+            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia", this.idMaestro);
             A.ShowDialog();
             refreshPaneles(true);
         }
@@ -393,7 +394,7 @@ namespace ControldeAlumnosPVI
             if (materia)
             {
                 Conexion con = new Conexion();
-                List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+                List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
                 if (listaMat.Count != panel_materias.Controls.Count)
                 {
                     panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
