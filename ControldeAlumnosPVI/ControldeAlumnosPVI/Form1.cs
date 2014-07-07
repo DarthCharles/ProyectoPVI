@@ -52,7 +52,6 @@ namespace ControldeAlumnosPVI
             }
         }
 
-
         //METODO DE LOS BOTONES DEL PANEL DE MATERIAS
         Grupo ActiveGrupo()
         {
@@ -338,12 +337,30 @@ namespace ControldeAlumnosPVI
                         tab.Controls.Clear();
                         a = 1;
                         total = new ListaTotal();
+                        int numtareas1 = con.countTrabajos(idGrupo, "tarea");
+                        int numtrabajos1 = con.countTrabajos(idGrupo, "trabajo");
+                        int numexamenes1 = con.countTrabajos(idGrupo, "examen");
+                        string[] ponderacion = con.readPonderacion(idGrupo);
+
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
                             total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
                                 (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
                                 int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
+                                total.Rows[total.RowCount - 1].Cells[4].Value = tareas.Rows[total.RowCount - 1].Cells[numtareas1+3].Value;
+                                total.Rows[total.RowCount - 1].Cells[5].Value = trabajos.Rows[total.RowCount - 1].Cells[numtrabajos1 + 3].Value;
+                                total.Rows[total.RowCount - 1].Cells[6].Value = examenes.Rows[total.RowCount - 1].Cells[numexamenes1 + 3].Value;
+                                total.Rows[total.RowCount - 1].Cells[7].Value = ass.Rows[total.RowCount - 1].Cells[4].Value;
+                                total.Rows[total.RowCount - 1].Cells[8].Value = assa.Rows[total.RowCount - 1].Cells[4].Value;
+                                total.Rows[total.RowCount - 1].Cells[9].Value = calcularPromedio(ponderacion,
+                                                                                total.Rows[total.RowCount - 1].Cells[3].Value.ToString(),
+                                                                                total.Rows[total.RowCount - 1].Cells[7].Value.ToString(),
+                                                                                total.Rows[total.RowCount - 1].Cells[5].Value.ToString(),
+                                                                                total.Rows[total.RowCount - 1].Cells[4].Value.ToString(),
+                                                                                total.Rows[total.RowCount - 1].Cells[6].Value.ToString(),
+                                                                                total.Rows[total.RowCount - 1].Cells[8].Value.ToString());
+
                         }
                         tab.Controls.Add(total);
                         break;
@@ -351,6 +368,30 @@ namespace ControldeAlumnosPVI
                         break;
                 }
             }
+        }
+
+        public string calcularPromedio(string[]ponderacion, string asistencia, string participacion,
+            string trabajos, string tareas, string examenes, string puntos)
+        {
+            //asistencia
+            string[] a = asistencia.Split('/');
+            float asis = float.Parse(a[0]);
+            float total = float.Parse(a[1]);
+            float relacion = asis/total;
+            float puntosAsistencia = relacion * (float.Parse(ponderacion[0]));
+            //participacion
+            float partiPuntos = float.Parse(participacion);
+            //trabajos
+            float trabajosPuntos = float.Parse(trabajos) * (float.Parse(ponderacion[2])/100);
+            //tareas
+            float tareasPuntos = float.Parse(tareas)*(float.Parse(ponderacion[3])/100);
+            //examenes
+            float examenesPuntos = float.Parse(examenes) * (float.Parse(ponderacion[4]) / 100);
+            //ptos extra
+            float extraPuntos = float.Parse(puntos);
+            float totalPuntos = puntosAsistencia + partiPuntos + trabajosPuntos + tareasPuntos + examenesPuntos + extraPuntos;
+            
+            return totalPuntos.ToString();
         }
 
         public void promediar(DataGridView tareas, int numtareas)

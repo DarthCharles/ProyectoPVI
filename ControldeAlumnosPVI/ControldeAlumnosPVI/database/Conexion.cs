@@ -301,7 +301,7 @@ namespace database
 
         public bool create(Materia materia)
         {
-            if (!isMateriaRepetida(materia.NombreMateria))
+            if (!isMateriaRepetida(materia.NombreMateria, materia.IdMaestro))
             {
                 try
                 {
@@ -339,7 +339,7 @@ namespace database
             }
         }
 
-        public bool isMateriaRepetida(string nombre)
+        public bool isMateriaRepetida(string nombre, string idMaestro)
         {
             try
             {
@@ -347,9 +347,11 @@ namespace database
                 {
                     conexion.Open();
                 }
-                string query = "SELECT * from materias where nombre = @nombre";
+                string query = "SELECT * from materias where nombre = @nombre and idmaestros = @idmaestros";
                 MySqlCommand comando = new MySqlCommand(query);
                 comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@idmaestros", idMaestro);
+
                 comando.Connection = conexion;
                 MySqlDataReader reader = comando.ExecuteReader();
                 if (reader.HasRows)
@@ -676,34 +678,46 @@ namespace database
 
         public string[] readPonderacion(string idPonderacion)
         {
-            string[] listaPonde = new string[6];
-
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-            string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
-                "idponderacion = @idponderacion";
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
-            comando.Connection = conexion;
-
-            MySqlDataReader reader = comando.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
+            
+                string[] listaPonde = new string[6];
+                try
                 {
-                    listaPonde[0] = reader["asistencia"].ToString();
-                    listaPonde[1] = reader["participacion"].ToString();
-                    listaPonde[2] = reader["trabajos"].ToString();
-                    listaPonde[3] = reader["tareas"].ToString();
-                    listaPonde[4] = reader["examenes"].ToString();
-                    listaPonde[5] = reader["idponderacion"].ToString();
-
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
                 }
+                string query = "SELECT idponderacion, asistencia, participacion, trabajos, tareas, examenes FROM ponderacion WHERE " +
+                    "idponderacion = @idponderacion";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@idponderacion", idPonderacion);
+                comando.Connection = conexion;
+
+                MySqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        listaPonde[0] = reader["asistencia"].ToString();
+                        listaPonde[1] = reader["participacion"].ToString();
+                        listaPonde[2] = reader["trabajos"].ToString();
+                        listaPonde[3] = reader["tareas"].ToString();
+                        listaPonde[4] = reader["examenes"].ToString();
+                        listaPonde[5] = reader["idponderacion"].ToString();
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ha ocurrido un error al registrar un nuevo grupo: " + e.Message);
+            }
+            finally
+            {
+                conexion.Close();
             }
             return listaPonde;
         }
+        
 
         public bool isGrupoRepetido(string nombre, string idMateria)
         {
