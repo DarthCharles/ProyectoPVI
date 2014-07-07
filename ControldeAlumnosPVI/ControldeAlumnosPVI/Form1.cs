@@ -229,7 +229,12 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(idGrupo, "tarea");
+<<<<<<< HEAD
                         tareas = new ListaTTE(numtareas);
+=======
+                        ListaTTE tareas = new ListaTTE(numtareas, "tarea");
+
+>>>>>>> origin/master
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
@@ -249,7 +254,7 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         int numtrabajos = con.countTrabajos(idGrupo, "trabajo");
                         tab.Controls.Clear();
-                        ListaTTE trabajos = new ListaTTE(numtrabajos);
+                        ListaTTE trabajos = new ListaTTE(numtrabajos, "trabajo");
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             trabajos.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
@@ -269,7 +274,7 @@ namespace ControldeAlumnosPVI
 
                         int numexamenes = con.countTrabajos(idGrupo, "examen");
 
-                        ListaTTE examenes = new ListaTTE(numexamenes);
+                        ListaTTE examenes = new ListaTTE(numexamenes, "examen");
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             examenes.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
@@ -353,8 +358,13 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
-                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "tarea");
+                string idGrupo = ActiveGrupo().IdGrupo;
+                NuevaTTE tarea = new NuevaTTE("tarea", ActiveGrupo().NombreGrupo, idGrupo, "tarea");
                 tarea.ShowDialog();
+                if (tarea.Cambiado)
+                {
+                    refreshTables(idGrupo);
+                }
             }
             else
             {
@@ -369,8 +379,13 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
+                string idGrupo = ActiveGrupo().IdGrupo;
                 NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "trabajo");
                 tarea.ShowDialog();
+                if (tarea.Cambiado)
+                {
+                    refreshTables(idGrupo);
+                }
             }
             else
             {
@@ -385,8 +400,13 @@ namespace ControldeAlumnosPVI
 
             if (ActiveGrupo() != null)
             {
+                string idGrupo = ActiveGrupo().IdGrupo;
                 NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "examen");
                 tarea.ShowDialog();
+                if (tarea.Cambiado)
+                {
+                    refreshTables(idGrupo);
+                }
             }
             else
             {

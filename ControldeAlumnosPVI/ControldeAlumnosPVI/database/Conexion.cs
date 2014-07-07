@@ -1204,6 +1204,27 @@ namespace database
             return true;
         }
 
+        public bool delete(string str)
+        {
+
+            if (conexion.State == ConnectionState.Closed)
+            {
+                conexion.Open();
+            }
+            string query = "DELETE FROM trabajos_dejados WHERE idtareas_dejadas = @nombre";
+            MySqlCommand comando = new MySqlCommand(query);
+            comando.Parameters.AddWithValue("@nombre", str);
+
+            comando.Connection = conexion;
+            int a = comando.ExecuteNonQuery();
+            if (a == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool nuevoTrabajo(string idAlumno, string clave, string calificacion, string tipo)
         {
             try
@@ -1402,10 +1423,20 @@ namespace database
             {
                 while (reader.Read())
                 {
+<<<<<<< HEAD
                     Trabajo trabajo = new Trabajo();
                     trabajo.Nombre = reader["nombre"].ToString();
                     trabajo.IdTrabajo = reader["idtareas_dejadas"].ToString();
                     listaTrabajos.Add(trabajo);
+=======
+                    while (reader.Read())
+                    {
+                        Trabajo trabajo = new Trabajo();
+                        trabajo.IdTrabajo = reader["idtareas_dejadas"].ToString();
+                        trabajo.Nombre = reader["nombre"].ToString();
+                        listaTrabajos.Add(trabajo);
+                    }
+>>>>>>> origin/master
                 }
             }
             reader.Close();
