@@ -16,11 +16,13 @@ namespace ControldeAlumnosPVI
     {
         bool nuevo = true;
         string idMateria;
-        public OpcionesMateria(String str)
+        string idMaestro;
+        public OpcionesMateria(String str, string idMaestro)
         {
             InitializeComponent();
             this.Text = str;
             this.AcceptButton = button1;
+            this.idMaestro = idMaestro;
 
         }
 
@@ -53,7 +55,7 @@ namespace ControldeAlumnosPVI
                 if (nuevo)
                 {
                     Conexion con = new Conexion();
-                    Materia materia = new Materia("1", textBox1.Text, "1");
+                    Materia materia = new Materia(idMaestro, textBox1.Text, "1");
                     if (!con.create(materia))
                     {
                         MessageBox.Show("Ya existe una materia con ese nombre");
@@ -66,7 +68,7 @@ namespace ControldeAlumnosPVI
                 else
                 {
                     Conexion con = new Conexion();
-                    Materia materia = new Materia("1", textBox1.Text, "1", idMateria);
+                    Materia materia = new Materia(idMaestro, textBox1.Text, "1", idMateria);
                     if (!con.update(materia))
                     {
                         MessageBox.Show("Ha habido un error");

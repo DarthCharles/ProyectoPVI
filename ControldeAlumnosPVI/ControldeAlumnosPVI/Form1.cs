@@ -34,17 +34,18 @@ namespace ControldeAlumnosPVI
         ListaTotal total;
         ListaPart_Pextra ass;
         ListaPart_Pextra assa;
+        string idMaestro;
 
-        public Form1(string str1, string str2)
+        public Form1(string str1, string str2, string idMaestro)
         {
             InitializeComponent();
+            this.idMaestro = idMaestro;
             HideTabs();
             nombre_profesor.Text = str1 + " " + str2;
             label_fecha.Text = DateTime.Today.ToString("D");
             Conexion con = new Conexion();
             panel = new PanelParameters(this);
-            List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
-
+            List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
             foreach (Materia materia in listaMat)
             {
                 panel_materias.Controls.Add(new ItemMaterias(panel, materia.NombreMateria, materia));
@@ -135,7 +136,7 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia");
+            OpcionesMateria A = new OpcionesMateria("Agregar nueva materia", idMaestro);
             A.ShowDialog();
             refreshPaneles(true);
         }
@@ -439,7 +440,7 @@ namespace ControldeAlumnosPVI
             if (materia)
             {
                 Conexion con = new Conexion();
-                List<Materia> listaMat = con.readInfoMateriasIdMaestro("1");
+                List<Materia> listaMat = con.readInfoMateriasIdMaestro(idMaestro);
                 if (listaMat.Count != panel_materias.Controls.Count)
                 {
                     panel_materias.Controls.Add(new ItemMaterias(panel, listaMat[listaMat.Count - 1].NombreMateria, listaMat[listaMat.Count - 1]));
