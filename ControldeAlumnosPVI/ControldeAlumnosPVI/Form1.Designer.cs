@@ -57,9 +57,10 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label_fecha = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.delete_alumnos = new System.Windows.Forms.PictureBox();
             this.exportar_excel = new System.Windows.Forms.PictureBox();
             this.agregar_Alumno = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.agregar_lista_alumnos = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -78,9 +79,10 @@
             this.tabs_alumnos.SuspendLayout();
             this.panel6.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delete_alumnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.agregar_lista_alumnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -376,6 +378,18 @@
             this.label_fecha.TabIndex = 0;
             this.label_fecha.Text = "label_fecha";
             // 
+            // delete_alumnos
+            // 
+            this.delete_alumnos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.delete_alumnos.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_eliminar;
+            this.delete_alumnos.Location = new System.Drawing.Point(1175, 264);
+            this.delete_alumnos.Name = "delete_alumnos";
+            this.delete_alumnos.Size = new System.Drawing.Size(55, 57);
+            this.delete_alumnos.TabIndex = 16;
+            this.delete_alumnos.TabStop = false;
+            this.toolTip1.SetToolTip(this.delete_alumnos, "Eliminar alumnos");
+            this.delete_alumnos.Click += new System.EventHandler(this.delete_alumnos_Click);
+            // 
             // exportar_excel
             // 
             this.exportar_excel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -400,17 +414,17 @@
             this.toolTip1.SetToolTip(this.agregar_Alumno, "Agregar un solo alumno");
             this.agregar_Alumno.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // pictureBox1
+            // agregar_lista_alumnos
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_group;
-            this.pictureBox1.Location = new System.Drawing.Point(1175, 264);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(53, 57);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox1, "Agregar alumno desde archivo");
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
+            this.agregar_lista_alumnos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.agregar_lista_alumnos.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_group;
+            this.agregar_lista_alumnos.Location = new System.Drawing.Point(1175, 183);
+            this.agregar_lista_alumnos.Name = "agregar_lista_alumnos";
+            this.agregar_lista_alumnos.Size = new System.Drawing.Size(53, 57);
+            this.agregar_lista_alumnos.TabIndex = 13;
+            this.agregar_lista_alumnos.TabStop = false;
+            this.toolTip1.SetToolTip(this.agregar_lista_alumnos, "Agregar alumno desde archivo");
+            this.agregar_lista_alumnos.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // pictureBox7
             // 
@@ -532,9 +546,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1247, 628);
+            this.Controls.Add(this.delete_alumnos);
             this.Controls.Add(this.exportar_excel);
             this.Controls.Add(this.agregar_Alumno);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.agregar_lista_alumnos);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.pictureBox6);
@@ -562,9 +577,10 @@
             this.panel6.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delete_alumnos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.agregar_lista_alumnos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -616,11 +632,12 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox agregar_lista_alumnos;
         private System.Windows.Forms.PictureBox agregar_Alumno;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.PictureBox exportar_excel;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.PictureBox delete_alumnos;
 
     }
 }

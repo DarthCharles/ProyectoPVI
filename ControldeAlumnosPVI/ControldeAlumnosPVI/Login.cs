@@ -25,21 +25,55 @@ namespace ControldeAlumnosPVI
         {
 
         }
+        private bool validar()
+        {
+            if (usuario.Text == "")    return false;
+            if (contraseña.Text == "") return false;
 
+            return true;
+           
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            Maestro maes = new Maestro();
-            Conexion con = new Conexion();
-            if ( con.login(usuario.Text.Trim(), contraseña.Text.Trim(), maes))
+            if (validar())
             {
-          
-                Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido);
-                principal.Show();
-                this.Visible = false;
-           
+                Maestro maes = new Maestro();
+                Conexion con = new Conexion();
+                if (con.login(usuario.Text.Trim(), contraseña.Text.Trim(), maes))
+                {
+
+                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido);
+                    principal.Show();
+                    this.Visible = false;
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Combinación de usuario y contraseña incorrecta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
+            else
+            {
+                Maestro maes = new Maestro();
+                Conexion con = new Conexion();
+                if (con.login(usuario.Text.Trim(), contraseña.Text.Trim(), maes))
+                {
+
+                    Form1 principal = new Form1(maes.NombreMaestro, maes.Apellido);
+                    principal.Show();
+                    this.Visible = false;
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Por favor ingrese su usuario y su contraseña.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
        
+            }
+           
 
         }
     }

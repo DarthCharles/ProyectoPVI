@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using database;
 using trabajos;
+using Microsoft.Office.Interop.Excel;
 
 namespace ControldeAlumnosPVI
 {
@@ -19,10 +20,17 @@ namespace ControldeAlumnosPVI
         string clave;
         List<Trabajo> trabajos;
         bool cambiado;
-
+        string str;
         public bool Cambiado {
             get { return cambiado; }
             set { cambiado = value; }
+        }
+
+        private bool validar()
+        {
+            if (textBox1.Text == "") return false;
+            return true;
+
         }
         public NuevaTTE(string str, string str1, string idGrupo, string tipo)
         {
@@ -38,7 +46,7 @@ namespace ControldeAlumnosPVI
 
             this.idGrupo = idGrupo;
             this.tipo = tipo;
-
+            this.str = str;
             switch (str)
             {
                 case "tarea":
@@ -108,13 +116,59 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Conexion con = new Conexion();
-            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
-            con.create(trabajo);
-            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
-            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
-            textBox1.Text = "";
-            Cambiado = true;
+            if (validar())
+            {
+
+
+                Conexion con = new Conexion();
+                Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
+                con.create(trabajo);
+                trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
+                dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
+                textBox1.Text = "";
+                Cambiado = true;
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor ingrese un nombre válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+        }
+
+        private void Exportar_Click(object sender, EventArgs e)
+        {
+            DataGridView jo = dataGridView1;
+
+            // crea una aplixacion de excel
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            app.Visible = true;
+            worksheet = workbook.Sheets["Hoja1"];
+            worksheet = workbook.ActiveSheet;
+
+            worksheet.Name = str.ToUpperInvariant();
+
+            ((Range)worksheet.Cells[1, 1]).EntireColumn.ColumnWidth = 30;
+
+
+            for (int i = 1; i < jo.Columns.Count; i++)
+            {
+                worksheet.Cells[1, i] = jo.Columns[i -1].HeaderText;
+
+            }
+
+            for (int i = 0; i < jo.Rows.Count; i++)
+            {
+                for (int j = 0; j < jo.Columns.Count; j++)
+                {
+                    if (jo.Rows[i].Cells[j].Value != null)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = jo.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+            }
         }
 
 

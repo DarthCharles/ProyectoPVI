@@ -1227,52 +1227,52 @@ namespace database
 
         public bool nuevoTrabajo(string idAlumno, string idtareas, string calificacion, string tipo)
         {
+            
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "INSERT INTO trabajos (calificacion, idalumnos_grupo, " +
+                    "idtareas_dejadas, tipo) " +
+                    "VALUES (@calificacion, @id_alumnosgrupo, @clave, @tipo)";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@calificacion", calificacion);
+                comando.Parameters.AddWithValue("@id_alumnosgrupo", idAlumno);
+                comando.Parameters.AddWithValue("@clave", idtareas);
+                comando.Parameters.AddWithValue("@tipo", tipo);
 
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-            string query = "INSERT INTO trabajos (calificacion, idalumnos_grupo, " +
-                "idtareas_dejadas, tipo) " +
-                "VALUES (@calificacion, @id_alumnosgrupo, @clave, @tipo)";
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@calificacion", calificacion);
-            comando.Parameters.AddWithValue("@id_alumnosgrupo", idAlumno);
-            comando.Parameters.AddWithValue("@clave", idtareas);
-            comando.Parameters.AddWithValue("@tipo", tipo);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
 
-            comando.Connection = conexion;
-            int a = comando.ExecuteNonQuery();
-
-            if (a == 0)
-            {
-                return false;
-            }
+                if (a == 0)
+                {
+                    return false;
+                }
 
             return true;
         }
 
         public bool updateTrabajo(string idAlumno, string idtareas, string calificacion)
         {
+            
+                if (conexion.State == ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+                string query = "UPDATE trabajos SET calificacion = @calificacion " +
+                    " WHERE idtareas_dejadas = @clave and idalumnos_grupo = @idalumnos_grupo";
+                MySqlCommand comando = new MySqlCommand(query);
+                comando.Parameters.AddWithValue("@calificacion", calificacion);
+                comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
+                comando.Parameters.AddWithValue("@clave", idtareas);
 
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-            string query = "UPDATE trabajos SET calificacion = @calificacion " +
-                " WHERE idtareas_dejadas = @clave and idalumnos_grupo = @idalumnos_grupo";
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@calificacion", calificacion);
-            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
-            comando.Parameters.AddWithValue("@clave", idtareas);
+                comando.Connection = conexion;
+                int a = comando.ExecuteNonQuery();
 
-            comando.Connection = conexion;
-            int a = comando.ExecuteNonQuery();
-
-            if (a == 0)
-            {
-                return false;
-            }
+                if (a == 0)
+                {
+                    return false;
+                }
             return true;
         }
 
@@ -1425,184 +1425,6 @@ namespace database
             return listaTrabajos;
         }
 
-        //Lista
-
-        public bool tomarLista(string idAlumno, string fecha, string vino)
-        {
-            if (!isFechaRepetida(idAlumno, fecha))
-            {
-                nuevaLista(idAlumno, fecha, vino);
-            }
-            else
-            {
-                updateLista(idAlumno, fecha, vino);
-            }
-            return true;
-        }
-
-        public bool updateLista(string idAlumno, string fecha, string vino)
-        {
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-            string query = "UPDATE asistencias SET asistencia = @asistencia " +
-                " WHERE fecha = @fecha and idalumnos_grupo = @idalumnos_grupo";
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@asistencia", vino.ToUpper());
-            comando.Parameters.AddWithValue("@fecha", fecha);
-            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
-
-            comando.Connection = conexion;
-            int a = comando.ExecuteNonQuery();
-
-            if (a == 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool nuevaLista(string idAlumno, string fecha, string vino)
-        {
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-            string query = "INSERT INTO asistencias (asistencia, fecha, " +
-                "idalumnos_grupo) " +
-                "VALUES (@asistencia, @fecha, @idalumnos_grupo)";
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@asistencia", vino.ToUpper());
-            comando.Parameters.AddWithValue("@fecha", fecha);
-            comando.Parameters.AddWithValue("@idalumnos_grupo", idAlumno);
-
-            comando.Connection = conexion;
-            int a = comando.ExecuteNonQuery();
-
-            if (a == 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool isFechaRepetida(string idAlumno, string fecha)
-        {
-            try
-            {
-                if (conexion.State == ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                string query = "SELECT * from asistencias where idalumnos_grupo = @idalumnos and fecha = @clave";
-                MySqlCommand comando = new MySqlCommand(query);
-                comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-                comando.Parameters.AddWithValue("@clave", fecha);
-                comando.Connection = conexion;
-                MySqlDataReader reader = comando.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Ha ocurrido un error al comprobar si existe el alumno: " + e.Message);
-                return false;
-            }
-            finally
-            {
-                conexion.Close();
-            }
-            return false;
-        }
-
-        public string loadLista(string idAlumno, string fecha)
-        {
-            string vino = "TRUE";
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-
-            string query = "SELECT * FROM asistencias  " +
-                "WHERE idalumnos_grupo = @idalumnos and fecha = @fecha";
-
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-            comando.Parameters.AddWithValue("@fecha", fecha);
-            comando.Connection = conexion;
-            MySqlDataReader reader = comando.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    vino = reader["asistencia"].ToString();
-                }
-            }
-            reader.Close();
-
-            return vino;
-        }
-
-        public string numeroAsistencias(string idAlumno)
-        {
-            string asistencias = "0";
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-
-            string query = "SELECT count(*) FROM asistencias  " +
-                "WHERE idalumnos_grupo = @idalumnos and asistencia = 'TRUE'";
-
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-            comando.Connection = conexion;
-            MySqlDataReader reader = comando.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    asistencias = reader["count(*)"].ToString();
-                }
-            }
-            reader.Close();
-
-            return asistencias;
-        }
-
-        public string numeroFaltas(string idAlumno)
-        {
-            string asistencias = "0";
-            if (conexion.State == ConnectionState.Closed)
-            {
-                conexion.Open();
-            }
-
-            string query = "SELECT count(*) FROM asistencias  " +
-                "WHERE idalumnos_grupo = @idalumnos and asistencia = 'FALSE'";
-
-            MySqlCommand comando = new MySqlCommand(query);
-            comando.Parameters.AddWithValue("@idalumnos", idAlumno);
-            comando.Connection = conexion;
-            MySqlDataReader reader = comando.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    asistencias = reader["count(*)"].ToString();
-                }
-            }
-            reader.Close();
-
-            return asistencias;
-        }
-    
     }
 }
-
 

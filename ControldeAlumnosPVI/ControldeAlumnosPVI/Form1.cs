@@ -29,9 +29,6 @@ namespace ControldeAlumnosPVI
         ListaTTE tareas;
         ListaTTE trabajos;
         ListaTTE examenes;
-        ListaAsistencia lista;
-        List<Alumno> listaAlumnos;
-        ListaTotal total;
 
         public Form1(string str1, string str2)
         {
@@ -61,6 +58,7 @@ namespace ControldeAlumnosPVI
                 {
                     x.Grupo.Clave = index.ToString();
                     return x.Grupo;
+
                 }
                 index++;
             }
@@ -207,7 +205,7 @@ namespace ControldeAlumnosPVI
         public void refreshTables(string idGrupo)
         {
             Conexion con = new Conexion();
-            listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
 
@@ -218,14 +216,17 @@ namespace ControldeAlumnosPVI
                     case "tabPage1":
                         tab.Controls.Clear();
                         a = 1;
-                        lista = new ListaAsistencia();
+                        ListaAsistencia lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            (lista.Rows[lista.RowCount - 1].Cells[3] as DataGridViewCheckBoxCell).Value = con.loadLista(alumno.IdAlumno,DateTime.Today.ToString("yyyy-MM-dd")).ToString();
+
                         }
+                        lista.CheckAll();
                         tab.Controls.Add(lista);
                         break;
+
+
 
                     case "tabPage2":
                         tab.Controls.Clear();
@@ -322,13 +323,10 @@ namespace ControldeAlumnosPVI
                     case "tabPage7":
                         tab.Controls.Clear();
                         a = 1;
-                        total = new ListaTotal();
+                        ListaTotal total = new ListaTotal();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" + 
-                                (int.Parse(con.numeroFaltas(alumno.IdAlumno)) + 
-                                int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
                         }
                         tab.Controls.Add(total);
                         break;
@@ -389,7 +387,7 @@ namespace ControldeAlumnosPVI
             if (ActiveGrupo() != null)
             {
                 string idGrupo = ActiveGrupo().IdGrupo;
-                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "trabajo");
+                NuevaTTE tarea = new NuevaTTE("trabajo", ActiveGrupo().NombreGrupo, idGrupo, "trabajo");
                 tarea.ShowDialog();
                 if (tarea.Cambiado)
                 {
@@ -410,7 +408,7 @@ namespace ControldeAlumnosPVI
             if (ActiveGrupo() != null)
             {
                 string idGrupo = ActiveGrupo().IdGrupo;
-                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo, ActiveGrupo().IdGrupo, "examen");
+                NuevaTTE tarea = new NuevaTTE("examen", ActiveGrupo().NombreGrupo, idGrupo, "examen");
                 tarea.ShowDialog();
                 if (tarea.Cambiado)
                 {
@@ -456,11 +454,9 @@ namespace ControldeAlumnosPVI
                     panel_grupos.Refresh();
                     HideTabs();
                 }
-
             }
             else
             {
-
                 MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -476,8 +472,6 @@ namespace ControldeAlumnosPVI
                 {
                     refreshTables(idGrupo);
                 }
-
-
             }
             else
             {
@@ -488,10 +482,21 @@ namespace ControldeAlumnosPVI
         private void pictureBox6_Click(object sender, EventArgs e)
         {
             label_fecha.Focus();
-            guardarTareas();
-            guardarTrabajos();
-            guardarExamenes();
-            guardarLista();
+
+            switch (tabs_alumnos.SelectedTab.Name)
+            {
+                case "tabPage2":
+                    guardarTareas();
+                    break;
+                case "tabPage3":
+                    guardarTrabajos();
+                    break;
+                case "tabPage4":
+                    guardarExamenes();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void guardarTareas()
@@ -516,7 +521,10 @@ namespace ControldeAlumnosPVI
                         "tarea");
                 }
             }
+
+            MessageBox.Show("Tareas guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         public void guardarTrabajos()
         {
@@ -540,6 +548,8 @@ namespace ControldeAlumnosPVI
                         "trabajo");
                 }
             }
+
+            MessageBox.Show("Trabajos guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarExamenes()
@@ -564,71 +574,51 @@ namespace ControldeAlumnosPVI
                         "examen");
                 }
             }
-        }
-
-        public void guardarLista()
-        {
-            Conexion con = new Conexion();
-            for (int i = 0; i < lista.RowCount; i++)
-            {
-                con.tomarLista(listaAlumnos[i].IdAlumno,DateTime.Today.ToString("yyyy-MM-dd"),lista.Rows[i].Cells[3].Value.ToString());
-            }
+            MessageBox.Show("Examen guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void exportar_excel_Click(object sender, EventArgs e)
         {
-            DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
-
-            // creating Excel Application
-            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-
-
-            // creating new WorkBook within Excel application
-            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-
-
-            // creating new Excelsheet in workbook
-            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-
-            // see the excel sheet behind the program
-            app.Visible = true;
-            // get the reference of first sheet. By default its name is Sheet1.
-            // store its reference to worksheet
-            worksheet = workbook.Sheets["Sheet1"];
-            worksheet = workbook.ActiveSheet;
-
-            // changing the name of active sheet
-            worksheet.Name = tabs_alumnos.SelectedTab.Name;
-
-            ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
-            // storing header part in Excel
-
-
-
-            // storing header part in Excel
-            for (int i = 1; i < jo.Columns.Count; i++)
+            if (ActiveGrupo() != null)
             {
 
-                worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
+                DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
+
+                // crea una aplixacion de excel
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                app.Visible = true;
+                worksheet = workbook.Sheets["Hoja1"];
+                worksheet = workbook.ActiveSheet;
+
+                worksheet.Name = tabs_alumnos.SelectedTab.Text;
+
+                ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
 
 
-            }
-
-
-
-            // storing Each row and column value to excel sheet
-            for (int i = 0; i < jo.Rows.Count; i++)
-            {
-                for (int j = 1; j < jo.Columns.Count; j++)
+                for (int i = 1; i < jo.Columns.Count; i++)
                 {
-                    if (jo.Rows[i].Cells[j].Value != null)
-                    {
-                        worksheet.Cells[i + 2, j] = jo.Rows[i].Cells[j].Value.ToString();
-                    }
+                    worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
 
                 }
-            }
 
+                for (int i = 0; i < jo.Rows.Count; i++)
+                {
+                    for (int j = 1; j < jo.Columns.Count; j++)
+                    {
+                        if (jo.Rows[i].Cells[j].Value != null)
+                        {
+                            worksheet.Cells[i + 2, j] = jo.Rows[i].Cells[j].Value.ToString();
+                        }
+                    }
+                }
+                this.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -641,6 +631,34 @@ namespace ControldeAlumnosPVI
             System.Windows.Forms.Application.Exit();
         }
 
+        private void delete_alumnos_Click(object sender, EventArgs e)
+        {
+            DialogResult eliminar = eliminar = MessageBox.Show("¿Está seguro de querer eliminar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (eliminar == DialogResult.Yes)
+            {
+
+
+                if (ActiveGrupo() != null)
+                {
+                    try
+                    {
+                        Conexion con = new Conexion();
+                        DataGridView datos = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
+                        con.deleteAlumnoGrupo(datos.Rows[datos.SelectedCells[0].RowIndex].Cells[0].Value.ToString());
+                        datos.Rows.RemoveAt(datos.SelectedCells[0].RowIndex);
+                        refreshTables(ActiveGrupo().IdGrupo);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Nada que eliminar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
     }
 }
 

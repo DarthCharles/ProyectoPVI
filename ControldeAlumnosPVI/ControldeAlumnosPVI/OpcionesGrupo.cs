@@ -25,8 +25,19 @@ namespace ControldeAlumnosPVI
         {
             InitializeComponent();
         }
+        private bool validar()
+        {
+            if (textBox1.Text == "") return false;
+            if (textBox2.Text == "") return false;
+            if (textBox3.Text == "") return false;
+            if (textBox4.Text == "") return false;
+            if (textBox5.Text == "") return false;
+            if (textBox6.Text == "") return false;
+            if (idPonderacion == "") return false;
+            return true;
 
-        public OpcionesGrupo(string str, string[]listaPonde, string idGrupo, string idMateria)
+        }
+        public OpcionesGrupo(string str, string[] listaPonde, string idGrupo, string idMateria)
         {
             InitializeComponent();
             this.Text = "Configurar";
@@ -62,46 +73,56 @@ namespace ControldeAlumnosPVI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (idPonderacion == null)
+            if (validar())
             {
-                Conexion con = new Conexion();
-                Grupo grupo = new Grupo();
-                grupo.NombreGrupo = textBox1.Text;
-                grupo.IdMateria = idMateria;
-                if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, grupo))
+
+
+                if (idPonderacion == null)
                 {
-                    MessageBox.Show("Ya existe un grupo con ese nombre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Conexion con = new Conexion();
+                    Grupo grupo = new Grupo();
+                    grupo.NombreGrupo = textBox1.Text;
+                    grupo.IdMateria = idMateria;
+                    if (!con.createPonderacion(textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, grupo))
+                    {
+                        MessageBox.Show("Ya existe un grupo con ese nombre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        this.Close();
+
+                    }
                 }
                 else
                 {
-                    this.Close();
-
+                    Conexion con = new Conexion();
+                    Grupo grupo = new Grupo();
+                    grupo.NombreGrupo = textBox1.Text;
+                    grupo.IdMateria = idMateria;
+                    grupo.IdGrupo = idGrupo;
+                    string[] listaPonde = new string[6];
+                    listaPonde[0] = textBox2.Text;
+                    listaPonde[1] = textBox3.Text;
+                    listaPonde[2] = textBox4.Text;
+                    listaPonde[3] = textBox5.Text;
+                    listaPonde[4] = textBox6.Text;
+                    listaPonde[5] = idPonderacion;
+                    nombreGrupo = textBox1.Text;
+                    validado = true;
+                    if (!con.update(grupo, listaPonde))
+                    {
+                        MessageBox.Show("No se pudo actualizar");
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
             else
             {
-                Conexion con = new Conexion();
-                Grupo grupo = new Grupo();
-                grupo.NombreGrupo = textBox1.Text;
-                grupo.IdMateria = idMateria;
-                grupo.IdGrupo = idGrupo;
-                string[] listaPonde = new string[6];
-                listaPonde[0] = textBox2.Text;
-                listaPonde[1] = textBox3.Text;
-                listaPonde[2] = textBox4.Text;
-                listaPonde[3] = textBox5.Text;
-                listaPonde[4] = textBox6.Text;
-                listaPonde[5] = idPonderacion;
-                nombreGrupo = textBox1.Text;
-                validado = true;
-                if (!con.update(grupo, listaPonde))
-                {
-                    MessageBox.Show("No se pudo actualizar");
-                }
-                else
-                {
-                    this.Close();
-                }
+                MessageBox.Show("Por favor rellene todos los campos", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
         }
 

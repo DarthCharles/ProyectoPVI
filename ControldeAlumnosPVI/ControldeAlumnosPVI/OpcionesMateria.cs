@@ -34,36 +34,49 @@ namespace ControldeAlumnosPVI
             this.idMateria = idMateria;
 
         }
+        private bool validar()
+        {
+            if (textBox1.Text == "") return false;
+            return true;
 
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (nuevo)
+            if (validar())
             {
-                Conexion con = new Conexion();
-                Materia materia = new Materia("1", textBox1.Text, "1");
-                if (!con.create(materia))
+
+
+                if (nuevo)
                 {
-                    MessageBox.Show("Ya existe una materia con ese nombre");
+                    Conexion con = new Conexion();
+                    Materia materia = new Materia("1", textBox1.Text, "1");
+                    if (!con.create(materia))
+                    {
+                        MessageBox.Show("Ya existe una materia con ese nombre");
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    this.Close();
+                    Conexion con = new Conexion();
+                    Materia materia = new Materia("1", textBox1.Text, "1", idMateria);
+                    if (!con.update(materia))
+                    {
+                        MessageBox.Show("Ha habido un error");
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
             else
             {
-                Conexion con = new Conexion();
-                Materia materia = new Materia("1", textBox1.Text, "1", idMateria);
-                if (!con.update(materia))
-                {
-                    MessageBox.Show("Ha habido un error");
-                }
-                else
-                {
-                    this.Close();
-                }
+                MessageBox.Show("Por favor ingrese un nombre válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
