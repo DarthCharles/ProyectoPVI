@@ -83,18 +83,12 @@ namespace ControldeAlumnosPVI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Conexion con = new Conexion();
-            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
-            con.create(trabajo);
-            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
-            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
-            textBox1.Text = "";
-            Cambiado = true;
+            this.Close();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-         
+            this.Close();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -104,8 +98,23 @@ namespace ControldeAlumnosPVI
 
         private void button3_Click(object sender, EventArgs e)
         {
+       //dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells[0].Value.ToString()
+   
+            Conexion con = new Conexion();
+            con.delete(trabajos[dataGridView1.SelectedCells[0].RowIndex].IdTrabajo);
             dataGridView1.Rows.RemoveAt(dataGridView1.SelectedCells[0].RowIndex);
-    
+            Cambiado = true;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Conexion con = new Conexion();
+            Trabajo trabajo = new Trabajo(textBox1.Text, tipo, "1", idGrupo);
+            con.create(trabajo);
+            trabajos = con.readInfoTrabajosGrupo(idGrupo, tipo);
+            dataGridView1.Rows.Add(textBox1.Text, clave + "" + (dataGridView1.Rows.Count + 1));
+            textBox1.Text = "";
+            Cambiado = true;
         }
 
 
