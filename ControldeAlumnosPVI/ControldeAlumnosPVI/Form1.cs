@@ -507,7 +507,7 @@ namespace ControldeAlumnosPVI
             }
         }
 
-<<<<<<< HEAD
+
         public void guardarTrabajos()
         {
             Conexion con = new Conexion();
@@ -555,7 +555,7 @@ namespace ControldeAlumnosPVI
                 }
             }
         }
-=======
+
         private void exportar_excel_Click(object sender, EventArgs e)
         {
                       DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
@@ -611,8 +611,7 @@ namespace ControldeAlumnosPVI
              }
 
         }
-        
->>>>>>> origin/master
+
    
     
     
