@@ -140,7 +140,7 @@
             this.MaximizeBox = false;
             this.Name = "NuevaListaAlumnos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NuevaListaAlumnos";
+            this.Text = "Importar archivo...";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
