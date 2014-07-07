@@ -379,7 +379,6 @@ namespace ControldeAlumnosPVI
                     tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = 0;
                 }
             }
-
             }
             catch (Exception)
             {
