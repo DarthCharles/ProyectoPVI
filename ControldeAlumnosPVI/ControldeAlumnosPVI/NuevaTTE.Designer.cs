@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Exportar = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,24 +41,23 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.detalles = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Exportar = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.detalles = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.flowLayoutPanel2);
             this.panel1.Controls.Add(this.Exportar);
             this.panel1.Controls.Add(this.pictureBox3);
-            this.panel1.Controls.Add(this.detalles);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
@@ -70,6 +72,38 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(306, 432);
             this.panel1.TabIndex = 0;
+            // 
+            // Exportar
+            // 
+            this.Exportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Exportar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exportar.Location = new System.Drawing.Point(206, 136);
+            this.Exportar.Margin = new System.Windows.Forms.Padding(2);
+            this.Exportar.Name = "Exportar";
+            this.Exportar.Size = new System.Drawing.Size(74, 24);
+            this.Exportar.TabIndex = 77;
+            this.Exportar.Text = "Exportar";
+            this.Exportar.UseVisualStyleBackColor = true;
+            this.Exportar.Click += new System.EventHandler(this.Exportar_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_search;
+            this.pictureBox3.Location = new System.Drawing.Point(21, 129);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(35, 35);
+            this.pictureBox3.TabIndex = 76;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
+            this.pictureBox2.Location = new System.Drawing.Point(254, 75);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(31, 32);
+            this.pictureBox2.TabIndex = 74;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // button3
             // 
@@ -170,35 +204,6 @@
             this.label1.TabIndex = 64;
             this.label1.Text = "Asignar nueva tarea";
             // 
-            // detalles
-            // 
-            this.detalles.AutoSize = true;
-            this.detalles.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.detalles.Location = new System.Drawing.Point(61, 138);
-            this.detalles.Name = "detalles";
-            this.detalles.Size = new System.Drawing.Size(130, 19);
-            this.detalles.TabIndex = 75;
-            this.detalles.Text = "Detalles de tareas";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_search;
-            this.pictureBox3.Location = new System.Drawing.Point(21, 129);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(35, 35);
-            this.pictureBox3.TabIndex = 76;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
-            this.pictureBox2.Location = new System.Drawing.Point(254, 75);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 32);
-            this.pictureBox2.TabIndex = 74;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen_small;
@@ -208,18 +213,24 @@
             this.pictureBox1.TabIndex = 63;
             this.pictureBox1.TabStop = false;
             // 
-            // Exportar
+            // flowLayoutPanel2
             // 
-            this.Exportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Exportar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exportar.Location = new System.Drawing.Point(206, 136);
-            this.Exportar.Margin = new System.Windows.Forms.Padding(2);
-            this.Exportar.Name = "Exportar";
-            this.Exportar.Size = new System.Drawing.Size(74, 24);
-            this.Exportar.TabIndex = 77;
-            this.Exportar.Text = "Exportar";
-            this.Exportar.UseVisualStyleBackColor = true;
-            this.Exportar.Click += new System.EventHandler(this.Exportar_Click);
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel2.Controls.Add(this.detalles);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(62, 129);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(139, 41);
+            this.flowLayoutPanel2.TabIndex = 78;
+            // 
+            // detalles
+            // 
+            this.detalles.AutoSize = true;
+            this.detalles.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detalles.Location = new System.Drawing.Point(3, 0);
+            this.detalles.Name = "detalles";
+            this.detalles.Size = new System.Drawing.Size(130, 19);
+            this.detalles.TabIndex = 76;
+            this.detalles.Text = "Detalles de tareas";
             // 
             // NuevaTTE
             // 
@@ -235,12 +246,14 @@
             this.Text = "NuevaTarea";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -260,8 +273,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label detalles;
         private System.Windows.Forms.Button Exportar;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label detalles;
 
 
     }
