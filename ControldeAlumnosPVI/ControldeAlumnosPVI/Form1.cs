@@ -229,12 +229,8 @@ namespace ControldeAlumnosPVI
                         a = 1;
                         tab.Text = "Tareas";
                         int numtareas = con.countTrabajos(idGrupo, "tarea");
-<<<<<<< HEAD
-                        tareas = new ListaTTE(numtareas);
-=======
-                        ListaTTE tareas = new ListaTTE(numtareas, "tarea");
+                        tareas = new ListaTTE(numtareas, "tarea");
 
->>>>>>> origin/master
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             tareas.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);

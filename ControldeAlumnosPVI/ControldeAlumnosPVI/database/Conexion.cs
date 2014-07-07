@@ -1423,20 +1423,11 @@ namespace database
             {
                 while (reader.Read())
                 {
-<<<<<<< HEAD
                     Trabajo trabajo = new Trabajo();
                     trabajo.Nombre = reader["nombre"].ToString();
                     trabajo.IdTrabajo = reader["idtareas_dejadas"].ToString();
                     listaTrabajos.Add(trabajo);
-=======
-                    while (reader.Read())
-                    {
-                        Trabajo trabajo = new Trabajo();
-                        trabajo.IdTrabajo = reader["idtareas_dejadas"].ToString();
-                        trabajo.Nombre = reader["nombre"].ToString();
-                        listaTrabajos.Add(trabajo);
-                    }
->>>>>>> origin/master
+
                 }
             }
             reader.Close();
