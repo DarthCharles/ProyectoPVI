@@ -153,7 +153,7 @@ namespace ControldeAlumnosPVI
             ((Range)worksheet.Cells[1, 1]).EntireColumn.ColumnWidth = 30;
 
 
-            for (int i = 1; i < jo.Columns.Count; i++)
+            for (int i = 1; i <= jo.Columns.Count; i++)
             {
                 worksheet.Cells[1, i] = jo.Columns[i -1].HeaderText;
 
