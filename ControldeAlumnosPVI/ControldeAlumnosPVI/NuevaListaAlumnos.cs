@@ -52,9 +52,7 @@ namespace ControldeAlumnosPVI
                 if (_file.ShowDialog() == DialogResult.OK)
                 {
 
-                    if (MessageBox.Show("Esta a punto de importar una lista de estudiantes. ¿Desea continuar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-
+   
                         String archivo = _file.FileName;
                         textBox1.Text = archivo;
                         String name = "Hoja1";
@@ -74,7 +72,7 @@ namespace ControldeAlumnosPVI
                    
 
 
-                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -111,7 +109,7 @@ namespace ControldeAlumnosPVI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

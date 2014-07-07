@@ -32,19 +32,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_materias = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.materias_conf = new System.Windows.Forms.PictureBox();
-            this.materias_eliminar = new System.Windows.Forms.PictureBox();
             this.label_grupos = new System.Windows.Forms.Label();
-            this.materias_agregar = new System.Windows.Forms.PictureBox();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel_grupos = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.grupos_conf = new System.Windows.Forms.PictureBox();
-            this.grupos_eliminar = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grupos_agregar = new System.Windows.Forms.PictureBox();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -61,6 +55,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label_fecha = new System.Windows.Forms.Label();
+            this.exportar_excel = new System.Windows.Forms.PictureBox();
             this.agregar_Alumno = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -68,21 +63,21 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.exportar_excel = new System.Windows.Forms.PictureBox();
+            this.grupos_conf = new System.Windows.Forms.PictureBox();
+            this.grupos_eliminar = new System.Windows.Forms.PictureBox();
+            this.grupos_agregar = new System.Windows.Forms.PictureBox();
+            this.materias_conf = new System.Windows.Forms.PictureBox();
+            this.materias_eliminar = new System.Windows.Forms.PictureBox();
+            this.materias_agregar = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_conf)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_eliminar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_agregar)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_conf)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_eliminar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_agregar)).BeginInit();
             this.panel5.SuspendLayout();
             this.tabs_alumnos.SuspendLayout();
             this.panel6.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -90,7 +85,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_conf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_eliminar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_agregar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_conf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_eliminar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_agregar)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -128,26 +128,6 @@
             this.panel2.Size = new System.Drawing.Size(200, 38);
             this.panel2.TabIndex = 3;
             // 
-            // materias_conf
-            // 
-            this.materias_conf.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
-            this.materias_conf.Location = new System.Drawing.Point(91, 4);
-            this.materias_conf.Name = "materias_conf";
-            this.materias_conf.Size = new System.Drawing.Size(32, 30);
-            this.materias_conf.TabIndex = 6;
-            this.materias_conf.TabStop = false;
-            this.materias_conf.Click += new System.EventHandler(this.materias_conf_Click);
-            // 
-            // materias_eliminar
-            // 
-            this.materias_eliminar.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_delete;
-            this.materias_eliminar.Location = new System.Drawing.Point(127, 3);
-            this.materias_eliminar.Name = "materias_eliminar";
-            this.materias_eliminar.Size = new System.Drawing.Size(32, 30);
-            this.materias_eliminar.TabIndex = 5;
-            this.materias_eliminar.TabStop = false;
-            this.materias_eliminar.Click += new System.EventHandler(this.materias_eliminar_Click);
-            // 
             // label_grupos
             // 
             this.label_grupos.AutoSize = true;
@@ -157,16 +137,6 @@
             this.label_grupos.Size = new System.Drawing.Size(82, 23);
             this.label_grupos.TabIndex = 4;
             this.label_grupos.Text = "Materias";
-            // 
-            // materias_agregar
-            // 
-            this.materias_agregar.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
-            this.materias_agregar.Location = new System.Drawing.Point(165, 3);
-            this.materias_agregar.Name = "materias_agregar";
-            this.materias_agregar.Size = new System.Drawing.Size(32, 30);
-            this.materias_agregar.TabIndex = 3;
-            this.materias_agregar.TabStop = false;
-            this.materias_agregar.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // shapeContainer1
             // 
@@ -223,26 +193,6 @@
             this.panel4.Size = new System.Drawing.Size(177, 38);
             this.panel4.TabIndex = 3;
             // 
-            // grupos_conf
-            // 
-            this.grupos_conf.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
-            this.grupos_conf.Location = new System.Drawing.Point(68, 5);
-            this.grupos_conf.Name = "grupos_conf";
-            this.grupos_conf.Size = new System.Drawing.Size(32, 30);
-            this.grupos_conf.TabIndex = 8;
-            this.grupos_conf.TabStop = false;
-            this.grupos_conf.Click += new System.EventHandler(this.grupos_conf_Click);
-            // 
-            // grupos_eliminar
-            // 
-            this.grupos_eliminar.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_delete;
-            this.grupos_eliminar.Location = new System.Drawing.Point(104, 4);
-            this.grupos_eliminar.Name = "grupos_eliminar";
-            this.grupos_eliminar.Size = new System.Drawing.Size(32, 30);
-            this.grupos_eliminar.TabIndex = 7;
-            this.grupos_eliminar.TabStop = false;
-            this.grupos_eliminar.Click += new System.EventHandler(this.grupos_eliminar_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -252,16 +202,6 @@
             this.label1.Size = new System.Drawing.Size(67, 23);
             this.label1.TabIndex = 4;
             this.label1.Text = "Grupos";
-            // 
-            // grupos_agregar
-            // 
-            this.grupos_agregar.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
-            this.grupos_agregar.Location = new System.Drawing.Point(141, 3);
-            this.grupos_agregar.Name = "grupos_agregar";
-            this.grupos_agregar.Size = new System.Drawing.Size(32, 30);
-            this.grupos_agregar.TabIndex = 3;
-            this.grupos_agregar.TabStop = false;
-            this.grupos_agregar.Click += new System.EventHandler(this.grupos_agregar_Click);
             // 
             // shapeContainer2
             // 
@@ -435,6 +375,17 @@
             this.label_fecha.TabIndex = 0;
             this.label_fecha.Text = "label_fecha";
             // 
+            // exportar_excel
+            // 
+            this.exportar_excel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.exportar_excel.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_excel;
+            this.exportar_excel.Location = new System.Drawing.Point(1114, 340);
+            this.exportar_excel.Name = "exportar_excel";
+            this.exportar_excel.Size = new System.Drawing.Size(55, 59);
+            this.exportar_excel.TabIndex = 15;
+            this.exportar_excel.TabStop = false;
+            this.exportar_excel.Click += new System.EventHandler(this.exportar_excel_Click);
+            // 
             // agregar_Alumno
             // 
             this.agregar_Alumno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -511,15 +462,65 @@
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
             // 
-            // exportar_excel
+            // grupos_conf
             // 
-            this.exportar_excel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exportar_excel.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_examen;
-            this.exportar_excel.Location = new System.Drawing.Point(1114, 346);
-            this.exportar_excel.Name = "exportar_excel";
-            this.exportar_excel.Size = new System.Drawing.Size(55, 56);
-            this.exportar_excel.TabIndex = 15;
-            this.exportar_excel.TabStop = false;
+            this.grupos_conf.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
+            this.grupos_conf.Location = new System.Drawing.Point(68, 5);
+            this.grupos_conf.Name = "grupos_conf";
+            this.grupos_conf.Size = new System.Drawing.Size(32, 30);
+            this.grupos_conf.TabIndex = 8;
+            this.grupos_conf.TabStop = false;
+            this.grupos_conf.Click += new System.EventHandler(this.grupos_conf_Click);
+            // 
+            // grupos_eliminar
+            // 
+            this.grupos_eliminar.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_delete;
+            this.grupos_eliminar.Location = new System.Drawing.Point(104, 4);
+            this.grupos_eliminar.Name = "grupos_eliminar";
+            this.grupos_eliminar.Size = new System.Drawing.Size(32, 30);
+            this.grupos_eliminar.TabIndex = 7;
+            this.grupos_eliminar.TabStop = false;
+            this.grupos_eliminar.Click += new System.EventHandler(this.grupos_eliminar_Click);
+            // 
+            // grupos_agregar
+            // 
+            this.grupos_agregar.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
+            this.grupos_agregar.Location = new System.Drawing.Point(141, 3);
+            this.grupos_agregar.Name = "grupos_agregar";
+            this.grupos_agregar.Size = new System.Drawing.Size(32, 30);
+            this.grupos_agregar.TabIndex = 3;
+            this.grupos_agregar.TabStop = false;
+            this.grupos_agregar.Click += new System.EventHandler(this.grupos_agregar_Click);
+            // 
+            // materias_conf
+            // 
+            this.materias_conf.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_action_1404533629_98;
+            this.materias_conf.Location = new System.Drawing.Point(91, 4);
+            this.materias_conf.Name = "materias_conf";
+            this.materias_conf.Size = new System.Drawing.Size(32, 30);
+            this.materias_conf.TabIndex = 6;
+            this.materias_conf.TabStop = false;
+            this.materias_conf.Click += new System.EventHandler(this.materias_conf_Click);
+            // 
+            // materias_eliminar
+            // 
+            this.materias_eliminar.Image = global::ControldeAlumnosPVI.Properties.Resources.ic_delete;
+            this.materias_eliminar.Location = new System.Drawing.Point(127, 3);
+            this.materias_eliminar.Name = "materias_eliminar";
+            this.materias_eliminar.Size = new System.Drawing.Size(32, 30);
+            this.materias_eliminar.TabIndex = 5;
+            this.materias_eliminar.TabStop = false;
+            this.materias_eliminar.Click += new System.EventHandler(this.materias_eliminar_Click);
+            // 
+            // materias_agregar
+            // 
+            this.materias_agregar.Image = global::ControldeAlumnosPVI.Properties.Resources.agregar1;
+            this.materias_agregar.Location = new System.Drawing.Point(165, 3);
+            this.materias_agregar.Name = "materias_agregar";
+            this.materias_agregar.Size = new System.Drawing.Size(32, 30);
+            this.materias_agregar.TabIndex = 3;
+            this.materias_agregar.TabStop = false;
+            this.materias_agregar.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
@@ -548,21 +549,16 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_conf)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_eliminar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.materias_agregar)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_conf)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_eliminar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupos_agregar)).EndInit();
             this.panel5.ResumeLayout(false);
             this.tabs_alumnos.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.agregar_Alumno)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
@@ -570,7 +566,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exportar_excel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_conf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_eliminar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grupos_agregar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_conf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_eliminar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materias_agregar)).EndInit();
             this.ResumeLayout(false);
 
         }
