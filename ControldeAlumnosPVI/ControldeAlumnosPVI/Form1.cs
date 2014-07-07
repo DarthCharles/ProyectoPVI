@@ -29,6 +29,11 @@ namespace ControldeAlumnosPVI
         ListaTTE tareas;
         ListaTTE trabajos;
         ListaTTE examenes;
+        ListaAsistencia lista;
+        List<Alumno> listaAlumnos;
+        ListaTotal total;
+        ListaPart_Pextra ass;
+        ListaPart_Pextra assa;
 
         public Form1(string str1, string str2)
         {
@@ -99,6 +104,7 @@ namespace ControldeAlumnosPVI
                 }
                 ActiveGrupo().NombreGrupo = OpcionesGrupo.nombreGrupo;
                 panel_grupos.Refresh();
+                refreshTables(ActiveGrupo().IdGrupo);
 
             }
             else
@@ -204,7 +210,7 @@ namespace ControldeAlumnosPVI
         public void refreshTables(string idGrupo)
         {
             Conexion con = new Conexion();
-            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
 
@@ -215,14 +221,15 @@ namespace ControldeAlumnosPVI
                     case "tabPage1":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaAsistencia lista = new ListaAsistencia();
+                        lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-
+                            (lista.Rows[lista.RowCount - 1].Cells[3] as DataGridViewCheckBoxCell).Value = con.loadLista(alumno.IdAlumno,
+                                DateTime.Today.ToString("yyyy-MM-dd")).ToString();
                         }
-                        lista.CheckAll();
                         tab.Controls.Add(lista);
+
                         break;
 
 
@@ -248,6 +255,8 @@ namespace ControldeAlumnosPVI
                         }
                         tareas.Columns[0].Visible = false;
                         tab.Controls.Add(tareas);
+                        promediar(tareas, numtareas);
+
                         break;
 
                     case "tabPage3":
@@ -269,6 +278,7 @@ namespace ControldeAlumnosPVI
                             }
                         }
                         tab.Controls.Add(trabajos);
+                        promediar(trabajos, numtrabajos);
                         break;
 
                     case "tabPage4":
@@ -293,15 +303,17 @@ namespace ControldeAlumnosPVI
                         }
 
                         tab.Controls.Add(examenes);
+                        promediar(examenes, numexamenes);
                         break;
 
                     case "tabPage5":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaPart_Pextra ass = new ListaPart_Pextra();
+                        ass = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             ass.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            ass.Rows[ass.RowCount - 1].Cells[4].Value = (con.numeroParticipaciones(alumno.IdAlumno));
                         }
                         tab.Controls.Add(ass);
 
@@ -310,32 +322,35 @@ namespace ControldeAlumnosPVI
                     case "tabPage6":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaPart_Pextra assa = new ListaPart_Pextra();
+                        assa = new ListaPart_Pextra();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             assa.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            assa.Rows[assa.RowCount - 1].Cells[4].Value = (con.numPuntosExtra(alumno.IdAlumno));
+
                         }
                         tab.Controls.Add(assa);
                         break;
 
 
                     case "tabPage7":
-                        tab.Controls.Clear();
-                        a = 1;
-<<<<<<< HEAD
-                        total = new ListaTotal();
-                        int numtareas1 = con.countTrabajos(idGrupo, "tarea");
-                        int numtrabajos1 = con.countTrabajos(idGrupo, "trabajo");
-                        int numexamenes1 = con.countTrabajos(idGrupo, "examen");
-                        string[] ponderacion = con.readPonderacion(idGrupo);
-
-                        foreach (Alumno alumno in listaAlumnos)
+                        try
                         {
-                            total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-                            total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
-                                (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
-                                int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
-                                total.Rows[total.RowCount - 1].Cells[4].Value = tareas.Rows[total.RowCount - 1].Cells[numtareas1+3].Value;
+                            tab.Controls.Clear();
+                            a = 1;
+                            total = new ListaTotal();
+                            int numtareas1 = con.countTrabajos(idGrupo, "tarea");
+                            int numtrabajos1 = con.countTrabajos(idGrupo, "trabajo");
+                            int numexamenes1 = con.countTrabajos(idGrupo, "examen");
+                            string[] ponderacion = con.readPonderacion(idGrupo);
+
+                            foreach (Alumno alumno in listaAlumnos)
+                            {
+                                total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                                total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
+                                    (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
+                                    int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
+                                total.Rows[total.RowCount - 1].Cells[4].Value = tareas.Rows[total.RowCount - 1].Cells[numtareas1 + 3].Value;
                                 total.Rows[total.RowCount - 1].Cells[5].Value = trabajos.Rows[total.RowCount - 1].Cells[numtrabajos1 + 3].Value;
                                 total.Rows[total.RowCount - 1].Cells[6].Value = examenes.Rows[total.RowCount - 1].Cells[numexamenes1 + 3].Value;
                                 total.Rows[total.RowCount - 1].Cells[7].Value = ass.Rows[total.RowCount - 1].Cells[4].Value;
@@ -348,12 +363,9 @@ namespace ControldeAlumnosPVI
                                                                                 total.Rows[total.RowCount - 1].Cells[6].Value.ToString(),
                                                                                 total.Rows[total.RowCount - 1].Cells[8].Value.ToString());
 
-=======
-                        ListaTotal total = new ListaTotal();
-                        foreach (Alumno alumno in listaAlumnos)
-                        {
-                            total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
->>>>>>> origin/master
+                            }
+                        }
+                        catch { 
                         }
                         tab.Controls.Add(total);
                         break;
@@ -363,28 +375,27 @@ namespace ControldeAlumnosPVI
             }
         }
 
-<<<<<<< HEAD
-        public string calcularPromedio(string[]ponderacion, string asistencia, string participacion,
+        public string calcularPromedio(string[] ponderacion, string asistencia, string participacion,
             string trabajos, string tareas, string examenes, string puntos)
         {
             //asistencia
             string[] a = asistencia.Split('/');
             float asis = float.Parse(a[0]);
             float total = float.Parse(a[1]);
-            float relacion = asis/total;
+            float relacion = asis / total;
             float puntosAsistencia = relacion * (float.Parse(ponderacion[0]));
             //participacion
             float partiPuntos = float.Parse(participacion);
             //trabajos
-            float trabajosPuntos = float.Parse(trabajos) * (float.Parse(ponderacion[2])/100);
+            float trabajosPuntos = float.Parse(trabajos) * (float.Parse(ponderacion[2]) / 100);
             //tareas
-            float tareasPuntos = float.Parse(tareas)*(float.Parse(ponderacion[3])/100);
+            float tareasPuntos = float.Parse(tareas) * (float.Parse(ponderacion[3]) / 100);
             //examenes
             float examenesPuntos = float.Parse(examenes) * (float.Parse(ponderacion[4]) / 100);
             //ptos extra
             float extraPuntos = float.Parse(puntos);
             float totalPuntos = puntosAsistencia + partiPuntos + trabajosPuntos + tareasPuntos + examenesPuntos + extraPuntos;
-            
+
             return totalPuntos.ToString();
         }
 
@@ -393,38 +404,37 @@ namespace ControldeAlumnosPVI
             try
             {
 
-      
-            int promedio = 0;
 
-            if (numtareas > 0)
-            {
-                for (int i = 0; i < tareas.Rows.Count; i++)
+                int promedio = 0;
+
+                if (numtareas > 0)
                 {
-                    for (int j = 3; j < tareas.Columns.Count - 1; j++)
+                    for (int i = 0; i < tareas.Rows.Count; i++)
                     {
-                        promedio += int.Parse(tareas.Rows[i].Cells[j].Value.ToString());
+                        for (int j = 3; j < tareas.Columns.Count - 1; j++)
+                        {
+                            promedio += int.Parse(tareas.Rows[i].Cells[j].Value.ToString());
+                        }
+                        tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = (promedio / numtareas);
+                        promedio = 0;
                     }
-                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = (promedio / numtareas);
-                    promedio = 0;
                 }
-            }
-            else
-            {
-                for (int i = 0; i < tareas.Rows.Count; i++)
+                else
                 {
-                    tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = 0;
+                    for (int i = 0; i < tareas.Rows.Count; i++)
+                    {
+                        tareas.Rows[i].Cells[tareas.ColumnCount - 1].Value = 0;
+                    }
                 }
-            }
             }
             catch (Exception)
             {
 
-  
+
             }
         }
 
-=======
->>>>>>> origin/master
+
         //METODO PARA REFRESCAR LOS PANELES DE GRUPO Y MATERIA
         private void refreshPaneles(bool materia)
         {
@@ -570,21 +580,30 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
-            label_fecha.Focus();
-
-            switch (tabs_alumnos.SelectedTab.Name)
+            if (ActiveGrupo() != null)
             {
-                case "tabPage2":
-                    guardarTareas();
-                    break;
-                case "tabPage3":
-                    guardarTrabajos();
-                    break;
-                case "tabPage4":
-                    guardarExamenes();
-                    break;
-                default:
-                    break;
+
+
+                label_fecha.Focus();
+
+
+
+                guardarLista();
+
+                guardarTareas();
+
+                guardarTrabajos();
+
+                guardarExamenes();
+
+                guardarParticipaciones();
+
+                guardarPuntos();
+
+                MessageBox.Show("Datos guardados con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                refreshTables(ActiveGrupo().IdGrupo);
+
             }
         }
 
@@ -611,9 +630,7 @@ namespace ControldeAlumnosPVI
                 }
             }
 
-            MessageBox.Show("Tareas guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
 
         public void guardarTrabajos()
         {
@@ -638,7 +655,6 @@ namespace ControldeAlumnosPVI
                 }
             }
 
-            MessageBox.Show("Trabajos guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void guardarExamenes()
@@ -663,8 +679,37 @@ namespace ControldeAlumnosPVI
                         "examen");
                 }
             }
-            MessageBox.Show("Examen guardadas con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void guardarLista()
+        {
+            Conexion con = new Conexion();
+
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarLista(listaAlumnos[i].IdAlumno, DateTime.Today.ToString("yyyy-MM-dd"), lista.Rows[i].Cells[3].Value.ToString());
+            }
+
+        }
+
+        public void guardarParticipaciones()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarPart(listaAlumnos[i].IdAlumno, ass.Rows[i].Cells[4].Value.ToString());
+            }
+        }
+
+        public void guardarPuntos()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
+            {
+                con.tomarPuntos(listaAlumnos[i].IdAlumno, assa.Rows[i].Cells[4].Value.ToString());
+            }
+        }
+
 
         private void exportar_excel_Click(object sender, EventArgs e)
         {
@@ -747,6 +792,16 @@ namespace ControldeAlumnosPVI
                     MessageBox.Show("Por favor primero seleccione un grupo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_materias_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
