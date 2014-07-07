@@ -9,6 +9,7 @@ namespace ControldeAlumnosPVI
 {
     class ListaTTE : ListaAlumnos
     {
+
         public ListaTTE(int num, string str)
             : base()
         {
@@ -55,8 +56,10 @@ namespace ControldeAlumnosPVI
             this.Columns[ColumnCount - 1].Width = 100;
             this.Columns[ColumnCount - 1].ReadOnly = true;
             adjustColumns();
+          
 
     }
+
 
         private void adjustColumns(){
             int width = 0;
