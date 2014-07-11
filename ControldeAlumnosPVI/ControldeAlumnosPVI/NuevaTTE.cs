@@ -145,7 +145,7 @@ namespace ControldeAlumnosPVI
             Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
             Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
             app.Visible = true;
-            worksheet = workbook.Sheets["Hoja1"];
+            worksheet = workbook.Sheets["Sheet1"];
             worksheet = workbook.ActiveSheet;
 
             worksheet.Name = str.ToUpperInvariant();

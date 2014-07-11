@@ -335,8 +335,7 @@ namespace ControldeAlumnosPVI
 
 
                     case "tabPage7":
-                        try
-                        {
+                       
                             tab.Controls.Clear();
                             a = 1;
                             total = new ListaTotal();
@@ -351,11 +350,46 @@ namespace ControldeAlumnosPVI
                                 total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" +
                                     (int.Parse(con.numeroFaltas(alumno.IdAlumno)) +
                                     int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
-                                total.Rows[total.RowCount - 1].Cells[4].Value = tareas.Rows[total.RowCount - 1].Cells[numtareas1 + 3].Value;
-                                total.Rows[total.RowCount - 1].Cells[5].Value = trabajos.Rows[total.RowCount - 1].Cells[numtrabajos1 + 3].Value;
-                                total.Rows[total.RowCount - 1].Cells[6].Value = examenes.Rows[total.RowCount - 1].Cells[numexamenes1 + 3].Value;
-                                total.Rows[total.RowCount - 1].Cells[7].Value = ass.Rows[total.RowCount - 1].Cells[4].Value;
-                                total.Rows[total.RowCount - 1].Cells[8].Value = assa.Rows[total.RowCount - 1].Cells[4].Value;
+                                string a1 = "0";
+                                string a2 = "0";
+                                string a3 = "0";
+                                string a4 = "0";
+                                string a5 =  "0";
+          
+
+                                try
+                                {
+                                    a1 = tareas.Rows[total.RowCount - 1].Cells[numtareas1 + 3].Value.ToString();
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    a2 = trabajos.Rows[total.RowCount - 1].Cells[numtrabajos1 + 3].Value.ToString();
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    a3 = examenes.Rows[total.RowCount - 1].Cells[numexamenes1 + 3].Value.ToString();
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    a4 = ass.Rows[total.RowCount - 1].Cells[4].Value.ToString();
+                                }
+                                catch { }
+                                try
+                                {
+                                a5 = assa.Rows[total.RowCount - 1].Cells[4].Value.ToString();
+                                }
+                                catch { }
+                                total.Rows[total.RowCount - 1].Cells[4].Value = a1;
+                                total.Rows[total.RowCount - 1].Cells[5].Value = a2;
+                                total.Rows[total.RowCount - 1].Cells[6].Value = a3;
+                                total.Rows[total.RowCount - 1].Cells[7].Value = a4;
+                                total.Rows[total.RowCount - 1].Cells[8].Value = a5;
                                 total.Rows[total.RowCount - 1].Cells[9].Value = calcularPromedio(ponderacion,
                                                                                 total.Rows[total.RowCount - 1].Cells[3].Value.ToString(),
                                                                                 total.Rows[total.RowCount - 1].Cells[7].Value.ToString(),
@@ -365,9 +399,7 @@ namespace ControldeAlumnosPVI
                                                                                 total.Rows[total.RowCount - 1].Cells[8].Value.ToString());
 
                             }
-                        }
-                        catch { 
-                        }
+                        
                         tab.Controls.Add(total);
                         break;
                     default:
@@ -719,7 +751,7 @@ namespace ControldeAlumnosPVI
                 Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
                 Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
                 app.Visible = true;
-                worksheet = workbook.Sheets["Hoja1"];
+                worksheet = workbook.Sheets["Sheet1"];
                 worksheet = workbook.ActiveSheet;
 
                 worksheet.Name = tabs_alumnos.SelectedTab.Text;
