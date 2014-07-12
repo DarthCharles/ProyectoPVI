@@ -29,6 +29,9 @@ namespace ControldeAlumnosPVI
         ListaTTE tareas;
         ListaTTE trabajos;
         ListaTTE examenes;
+        ListaAsistencia lista;
+        List<Alumno> listaAlumnos;
+        ListaTotal total;
 
         public Form1(string str1, string str2)
         {
@@ -204,7 +207,7 @@ namespace ControldeAlumnosPVI
         public void refreshTables(string idGrupo)
         {
             Conexion con = new Conexion();
-            List<Alumno> listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
+            listaAlumnos = con.readInfoAlumnosGrupo(idGrupo);
             foreach (TabPage tab in panel.Context.tabs_alumnos.TabPages)
             {
 
@@ -215,17 +218,14 @@ namespace ControldeAlumnosPVI
                     case "tabPage1":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaAsistencia lista = new ListaAsistencia();
+                        lista = new ListaAsistencia();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             lista.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
-
+                            (lista.Rows[lista.RowCount - 1].Cells[3] as DataGridViewCheckBoxCell).Value = con.loadLista(alumno.IdAlumno,DateTime.Today.ToString("yyyy-MM-dd")).ToString();
                         }
-                        lista.CheckAll();
                         tab.Controls.Add(lista);
                         break;
-
-
 
                     case "tabPage2":
                         tab.Controls.Clear();
@@ -322,10 +322,13 @@ namespace ControldeAlumnosPVI
                     case "tabPage7":
                         tab.Controls.Clear();
                         a = 1;
-                        ListaTotal total = new ListaTotal();
+                        total = new ListaTotal();
                         foreach (Alumno alumno in listaAlumnos)
                         {
                             total.Rows.Add(alumno.IdAlumno, a++, alumno.NombreAlumno);
+                            total.Rows[total.RowCount - 1].Cells[3].Value = (con.numeroAsistencias(alumno.IdAlumno) + "/" + 
+                                (int.Parse(con.numeroFaltas(alumno.IdAlumno)) + 
+                                int.Parse(con.numeroAsistencias(alumno.IdAlumno))));
                         }
                         tab.Controls.Add(total);
                         break;
@@ -484,9 +487,11 @@ namespace ControldeAlumnosPVI
 
         private void pictureBox6_Click(object sender, EventArgs e)
         {
+            label_fecha.Focus();
             guardarTareas();
             guardarTrabajos();
             guardarExamenes();
+            guardarLista();
         }
 
         public void guardarTareas()
@@ -512,7 +517,6 @@ namespace ControldeAlumnosPVI
                 }
             }
         }
-
 
         public void guardarTrabajos()
         {
@@ -562,59 +566,68 @@ namespace ControldeAlumnosPVI
             }
         }
 
-        private void exportar_excel_Click(object sender, EventArgs e)
+        public void guardarLista()
+        {
+            Conexion con = new Conexion();
+            for (int i = 0; i < lista.RowCount; i++)
             {
-                      DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
- 
+                con.tomarLista(listaAlumnos[i].IdAlumno,DateTime.Today.ToString("yyyy-MM-dd"),lista.Rows[i].Cells[3].Value.ToString());
+            }
+        }
+
+        private void exportar_excel_Click(object sender, EventArgs e)
+        {
+            DataGridView jo = (DataGridView)tabs_alumnos.SelectedTab.Controls[0];
+
             // creating Excel Application
-             Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
- 
- 
-             // creating new WorkBook within Excel application
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+
+
+            // creating new WorkBook within Excel application
             Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
- 
- 
-             // creating new Excelsheet in workbook
+
+
+            // creating new Excelsheet in workbook
             Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
- 
-             // see the excel sheet behind the program
+
+            // see the excel sheet behind the program
             app.Visible = true;
-             // get the reference of first sheet. By default its name is Sheet1.
-             // store its reference to worksheet
-             worksheet = workbook.Sheets["Hoja1"];
+            // get the reference of first sheet. By default its name is Sheet1.
+            // store its reference to worksheet
+            worksheet = workbook.Sheets["Sheet1"];
             worksheet = workbook.ActiveSheet;
- 
-             // changing the name of active sheet
-             worksheet.Name = tabs_alumnos.SelectedTab.Name;
- 
-             ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
-             // storing header part in Excel
- 
- 
- 
-             // storing header part in Excel
-             for (int i = 1; i < jo.Columns.Count; i++)
-             {
-                 
-                     worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
-                
-           
-             }
- 
- 
- 
-             // storing Each row and column value to excel sheet
-             for (int i = 0; i < jo.Rows.Count; i++)
-             {
-                 for (int j = 1; j < jo.Columns.Count; j++)
-                 {
-                     if (jo.Rows[i].Cells[j].Value != null)
-                     {
-                         worksheet.Cells[i + 2, j ] = jo.Rows[i].Cells[j].Value.ToString();
+
+            // changing the name of active sheet
+            worksheet.Name = tabs_alumnos.SelectedTab.Name;
+
+            ((Range)worksheet.Cells[1, 2]).EntireColumn.ColumnWidth = 30;
+            // storing header part in Excel
+
+
+
+            // storing header part in Excel
+            for (int i = 1; i < jo.Columns.Count; i++)
+            {
+
+                worksheet.Cells[1, i] = jo.Columns[i].HeaderText;
+
+
+            }
+
+
+
+            // storing Each row and column value to excel sheet
+            for (int i = 0; i < jo.Rows.Count; i++)
+            {
+                for (int j = 1; j < jo.Columns.Count; j++)
+                {
+                    if (jo.Rows[i].Cells[j].Value != null)
+                    {
+                        worksheet.Cells[i + 2, j] = jo.Rows[i].Cells[j].Value.ToString();
                     }
-                     
-                 }
-             }
+
+                }
+            }
 
         }
 
